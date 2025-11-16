@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7q87tmixkuid"]
+
+[ext_resource type="Texture2D" uid="uid://007afmyc4kuk" path="res://Graphics/CanvasLayer/goldjelly_k9patch.png" id="1_i72io"]
+
+[node name="d9patch" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 152.0
+offset_top = 74.0
+offset_right = -1523.0
+offset_bottom = -884.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i72io")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8

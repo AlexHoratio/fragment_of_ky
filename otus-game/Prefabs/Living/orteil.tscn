@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=3 uid="uid://f6kkmi10wb4g"]
+
+[ext_resource type="Script" uid="uid://de8n500ljkyls" path="res://Prefabs/Living/orteil.gd" id="1_75oj4"]
+[ext_resource type="Texture2D" uid="uid://qxwudgytucyk" path="res://Graphics/Kyztlings/Wild/PLT/orteil1.png" id="1_sndah"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="2_eju4k"]
+[ext_resource type="Texture2D" uid="uid://dknhwsu0twui8" path="res://Graphics/Kyztlings/Wild/PLT/orteil9.png" id="2_kdsur"]
+[ext_resource type="Texture2D" uid="uid://f5jpg6kflnvi" path="res://Graphics/Kyztlings/Wild/PLT/orteil8.png" id="3_75oj4"]
+[ext_resource type="Texture2D" uid="uid://b16mpefevg35r" path="res://Graphics/Kyztlings/Wild/PLT/orteil3.png" id="4_5rquj"]
+[ext_resource type="Texture2D" uid="uid://cvo2r6db2rq1" path="res://Graphics/Kyztlings/Wild/PLT/orteil7.png" id="4_a47bm"]
+[ext_resource type="Texture2D" uid="uid://dae81mn4hqprw" path="res://Graphics/Kyztlings/Wild/PLT/orteil6.png" id="5_4q25y"]
+[ext_resource type="Texture2D" uid="uid://j4cg4rwnoqtr" path="res://Graphics/Kyztlings/Wild/PLT/orteil2.png" id="5_pyl8h"]
+[ext_resource type="Texture2D" uid="uid://c773cyk827se6" path="res://Graphics/Kyztlings/Wild/PLT/shadow/shadow.png" id="6_kdsur"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eju4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sndah")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5rquj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pyl8h")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kdsur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_75oj4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a47bm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4q25y")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="orteil" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_75oj4")
+
+[node name="dialogue" parent="." instance=ExtResource("2_eju4k")]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -249.0
+offset_top = -261.0
+offset_right = 251.0
+offset_bottom = -87.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="dialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Now, let's do it again, on a 
+[rainbow sat=0.5][shake][wave]different world..."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -36)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_eju4k")
+animation = &"idle"
+frame_progress = 0.8922947
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(-2, -4)
+scale = Vector2(2, 2)
+texture = ExtResource("6_kdsur")
+
+[node name="after_talk_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="after_talk_timer" to="." method="_on_after_talk_timer_timeout"]

@@ -1,0 +1,175 @@
+[gd_scene load_steps=24 format=3 uid="uid://dvi7csjnojv02"]
+
+[ext_resource type="Script" uid="uid://bloesjee0yuys" path="res://Prefabs/Living/voidling.gd" id="1_ceeps"]
+[ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="1_fkm02"]
+[ext_resource type="Texture2D" uid="uid://c8lff1k6g2lo5" path="res://Graphics/Kyztlings/Void/White/voidkyztling5.png" id="2_ceeps"]
+[ext_resource type="Script" uid="uid://cqkj8vjvcitlt" path="res://Prefabs/Living/FSM.gd" id="2_hgvod"]
+[ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="3_yi0aw"]
+[ext_resource type="Texture2D" uid="uid://ia50k8lm0ow1" path="res://Graphics/Kyztlings/Void/White/voidkyztling4.png" id="3_ym65y"]
+[ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="4_e45og"]
+[ext_resource type="Texture2D" uid="uid://cyardwof70ksh" path="res://Graphics/Kyztlings/Void/White/voidkyztling3.png" id="4_hgvod"]
+[ext_resource type="Texture2D" uid="uid://bj0gbs8iffqup" path="res://Graphics/Kyztlings/Void/White/voidkyztling2.png" id="5_yi0aw"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="7_ym65y"]
+[ext_resource type="Texture2D" uid="uid://dumms0yhhvm4o" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask1.png" id="11_e1vgc"]
+[ext_resource type="Texture2D" uid="uid://de7rs8mk78ttx" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask5.png" id="12_qjum5"]
+[ext_resource type="Texture2D" uid="uid://dogdfoposw3ns" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask4.png" id="13_ik22q"]
+[ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="14_mi1as"]
+[ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="15_4acwt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym65y"]
+radius = 21.095022
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e45og"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fkm02")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ceeps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ym65y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hgvod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yi0aw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgqfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_e1vgc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_qjum5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ik22q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mi1as")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4acwt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ym65y"]
+offsets = PackedFloat32Array(0, 0.8742138, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8553459, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hgvod"]
+gradient = SubResource("Gradient_ym65y")
+
+[sub_resource type="Curve" id="Curve_ym65y"]
+_data = [Vector2(0, 1), 0.0, -2.2076616, 0, 0, Vector2(1, 0.14716983), -0.05235198, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hgvod"]
+curve = SubResource("Curve_ym65y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ym65y"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 4.0
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_hgvod")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_hgvod")
+
+[node name="voidling" type="CharacterBody2D" groups=["voidlings"]]
+motion_mode = 1
+script = ExtResource("1_ceeps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_ym65y")
+
+[node name="FSM" type="Node" parent="."]
+script = ExtResource("2_hgvod")
+
+[node name="IDLE" type="Node" parent="FSM"]
+script = ExtResource("3_yi0aw")
+
+[node name="idle_timer" type="Timer" parent="FSM/IDLE"]
+wait_time = 5.0
+one_shot = true
+
+[node name="WANDER" type="Node" parent="FSM"]
+script = ExtResource("4_e45og")
+
+[node name="wander_timer" type="Timer" parent="FSM/WANDER"]
+wait_time = 10.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.8495773, 0.59197664, 1.1551381e-06, 1)
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_e45og")
+animation = &"idle"
+frame_progress = 0.03911399
+
+[node name="shadow" type="Sprite2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(2, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("7_ym65y")
+
+[node name="mask" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_sgqfr")
+animation = &"idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(1, 8)
+emitting = false
+amount = 128
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_ym65y")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -42.0
+offset_top = -55.0
+offset_right = 42.0
+offset_bottom = 22.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[connection signal="timeout" from="FSM/IDLE/idle_timer" to="FSM/IDLE" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="FSM/WANDER/wander_timer" to="FSM/WANDER" method="_on_wander_timer_timeout"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

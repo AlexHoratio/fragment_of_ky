@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckfnl6k0kjf03"]
+
+[ext_resource type="Texture2D" uid="uid://ci4c2unsbnrw8" path="res://Graphics/CanvasLayer/jelly_k9patch_x2.png" id="1_wge82"]
+
+[node name="jellypatch" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1888.0
+offset_bottom = -1048.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wge82")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16

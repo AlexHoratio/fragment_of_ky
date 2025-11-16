@@ -1,0 +1,335 @@
+[gd_scene load_steps=25 format=3 uid="uid://dyfud3bbl61dt"]
+
+[ext_resource type="Script" uid="uid://ov4r4fyq6b4m" path="res://Scenes/otus_game.gd" id="1_82jwl"]
+[ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_hxn3n"]
+[ext_resource type="Script" uid="uid://ee68o5i8thd8" path="res://Prefabs/UI/narrator.gd" id="2_3tj8s"]
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="2_wtrc5"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="4_4tgwp"]
+[ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="4_5ucos"]
+[ext_resource type="Script" uid="uid://oiqovch6xnnf" path="res://Scenes/genome_viewer.gd" id="4_cam1e"]
+[ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="6_8g0im"]
+[ext_resource type="Script" uid="uid://bq0lwx6pde33d" path="res://Scenes/otu_table.gd" id="7_7gmj1"]
+[ext_resource type="Texture2D" uid="uid://b55g1kknbdqe6" path="res://Graphics/CanvasLayer/tab.png" id="7_fyaec"]
+[ext_resource type="Texture2D" uid="uid://clmr1nf5p5srr" path="res://Graphics/CanvasLayer/tab_mask.png" id="8_6l3gq"]
+[ext_resource type="PackedScene" uid="uid://tyhf6cihnkl5" path="res://Prefabs/UI/reticle.tscn" id="8_segjo"]
+
+[sub_resource type="Gradient" id="Gradient_wtrc5"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_wtrc5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_prais"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_prais"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+gradient = SubResource("Gradient_prais")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ut1hc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[sub_resource type="GDScript" id="GDScript_7gmj1"]
+script/source = "extends ColorRect
+
+func _ready() -> void:
+	get_tree().set_meta(\"fader\", self)
+	
+func fade_out() -> void:
+	$AnimationPlayer.play(\"fade_out\")
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == \"fade_out\":
+		get_tree().quit()
+"
+
+[sub_resource type="Animation" id="Animation_7gmj1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wtrc5"]
+resource_name = "fade_out"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_prais"]
+_data = {
+&"RESET": SubResource("Animation_7gmj1"),
+&"fade_out": SubResource("Animation_wtrc5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82jwl"]
+size = Vector2(37, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ucos"]
+size = Vector2(1995, 30.75)
+
+[node name="otus_game" type="Node2D"]
+script = ExtResource("1_82jwl")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+texture = ExtResource("2_wtrc5")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_prais")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_ut1hc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="narrator" parent="CanvasLayer" instance=ExtResource("1_hxn3n")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -216.0
+offset_top = 175.0
+offset_right = 217.0
+offset_bottom = 281.0
+grow_vertical = 1
+script = ExtResource("2_3tj8s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake]Enough is enough!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="genome_viewer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1576.0
+offset_top = -565.0
+offset_right = 1891.0
+offset_bottom = -82.0
+mouse_filter = 2
+script = ExtResource("4_cam1e")
+
+[node name="jellypatch" parent="CanvasLayer/genome_viewer" instance=ExtResource("4_4tgwp")]
+modulate = Color(1, 1, 1, 0.5803922)
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="g9patch" parent="CanvasLayer/genome_viewer/jellypatch" instance=ExtResource("6_8g0im")]
+self_modulate = Color(0.16445974, 0.16445976, 0.16445974, 1)
+show_behind_parent = true
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/genome_viewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0.7200212, 0.47851533, 7.70092e-07, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[color=blue][url=marker]ATCGTA[/url][color=#aaa]GAGG
+TTGACGTCAT
+AACATGGAAT
+AAGTATTCTT
+GGGTGACCTG
+ATGCACTACG
+CAGAATCTAG
+AGTCCGGAGC"
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+
+[node name="otu_table" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 118.0
+offset_right = 40.0
+offset_bottom = 158.0
+script = ExtResource("7_7gmj1")
+
+[node name="tab" type="Sprite2D" parent="CanvasLayer/otu_table"]
+position = Vector2(129, 951)
+scale = Vector2(2, 2)
+texture = ExtResource("7_fyaec")
+
+[node name="mask" type="Sprite2D" parent="CanvasLayer/otu_table/tab"]
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("8_6l3gq")
+
+[node name="Label" type="Label" parent="CanvasLayer/otu_table"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 1039.0
+offset_right = 219.0
+offset_bottom = 1071.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 32
+text = "OTU Table"
+horizontal_alignment = 1
+
+[node name="tab_button" type="Button" parent="CanvasLayer/otu_table"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 1024.0
+offset_right = 247.0
+offset_bottom = 1079.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+action_mode = 0
+
+[node name="body" parent="CanvasLayer/otu_table" instance=ExtResource("4_4tgwp")]
+show_behind_parent = true
+layout_mode = 1
+offset_left = -1.0
+offset_top = 1075.0
+offset_right = 1881.0
+offset_bottom = 1333.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/otu_table/body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="rows" type="Control" parent="CanvasLayer/otu_table/body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="fader" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = SubResource("GDScript_7gmj1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fader"]
+libraries = {
+&"": SubResource("AnimationLibrary_prais")
+}
+
+[node name="press_to_begin" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave][color=#aaa]Press [Enter] or [Spacebar] to begin..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="left" type="CollisionShape2D" parent="walls"]
+position = Vector2(-18.5, 540)
+shape = SubResource("RectangleShape2D_82jwl")
+
+[node name="right" type="CollisionShape2D" parent="walls"]
+position = Vector2(1939, 540)
+shape = SubResource("RectangleShape2D_82jwl")
+
+[node name="top" type="CollisionShape2D" parent="walls"]
+position = Vector2(960.5, -15)
+shape = SubResource("RectangleShape2D_5ucos")
+
+[node name="bottom" type="CollisionShape2D" parent="walls"]
+position = Vector2(960.5, 1095)
+shape = SubResource("RectangleShape2D_5ucos")
+
+[node name="reticle" parent="." instance=ExtResource("8_segjo")]
+
+[node name="living" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="orteil" parent="living" instance=ExtResource("4_5ucos")]
+position = Vector2(-291, 745)
+
+[connection signal="meta_hover_ended" from="CanvasLayer/genome_viewer/RichTextLabel" to="CanvasLayer/genome_viewer" method="_on_rich_text_label_meta_hover_ended"]
+[connection signal="meta_hover_started" from="CanvasLayer/genome_viewer/RichTextLabel" to="CanvasLayer/genome_viewer" method="_on_rich_text_label_meta_hover_started"]
+[connection signal="mouse_entered" from="CanvasLayer/otu_table/tab_button" to="CanvasLayer/otu_table" method="_on_tab_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/otu_table/tab_button" to="CanvasLayer/otu_table" method="_on_tab_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/otu_table/tab_button" to="CanvasLayer/otu_table" method="_on_tab_button_pressed"]
+[connection signal="animation_finished" from="CanvasLayer/fader/AnimationPlayer" to="CanvasLayer/fader" method="_on_animation_player_animation_finished"]
