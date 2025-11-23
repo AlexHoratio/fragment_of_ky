@@ -53,10 +53,10 @@ func next_stage() -> void:
 	
 	match text_stage:
 		0:
-			add_new_text("[shake level=25]SIKE!!!!![/shake][color=#777] [Press Enter to continue...]")
+			add_new_text("[rainbow speed=10][shake level=25]SIKE!!!!![/shake][/rainbow][color=#777] [Press Enter to continue...]")
 			target_position = Vector2(960 - target_size.x/2.0, 520 - target_size.y/2.0)
 		1:
-			add_new_text("[color=#ffb629][shake level=10]You really think I'd just let Orteil bore you to death?[/shake][color=#777]")
+			add_new_text("[color=#ffb629][shake level=10]Do you really think I'd let Orteil bore you to death?[/shake][color=#777]")
 			target_position = Vector2(960 - target_size.x/2.0, 490 - target_size.y/2.0)
 		2:
 			add_new_text("[color=#ffb629][shake level=10]Think again, Gamer...[/shake][color=#777]")

@@ -12,6 +12,7 @@ var world_id = 0
 var worlds = {
 	0: {
 		"voidlings": 11,
+		"finished": false,
 	}
 }
 
@@ -72,6 +73,9 @@ func count_random() -> void:
 	
 	if unclicked.size() > 0:
 		unclicked[randi()%unclicked.size()].click()
+		
+	if unclicked.size() <= 1:
+		get_node("../automation").can_download = true
 		
 	update_destination_bar()
 		
