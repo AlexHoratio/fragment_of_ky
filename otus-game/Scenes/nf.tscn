@@ -163,6 +163,7 @@ process_material = SubResource("ParticleProcessMaterial_15ig2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -493,33 +494,48 @@ offset_top = -27.817017
 offset_right = -0.21496582
 offset_bottom = 0.1829834
 
-[node name="Label" type="RichTextLabel" parent="sandbox/arena/destination"]
+[node name="task" type="RichTextLabel" parent="sandbox/arena/destination"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 9.0
+offset_top = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[color=#777][dev@ky ~][color=#fff] ssh: 39s.gombork.edu ... [color=green]CONNECTED"
+text = "[color=#777][[color=#aaa]54/db3482d[color=#777]] KY:[color=#bbb]COUNT_OTUS[color=#777] [0%] [color=#ccc]0 of 11"
+vertical_alignment = 1
+
+[node name="sample" type="RichTextLabel" parent="sandbox/arena/destination"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 800.0
+offset_top = 3.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][color=#777](sample_01.fasta)"
 vertical_alignment = 1
 
 [node name="next" type="LinkButton" parent="sandbox/arena/destination"]
 layout_mode = 0
 offset_left = 992.0
-offset_top = 6.0
+offset_top = 7.0
 offset_right = 1041.0
-offset_bottom = 22.0
+offset_bottom = 23.0
 text = "Next >>"
 underline = 1
 
 [node name="prev" type="LinkButton" parent="sandbox/arena/destination"]
 layout_mode = 0
-offset_left = 933.0
-offset_top = 6.0
-offset_right = 982.0
-offset_bottom = 22.0
+offset_left = 810.0
+offset_top = 7.0
+offset_right = 859.0
+offset_bottom = 23.0
 text = "<< Prev"
 underline = 1
 
