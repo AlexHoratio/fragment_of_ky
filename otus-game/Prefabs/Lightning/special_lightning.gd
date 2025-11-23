@@ -16,7 +16,7 @@ func randomize_points():
 	var distance = begin_point.distance_to(end_point)
 	var intermediary_points = int(int(distance)/7)
 	var line_points = []
-	var angle_from_end = end_point.angle_to_point(begin_point)
+	var angle_from_end = begin_point.angle_to_point(end_point)
 	line_points.append(end_point)
 	for point in range(intermediary_points):
 		var new_point = end_point + Vector2(-7*(point+1), 0).rotated(angle_from_end)
@@ -24,7 +24,7 @@ func randomize_points():
 		line_points.append(new_point)
 	line_points.append(begin_point)
 	
-	$Line2D.points = PoolVector2Array(line_points)
+	$Line2D.points = PackedVector2Array(line_points)
 #	for point in $Line2D.points:
 #		var boom = RESOURCES.small_pulse.instance()
 #		get_node("..").add_child(boom)

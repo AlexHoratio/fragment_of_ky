@@ -13,6 +13,8 @@ var hovering = false
 
 var debug = false
 
+var clicked_once = false
+
 var genome = {
 	"marker": "",
 	"junk": ""
@@ -80,6 +82,11 @@ func enable_clicking() -> void:
 	click_enabled = true
 	$Button.visible = true
 
+func click() -> void:
+	clicked_once = true
+	$AnimatedSprite2D/mask.modulate.a = 1
+	emit_signal("clicked")
+
 func _on_button_mouse_entered() -> void:
 	hovering = true
 
@@ -87,5 +94,4 @@ func _on_button_mouse_exited() -> void:
 	hovering = false
 
 func _on_button_pressed() -> void:
-	$AnimatedSprite2D/mask.modulate.a = 1
-	emit_signal("clicked")
+	click()

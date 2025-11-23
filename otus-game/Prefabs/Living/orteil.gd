@@ -97,6 +97,9 @@ in the community.
 		"nf_think":
 			walk_to(Vector2(1330, 1010))
 			queue_dialogue_after_walk("", true, 1, 1, "nf_move_along")
+			
+			get_node("../automation").start_automation()
+			
 		"nf_move_along":
 			queue_dialogue_after_walk("Looks good to me.", true, 1, 0, "nf_move_along2", 3)
 		"nf_move_along2":

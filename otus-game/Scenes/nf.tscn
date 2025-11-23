@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=25 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="5_jv23o"]
 [ext_resource type="Script" uid="uid://m6u2237aao2h" path="res://Scenes/automation.gd" id="5_up2ix"]
 [ext_resource type="Script" uid="uid://r1k6saqlxdof" path="res://Scenes/sandbox.gd" id="6_bsf7d"]
-[ext_resource type="PackedScene" uid="uid://dvi7csjnojv02" path="res://Prefabs/Living/voidling.tscn" id="8_xhl2a"]
 [ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="10_7qn4k"]
 [ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="10_a70ce"]
 
@@ -46,6 +45,21 @@ scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
 color_ramp = SubResource("GradientTexture1D_gg5g1")
 
+[sub_resource type="Animation" id="Animation_4gexm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_pu5lm"]
 resource_name = "fade_in"
 length = 4.0
@@ -60,21 +74,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4gexm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wq21"]
@@ -163,7 +162,6 @@ process_material = SubResource("ParticleProcessMaterial_15ig2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -325,6 +323,8 @@ label_settings = SubResource("LabelSettings_up2ix")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="count" type="Timer" parent="automation"]
+
 [node name="sandbox" parent="." instance=ExtResource("5_jv23o")]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 offset_left = 82.0
@@ -445,42 +445,6 @@ shape = SubResource("RectangleShape2D_a70ce")
 position = Vector2(521.5, 447.4617)
 shape = SubResource("RectangleShape2D_a70ce")
 
-[node name="voidling" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(134, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling2" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(134, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling3" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(134, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling4" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(134, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling5" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(869, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling6" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(869, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling7" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(869, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling8" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(869, 129.4617)
-scale = Vector2(0.5, 0.5)
-
-[node name="voidling9" parent="sandbox/arena/living" instance=ExtResource("8_xhl2a")]
-position = Vector2(869, 129.4617)
-scale = Vector2(0.5, 0.5)
-
 [node name="destination" parent="sandbox/arena" instance=ExtResource("5_jv23o")]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 1
@@ -504,7 +468,7 @@ offset_top = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[color=#777][[color=#aaa]54/db3482d[color=#777]] KY:[color=#bbb]COUNT_OTUS[color=#777] [0%] [color=#ccc]0 of 11"
+text = "[color=#777][[color=#aaa]54/db348d[color=#777]] KY:[color=#bbb]COUNT_OTUS[color=#777] [0%] [color=#ccc]0 of 11"
 vertical_alignment = 1
 
 [node name="sample" type="RichTextLabel" parent="sandbox/arena/destination"]
@@ -571,6 +535,7 @@ position = Vector2(-505, 995)
 [connection signal="button_up" from="automation/header/Button" to="automation" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="automation/header/Button" to="automation" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="automation/header/Button" to="automation" method="_on_button_mouse_exited"]
+[connection signal="timeout" from="automation/count" to="automation" method="_on_count_timeout"]
 [connection signal="button_down" from="sandbox/header/Button" to="sandbox" method="_on_button_button_down"]
 [connection signal="button_up" from="sandbox/header/Button" to="sandbox" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="sandbox/header/Button" to="sandbox" method="_on_button_mouse_entered"]
