@@ -69,6 +69,13 @@ func next_stage() -> void:
 		4:
 			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, 0)
+			
+			orteil.walk_to(Vector2(235, 1010))
+			
+			orteil.queue_dialogue_after_walk("[rainbow][wave]Hmm.", true, 1, 1, "nf_think", 3)
+		5:
+			add_new_text("")
+			target_position = Vector2(960 - target_size.x/2.0, 0)
 		_:
 			print("UHH")
 	

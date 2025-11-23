@@ -94,5 +94,13 @@ in the community.
 [rainbow sat=0.5][shake][wave]different world...""", true, 0.2, 1, "different_world")
 		"different_world":
 			get_tree().get_meta("fader").fade_out()
+		"nf_think":
+			walk_to(Vector2(1330, 1010))
+			queue_dialogue_after_walk("", true, 1, 1, "nf_move_along")
+		"nf_move_along":
+			queue_dialogue_after_walk("Looks good to me.", true, 1, 0, "nf_move_along2", 3)
+		"nf_move_along2":
+			queue_dialogue_after_walk("", true)
+			walk_to(Vector2(2100, 1010))
 		_:
 			pass

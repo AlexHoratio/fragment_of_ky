@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=26 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://m6u2237aao2h" path="res://Scenes/automation.gd" id="5_up2ix"]
 [ext_resource type="Script" uid="uid://r1k6saqlxdof" path="res://Scenes/sandbox.gd" id="6_bsf7d"]
 [ext_resource type="PackedScene" uid="uid://dvi7csjnojv02" path="res://Prefabs/Living/voidling.tscn" id="8_xhl2a"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="10_7qn4k"]
+[ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="10_a70ce"]
 
 [sub_resource type="Gradient" id="Gradient_a70ce"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
@@ -161,7 +163,6 @@ process_material = SubResource("ParticleProcessMaterial_15ig2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -521,6 +522,33 @@ offset_right = 982.0
 offset_bottom = 22.0
 text = "<< Prev"
 underline = 1
+
+[node name="results" parent="." instance=ExtResource("10_7qn4k")]
+visible = false
+offset_left = 13.0
+offset_top = 1039.0
+offset_right = 1907.0
+offset_bottom = 1071.0
+
+[node name="jellypatch" parent="results" instance=ExtResource("10_7qn4k")]
+layout_mode = 1
+offset_right = -1863.0
+offset_bottom = 0.0
+
+[node name="ColorRect" type="ColorRect" parent="results/jellypatch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.23137255, 0, 0.5803922, 1)
+
+[node name="orteil" parent="." instance=ExtResource("10_a70ce")]
+position = Vector2(-505, 995)
 
 [connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="button_down" from="automation/header/Button" to="automation" method="_on_button_button_down"]
