@@ -39,8 +39,9 @@ func _process(delta: float) -> void:
 	if spawn_momentum.length() < 0.01:
 		spawn_momentum = Vector2(0, 0)
 		
-	if global_position.y > get_tree().get_meta("otu_table").get_node("body").global_position.y:
-		otu_shove_momentum += Vector2(0, -20)
+	if get_tree().has_meta("otu_table"):
+		if global_position.y > get_tree().get_meta("otu_table").get_node("body").global_position.y:
+			otu_shove_momentum += Vector2(0, -20)
 	
 	velocity = otu_shove_momentum + spawn_momentum + movement_vector * walk_speed
 	move_and_slide()
