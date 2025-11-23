@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=13 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
 [ext_resource type="Script" uid="uid://d2u48h5lqs7rj" path="res://Scenes/narrator_nf_intro.gd" id="2_4gexm"]
+[ext_resource type="PackedScene" uid="uid://c7q87tmixkuid" path="res://Prefabs/UI/d9patch.tscn" id="4_3wq21"]
+[ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="5_jv23o"]
+[ext_resource type="Script" uid="uid://m6u2237aao2h" path="res://Scenes/automation.gd" id="5_up2ix"]
+[ext_resource type="Script" uid="uid://r1k6saqlxdof" path="res://Scenes/sandbox.gd" id="6_bsf7d"]
 
 [sub_resource type="Animation" id="Animation_pu5lm"]
 resource_name = "fade_in"
@@ -41,6 +45,18 @@ _data = {
 &"fade_in": SubResource("Animation_pu5lm")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_jv23o"]
+font_size = 32
+font_color = Color(1, 0.7137255, 0.16078432, 1)
+shadow_size = 0
+shadow_color = Color(1.1752286, 0.5741415, 0, 0.3882353)
+shadow_offset = Vector2(2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_up2ix"]
+font_size = 48
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
 [node name="nf" type="Node2D"]
 script = ExtResource("1_4gexm")
 
@@ -65,9 +81,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.0
 offset_left = -216.0
-offset_top = 175.0
+offset_top = -172.0
 offset_right = 217.0
-offset_bottom = 281.0
+offset_bottom = -66.0
 grow_vertical = 1
 script = ExtResource("2_4gexm")
 
@@ -86,4 +102,225 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
+[node name="automation" parent="." instance=ExtResource("4_3wq21")]
+offset_left = 1286.0
+offset_top = 370.0
+offset_right = 1794.0
+offset_bottom = 680.0
+script = ExtResource("5_up2ix")
+
+[node name="header" parent="automation" instance=ExtResource("4_3wq21")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 71.0
+grow_vertical = 1
+
+[node name="title" type="Label" parent="automation/header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NextFool Automatic [v3.2.3]"
+label_settings = SubResource("LabelSettings_jv23o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="automation/header"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.1903763
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.09019608)
+
+[node name="Button" type="Button" parent="automation/header"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="body" type="Control" parent="automation"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="automation/body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 18.0
+offset_right = -28.0
+offset_bottom = -22.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=#777]withName: [color=#fff]COUNT {
+
+	[color=#ffb629]cpus = 1[color=#fff]
+
+}"
+
+[node name="cpus" parent="automation/body/RichTextLabel" instance=ExtResource("4_3wq21")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 3.0
+offset_top = 60.0
+offset_right = 43.0
+offset_bottom = 100.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="ColorRect" type="ColorRect" parent="automation/body/RichTextLabel/cpus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.81960785, 0.43529412, 0, 1)
+
+[node name="Label" type="Label" parent="automation/body/RichTextLabel/cpus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_up2ix")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sandbox" parent="." instance=ExtResource("5_jv23o")]
+self_modulate = Color(1, 0.7137255, 0.16078432, 1)
+offset_left = 82.0
+offset_top = 275.0
+offset_right = 1137.0
+offset_bottom = 802.0
+script = ExtResource("6_bsf7d")
+
+[node name="header" parent="sandbox" instance=ExtResource("5_jv23o")]
+self_modulate = Color(0.81960785, 0.43529412, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 69.19038
+metadata/_edit_use_anchors_ = true
+
+[node name="d9patch" parent="sandbox/header" instance=ExtResource("4_3wq21")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="title" type="Label" parent="sandbox/header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Eco-Void Sandbox Utility [v1.3-1]"
+label_settings = SubResource("LabelSettings_jv23o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="sandbox/header"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.1903763
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.09019608)
+
+[node name="Button" type="Button" parent="sandbox/header"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="arena" parent="sandbox" instance=ExtResource("5_jv23o")]
+self_modulate = Color(1, 0.7137255, 0.16078432, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.9981025
+offset_left = 6.0
+offset_top = 72.53829
+offset_right = -6.0
+offset_bottom = -6.0
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="d9patch" parent="sandbox/arena" instance=ExtResource("4_3wq21")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="ColorRect" type="ColorRect" parent="sandbox/arena"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.4617004
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05882353, 0.02745098, 0, 1)
+
 [connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="button_down" from="automation/header/Button" to="automation" method="_on_button_button_down"]
+[connection signal="button_up" from="automation/header/Button" to="automation" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="automation/header/Button" to="automation" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="automation/header/Button" to="automation" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="sandbox/header/Button" to="sandbox" method="_on_button_button_down"]
+[connection signal="button_up" from="sandbox/header/Button" to="sandbox" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="sandbox/header/Button" to="sandbox" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="sandbox/header/Button" to="sandbox" method="_on_button_mouse_exited"]
