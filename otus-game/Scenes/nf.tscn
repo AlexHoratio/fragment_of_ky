@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://n65jm5ia0arl"]
+
+[ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
+[ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
+[ext_resource type="Script" uid="uid://d2u48h5lqs7rj" path="res://Scenes/narrator_nf_intro.gd" id="2_4gexm"]
+
+[sub_resource type="Animation" id="Animation_pu5lm"]
+resource_name = "fade_in"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4gexm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wq21"]
+_data = {
+&"RESET": SubResource("Animation_4gexm"),
+&"fade_in": SubResource("Animation_pu5lm")
+}
+
+[node name="nf" type="Node2D"]
+script = ExtResource("1_4gexm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_3wq21")
+}
+
+[node name="narrator" parent="CanvasLayer" instance=ExtResource("1_pu5lm")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -216.0
+offset_top = 175.0
+offset_right = 217.0
+offset_bottom = 281.0
+grow_vertical = 1
+script = ExtResource("2_4gexm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake]Enough is enough!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

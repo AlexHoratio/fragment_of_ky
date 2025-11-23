@@ -58,7 +58,7 @@ func fade_out() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == \"fade_out\":
-		get_tree().quit()
+		get_tree().change_scene_to_file(\"res://Scenes/nf.tscn\")
 "
 
 [sub_resource type="Animation" id="Animation_7gmj1"]
