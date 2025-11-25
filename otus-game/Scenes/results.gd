@@ -3,13 +3,14 @@ extends NinePatchRect
 var hovering = false
 var open = false
 
-var results = 0
+var results = 99
 
 func _ready():
 	pass
 	
 func _process(delta):
-	position.y = lerp(position.y, (1040.0 if open else 1078.0) if results > 0 else 1250.0, 0.2)
+	open = true
+	position.y = lerp(position.y, (1030.0 if open else 1078.0) if results > 0 else 1250.0, 0.2)
 	
 	$tab/mask.self_modulate.a = lerp($tab/mask.self_modulate.a, 0.1 if hovering else 0.0, 0.1)
 
