@@ -61,8 +61,8 @@ func _on_count_timeout():
 
 func _on_download_pressed():
 	get_node("../sandbox").worlds[get_node("../sandbox").world_id]["finished"] = true
-	get_node("../results").download_result()
+	get_node("../results").download_result({"otu_tables": 1})
 	can_download = false
-	stop_automation()
+	#stop_automation()
 	
 	$download/ColorRect.self_modulate.a = 1.0
