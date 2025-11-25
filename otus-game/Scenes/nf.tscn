@@ -267,7 +267,6 @@ label_settings = SubResource("LabelSettings_j4qnu")
 vertical_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -443,7 +442,6 @@ mouse_default_cursor_shape = 2
 
 [node name="count" type="Timer" parent="automation"]
 wait_time = 2.0
-autostart = true
 
 [node name="download" parent="automation" instance=ExtResource("5_jv23o")]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)

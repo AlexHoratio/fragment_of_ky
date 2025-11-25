@@ -86,6 +86,16 @@ func click() -> void:
 	clicked_once = true
 	$AnimatedSprite2D/mask.modulate.a = 1
 	emit_signal("clicked")
+	
+	var kyztling_text = load("res://Prefabs/UI/kyztling_text.tscn").instantiate()
+	#kyztling_text.global_position = global_position
+	kyztling_text.text = "[wave]+1 " + str(genome["marker"]) + "!"
+	kyztling_text.position = Vector2(0, 0)
+	kyztling_text.global_position.x -= kyztling_text.size.x/2.0
+	kyztling_text.global_position.y -= 64
+	kyztling_text.fade_speed = 2.25
+	kyztling_text.move_speed = 50
+	add_child(kyztling_text)
 
 func _on_button_mouse_entered() -> void:
 	hovering = true
