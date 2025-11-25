@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=30 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
@@ -92,6 +92,39 @@ shadow_size = 0
 shadow_color = Color(1.1752286, 0.5741415, 0, 0.3882353)
 shadow_offset = Vector2(2, 1)
 
+[sub_resource type="GDScript" id="GDScript_15ig2"]
+script/source = "extends NinePatchRect
+
+var enabled = false
+var hovering = false
+var pressed = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	modulate.a = lerp(modulate.a, 1.0 if enabled else 0.13, 0.2)
+	
+	$ColorRect.modulate.a = lerp($ColorRect.modulate.a, (0.2 if pressed else 0.9) if hovering else 1.0, 0.2)
+
+func _on_button_mouse_entered():
+	hovering = true
+
+func _on_button_mouse_exited():
+	hovering = false
+
+func _on_button_button_down():
+	if enabled:
+		pressed = true
+
+func _on_button_button_up():
+	pressed = false
+
+func _on_button_pressed():
+	if enabled:
+		get_parent().get_parent().get_parent().add_cpus()
+"
+
 [sub_resource type="LabelSettings" id="LabelSettings_up2ix"]
 font_size = 48
 outline_size = 12
@@ -167,6 +200,7 @@ process_material = SubResource("ParticleProcessMaterial_15ig2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -283,13 +317,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[color=#777]withName: [color=#fff]COUNT {
+text = "[color=#777]withName: [color=#fff]COUNT_OTUS {
 
 	[color=#ffb629]cpus = 1[color=#fff]
 
 }"
 
 [node name="cpus" parent="automation/body/RichTextLabel" instance=ExtResource("4_3wq21")]
+modulate = Color(1, 1, 1, 0.12941177)
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -300,6 +335,7 @@ offset_right = 43.0
 offset_bottom = 100.0
 grow_horizontal = 1
 grow_vertical = 1
+script = SubResource("GDScript_15ig2")
 
 [node name="ColorRect" type="ColorRect" parent="automation/body/RichTextLabel/cpus"]
 layout_mode = 1
@@ -327,6 +363,16 @@ text = "+"
 label_settings = SubResource("LabelSettings_up2ix")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="automation/body/RichTextLabel/cpus"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
 
 [node name="count" type="Timer" parent="automation"]
 wait_time = 2.0
@@ -619,12 +665,19 @@ position = Vector2(-505, 995)
 [connection signal="button_up" from="automation/header/Button" to="automation" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="automation/header/Button" to="automation" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="automation/header/Button" to="automation" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="automation/body/RichTextLabel/cpus/Button" to="automation/body/RichTextLabel/cpus" method="_on_button_button_down"]
+[connection signal="button_up" from="automation/body/RichTextLabel/cpus/Button" to="automation/body/RichTextLabel/cpus" method="_on_button_button_up"]
+[connection signal="mouse_entered" from="automation/body/RichTextLabel/cpus/Button" to="automation/body/RichTextLabel/cpus" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="automation/body/RichTextLabel/cpus/Button" to="automation/body/RichTextLabel/cpus" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="automation/body/RichTextLabel/cpus/Button" to="automation/body/RichTextLabel/cpus" method="_on_button_pressed"]
 [connection signal="timeout" from="automation/count" to="automation" method="_on_count_timeout"]
 [connection signal="pressed" from="automation/download/download" to="automation" method="_on_download_pressed"]
 [connection signal="button_down" from="sandbox/header/Button" to="sandbox" method="_on_button_button_down"]
 [connection signal="button_up" from="sandbox/header/Button" to="sandbox" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="sandbox/header/Button" to="sandbox" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="sandbox/header/Button" to="sandbox" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="sandbox/arena/destination/next" to="sandbox" method="_on_next_pressed"]
+[connection signal="pressed" from="sandbox/arena/destination/prev" to="sandbox" method="_on_prev_pressed"]
 [connection signal="mouse_entered" from="results/open_tab" to="results" method="_on_open_tab_mouse_entered"]
 [connection signal="mouse_exited" from="results/open_tab" to="results" method="_on_open_tab_mouse_exited"]
 [connection signal="pressed" from="results/open_tab" to="results" method="_on_open_tab_pressed"]

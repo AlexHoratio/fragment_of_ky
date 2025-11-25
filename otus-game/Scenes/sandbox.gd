@@ -7,12 +7,18 @@ var mouse_last_pos = Vector2(0, 0)
 
 var time = 0
 
-var world_id = 0
+var world_id = -1
 
 var worlds = {
 	0: {
+		"counted_voidlings": 0,
 		"voidlings": 11,
 		"finished": false,
+	},
+	1: {
+		"counted_voidlings": 5,
+		"voidlings": 20,
+		"finished": false
 	}
 }
 
@@ -51,18 +57,30 @@ func update_destination_bar() -> void:
 	$arena/destination/task.text = "[color=#777][[color=#aaa]" + work_dir + "[color=#777]] KY:[color=#bbb]COUNT_OTUS[color=#777] [" + str(pct) + "%] [color=#ccc]" + str(clicked) + " of " + str(max_voidlings) 
 
 func enter_world_id(id) -> void:
+	if id == world_id:
+		return
+		
 	world_id = id
 	
 	for voidling in get_tree().get_nodes_in_group("voidlings"):
 		voidling.queue_free()
 		
+	var pre_clicked = worlds[id]["counted_voidlings"]
 	for i in worlds[id]["voidlings"]:
 		var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 		voidling.scale = Vector2(0.5, 0.5)
 		voidling.position = Vector2(100 + randf()*(size.x - 200), 100 + randf()*(size.y - 200))
 		voidling.clicked.connect(voidling_clicked.bind(voidling))
 		voidling.modulate.a = 0.2
+			
 		$arena/living.add_child(voidling)
+		
+		if pre_clicked > 0:
+			voidling.clicked_once = true
+			voidling.modulate.a = 1.0
+			pre_clicked -= 1
+		
+	$arena/destination/sample.text = "[center][color=#777](sample_0" + str(world_id + 1) + ".fasta)"
 
 func count_random() -> void:
 	var unclicked = []
@@ -98,3 +116,9 @@ func _on_button_button_down():
 func _on_button_button_up():
 	dragging = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _on_next_pressed():
+	enter_world_id(clamp(world_id + 1, 0, 1))
+
+func _on_prev_pressed():
+	enter_world_id(clamp(world_id - 1, 0, 1))

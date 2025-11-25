@@ -75,8 +75,8 @@ func generate_genome() -> void:
 	for i in range(74):
 		genome["junk"] += ["A", "T", "C", "G"][randi()%4]
 	
-	print("MY GENOME IS....")
-	print(genome)
+	#print("MY GENOME IS....")
+	#print(genome)
 
 func enable_clicking() -> void:
 	click_enabled = true

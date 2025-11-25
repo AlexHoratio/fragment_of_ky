@@ -24,7 +24,7 @@ func _process(delta):
 	$download/ColorRect.self_modulate.a = lerp($download/ColorRect.self_modulate.a, 0.0, 0.2)
 
 func update_stats() -> void:
-	$body/RichTextLabel.text = """[color=#777]withName: [color=#fff]COUNT {
+	$body/RichTextLabel.text = """[color=#777]withName: [color=#fff]COUNT_OTUS {
 
 	[color=#ffb629]cpus = """ + str(cpus) + """[color=#fff]
 
@@ -37,6 +37,8 @@ func start_automation() -> void:
 func stop_automation() -> void:
 	$count.stop()
 	
+func add_cpus() -> void:
+	cpus += 1
 
 func _on_button_mouse_entered():
 	hovering = true
