@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=32 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
@@ -176,6 +176,27 @@ size = Vector2(20, 452)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a70ce"]
 size = Vector2(1071, 12)
+
+[sub_resource type="GDScript" id="GDScript_2wapo"]
+script/source = "extends Control
+
+var hovered = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	$ColorRect.self_modulate.a = lerp($ColorRect.self_modulate.a, 0.1 if hovered else 0.0, 0.2)
+
+func _on_button_mouse_entered():
+	hovered = true
+
+func _on_button_mouse_exited():
+	hovered = false
+
+func _on_button_pressed():
+	pass # Replace with function body.
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_2wapo"]
 font_size = 24
@@ -655,21 +676,48 @@ layout_mode = 1
 offset_right = -217.0
 offset_bottom = -201.0
 
-[node name="sell" type="Label" parent="results"]
+[node name="sell" type="Control" parent="results"]
+layout_mode = 1
+anchor_right = 0.11193242
+anchor_bottom = 0.19291338
+offset_left = 1678.0
+offset_top = 4.0
+offset_right = 1678.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_2wapo")
+metadata/_edit_use_anchors_ = true
+
+[node name="sell" type="Label" parent="results/sell"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1678.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -201.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sell All (1g)"
 label_settings = SubResource("LabelSettings_2wapo")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="results/sell"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="results/sell"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="otus" type="Label" parent="results"]
 layout_mode = 0
@@ -704,3 +752,6 @@ position = Vector2(-505, 995)
 [connection signal="mouse_entered" from="results/open_tab" to="results" method="_on_open_tab_mouse_entered"]
 [connection signal="mouse_exited" from="results/open_tab" to="results" method="_on_open_tab_mouse_exited"]
 [connection signal="pressed" from="results/open_tab" to="results" method="_on_open_tab_pressed"]
+[connection signal="mouse_entered" from="results/sell/Button" to="results/sell" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="results/sell/Button" to="results/sell" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="results/sell/Button" to="results/sell" method="_on_button_pressed"]
