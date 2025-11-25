@@ -3,6 +3,8 @@ extends NinePatchRect
 var hovering = false
 var open = false
 
+var first_time_sell = true
+
 var results = {
 	"otu_tables": 0
 }
@@ -36,6 +38,13 @@ func sell_results() -> void:
 	Gold.add_gold(get_value_of_results())
 	for result_type in results.keys():
 		results[result_type] = 0
+		
+	if first_time_sell:
+		first_time_sell = false
+		
+		var narrator = load("res://Prefabs/UI/Narrators/narrator_nf1_end.tscn").instantiate()
+		get_node("../CanvasLayer").add_child(narrator)
+		narrator.next_stage()
 	
 func get_value_of_results() -> float:
 	var value = 0

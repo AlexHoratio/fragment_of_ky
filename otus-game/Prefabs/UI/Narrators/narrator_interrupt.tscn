@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2k0vm17eugnr"]
+
+[ext_resource type="Texture2D" uid="uid://b0kahnjfw2y1v" path="res://Graphics/CanvasLayer/goldjelly_k9patch_x2.png" id="1_jnoum"]
+[ext_resource type="Script" uid="uid://bmjq42hb4b4jb" path="res://Prefabs/UI/Narrators/narrator_interrupt.gd" id="2_jnoum"]
+
+[node name="narrator_interrupt" type="NinePatchRect"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = -172.0
+offset_right = 217.0
+offset_bottom = -66.0
+grow_horizontal = 2
+texture = ExtResource("1_jnoum")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("2_jnoum")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake]Enough is enough!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1

@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://n65jm5ia0arl"]
+[gd_scene load_steps=42 format=3 uid="uid://n65jm5ia0arl"]
 
 [ext_resource type="Script" uid="uid://dndrrdpxwmkow" path="res://Scenes/nf.gd" id="1_4gexm"]
-[ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_pu5lm"]
 [ext_resource type="Script" uid="uid://d2u48h5lqs7rj" path="res://Scenes/narrator_nf_intro.gd" id="2_4gexm"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="2_ncv8y"]
+[ext_resource type="Texture2D" uid="uid://b0kahnjfw2y1v" path="res://Graphics/CanvasLayer/goldjelly_k9patch_x2.png" id="3_15ig2"]
 [ext_resource type="PackedScene" uid="uid://c7q87tmixkuid" path="res://Prefabs/UI/d9patch.tscn" id="4_3wq21"]
 [ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="5_jv23o"]
 [ext_resource type="Script" uid="uid://m6u2237aao2h" path="res://Scenes/automation.gd" id="5_up2ix"]
@@ -67,7 +67,46 @@ font_color = Color(1, 0.7137255, 0.16078432, 1)
 shadow_color = Color(0.3404046, 0.2278035, 0, 1)
 shadow_offset = Vector2(2, 2)
 
-[sub_resource type="Animation" id="Animation_4gexm"]
+[sub_resource type="GDScript" id="GDScript_pubq8"]
+script/source = "extends Control
+
+var showing = false
+
+func _process(delta):
+	position.x = lerp(position.x, 630.0 if showing else -392.0, 0.05)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_pubq8"]
+font_size = 48
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_etynp"]
+script/source = "extends Control
+
+var showing = false
+
+func _process(delta):
+	position.x = lerp(position.x, 980.0 if showing else 2022.0, 0.05)
+"
+
+[sub_resource type="Animation" id="Animation_j4qnu"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pubq8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,29 +118,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_pu5lm"]
-resource_name = "fade_in"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wq21"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etynp"]
 _data = {
-&"RESET": SubResource("Animation_4gexm"),
-&"fade_in": SubResource("Animation_pu5lm")
+&"RESET": SubResource("Animation_pubq8"),
+&"fade_out": SubResource("Animation_j4qnu")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_jv23o"]
@@ -226,6 +249,76 @@ shadow_offset = Vector2(2, 2)
 
 [sub_resource type="LabelSettings" id="LabelSettings_15ig2"]
 
+[sub_resource type="Animation" id="Animation_4gexm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pu5lm"]
+resource_name = "fade_in"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_15ig2"]
+resource_name = "partial_fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.1250001, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.54200006)]
+}
+
+[sub_resource type="Animation" id="Animation_2wapo"]
+resource_name = "fade_out"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.54200006), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15ig2"]
+_data = {
+&"RESET": SubResource("Animation_4gexm"),
+&"fade_in": SubResource("Animation_pu5lm"),
+&"fade_out": SubResource("Animation_2wapo"),
+&"partial_fadeout": SubResource("Animation_15ig2")
+}
+
 [node name="nf" type="Node2D"]
 script = ExtResource("1_4gexm")
 
@@ -249,10 +342,10 @@ process_material = SubResource("ParticleProcessMaterial_15ig2")
 [node name="gold" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 15.0
-offset_top = 11.0
-offset_right = 235.0
-offset_bottom = 79.0
+offset_left = 49.0
+offset_top = 58.0
+offset_right = 269.0
+offset_bottom = 126.0
 script = SubResource("GDScript_j4qnu")
 
 [node name="Label" type="Label" parent="CanvasLayer/gold"]
@@ -266,30 +359,21 @@ text = "0g"
 label_settings = SubResource("LabelSettings_j4qnu")
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
-libraries = {
-&"": SubResource("AnimationLibrary_3wq21")
-}
-
-[node name="narrator" parent="CanvasLayer" instance=ExtResource("1_pu5lm")]
+[node name="narrator" type="NinePatchRect" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -216.0
-offset_top = -172.0
-offset_right = 217.0
-offset_bottom = -66.0
-grow_vertical = 1
+offset_left = -813.0
+offset_top = 41.0
+offset_right = -380.0
+offset_bottom = 147.0
+grow_horizontal = 2
+texture = ExtResource("3_15ig2")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 script = ExtResource("2_4gexm")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator"]
@@ -306,6 +390,144 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
+
+[node name="this_genome" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -565.0
+offset_top = 314.0
+offset_right = -250.0
+offset_bottom = 797.0
+mouse_filter = 2
+script = SubResource("GDScript_pubq8")
+
+[node name="jellypatch" parent="CanvasLayer/this_genome" instance=ExtResource("10_7qn4k")]
+modulate = Color(1, 1, 1, 0.5803922)
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="g9patch" parent="CanvasLayer/this_genome/jellypatch" instance=ExtResource("5_jv23o")]
+self_modulate = Color(0.16445974, 0.16445976, 0.16445974, 1)
+show_behind_parent = true
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/this_genome"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0.7200212, 0.47851533, 7.70092e-07, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[color=blue][url=marker]ATCGTA[/url][color=#aaa]GAGG
+TTGACGTCAT
+AACATGGAAT
+AAGTATTCTT
+GGGTGACCTG
+ATGCACTACG
+CAGAATCTAG
+AGTCCGGAGC"
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+
+[node name="name" type="Label" parent="CanvasLayer/this_genome"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -51.0
+offset_right = 313.0
+offset_bottom = -3.0
+text = "this genome"
+label_settings = SubResource("LabelSettings_pubq8")
+horizontal_alignment = 1
+
+[node name="that_genome" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2052.0
+offset_top = 314.0
+offset_right = 2367.0
+offset_bottom = 797.0
+mouse_filter = 2
+script = SubResource("GDScript_etynp")
+
+[node name="jellypatch" parent="CanvasLayer/that_genome" instance=ExtResource("10_7qn4k")]
+modulate = Color(1, 1, 1, 0.5803922)
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="g9patch" parent="CanvasLayer/that_genome/jellypatch" instance=ExtResource("5_jv23o")]
+self_modulate = Color(0.16445974, 0.16445976, 0.16445974, 1)
+show_behind_parent = true
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/that_genome"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0.7200212, 0.47851533, 7.70092e-07, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[color=blue][url=marker]ATCGTA[/url][color=#aaa]ATTA
+GAAGTTCGAA
+ATTGTTAACT
+GTCTAATTTC
+CTCAAGTCAG
+ACGATCATTG
+CAGACCTTCG
+AGGCATCAGT
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+
+[node name="name" type="Label" parent="CanvasLayer/that_genome"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -51.0
+offset_right = 313.0
+offset_bottom = -3.0
+text = "that genome"
+label_settings = SubResource("LabelSettings_pubq8")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_etynp")
+}
 
 [node name="automation" parent="." instance=ExtResource("4_3wq21")]
 offset_left = 1286.0
@@ -640,6 +862,7 @@ text = "[center][color=#777](sample_01.fasta)"
 vertical_alignment = 1
 
 [node name="next" type="LinkButton" parent="sandbox/arena/destination"]
+self_modulate = Color(1, 1, 1, 0.28627452)
 layout_mode = 0
 offset_left = 992.0
 offset_top = 7.0
@@ -649,6 +872,7 @@ text = "Next >>"
 underline = 1
 
 [node name="prev" type="LinkButton" parent="sandbox/arena/destination"]
+self_modulate = Color(1, 1, 1, 0.28627452)
 layout_mode = 0
 offset_left = 810.0
 offset_top = 7.0
@@ -766,9 +990,29 @@ offset_bottom = 35.0
 text = "OTU Tables: 1"
 label_settings = SubResource("LabelSettings_15ig2")
 
-[node name="orteil" parent="." instance=ExtResource("10_a70ce")]
-position = Vector2(-505, 995)
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_15ig2")
+}
+
+[node name="orteil" parent="." instance=ExtResource("10_a70ce")]
+position = Vector2(-216, 995)
+
+[connection signal="meta_hover_ended" from="CanvasLayer/this_genome/RichTextLabel" to="CanvasLayer/this_genome" method="_on_rich_text_label_meta_hover_ended"]
+[connection signal="meta_hover_started" from="CanvasLayer/this_genome/RichTextLabel" to="CanvasLayer/this_genome" method="_on_rich_text_label_meta_hover_started"]
+[connection signal="meta_hover_ended" from="CanvasLayer/that_genome/RichTextLabel" to="CanvasLayer/that_genome" method="_on_rich_text_label_meta_hover_ended"]
+[connection signal="meta_hover_started" from="CanvasLayer/that_genome/RichTextLabel" to="CanvasLayer/that_genome" method="_on_rich_text_label_meta_hover_started"]
 [connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="button_down" from="automation/header/Button" to="automation" method="_on_button_button_down"]
 [connection signal="button_up" from="automation/header/Button" to="automation" method="_on_button_button_up"]
@@ -793,3 +1037,4 @@ position = Vector2(-505, 995)
 [connection signal="mouse_entered" from="results/sell/Button" to="results/sell" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="results/sell/Button" to="results/sell" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="results/sell/Button" to="results/sell" method="_on_button_pressed"]
+[connection signal="animation_finished" from="ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		if after_walk_timer == 0:
 			text_scroll_progress = clamp(text_scroll_progress + delta*text_reveal_speed, 0, 1)
 	
-	if text_scroll_progress == 1 and $dialogue/RichTextLabel.visible_ratio != 1:
+	if text_scroll_progress >= 0.999 and $dialogue/RichTextLabel.visible_ratio != 1:
 		emit_signal("done_talking")
 	
 	$dialogue/RichTextLabel.visible_ratio = text_scroll_progress
@@ -64,7 +64,7 @@ func walk_to(new_target) -> void:
 		seeking_destination = true
 		orteil_ready = false
 
-func queue_dialogue_after_walk(new_text, reset_text_scroll_progress = true, new_text_reveal_speed = 1, new_after_walk_timer = 1, new_prev_dialogue = "", new_after_talk_timer = 1) -> void:
+func queue_dialogue_after_walk(new_text, reset_text_scroll_progress = true, new_text_reveal_speed = 1.0, new_after_walk_timer = 1.0, new_prev_dialogue = "", new_after_talk_timer = 1.0) -> void:
 	$dialogue/RichTextLabel.text = new_text
 	
 	if reset_text_scroll_progress:
@@ -105,5 +105,40 @@ in the community.
 		"nf_move_along2":
 			queue_dialogue_after_walk("", true)
 			walk_to(Vector2(2100, 1010))
+		"nf1_end_calm_down":
+			walk_to(Vector2(1630, 995))
+			queue_dialogue_after_walk("""You see, these [color=#aaa]OTU Tables[color=#fff] are nearly [color=red][wave]meaningless[/wave][color=#fff] for Earthlings.""", true, 0.4, 0.3, "nf1_end_dev_interrupt")
+		"nf1_end_dev_interrupt":
+			var narrator_interrupt = load("res://Prefabs/UI/Narrators/narrator_interrupt.tscn").instantiate()
+			get_parent().add_child(narrator_interrupt)
+			narrator_interrupt.add_new_text("[color=#ffb629][shake level=50]WHAT?!")
+			narrator_interrupt.scale = Vector2(2, 2)
+			narrator_interrupt.target_position = Vector2(960 - narrator_interrupt.target_size.x, 540 - narrator_interrupt.target_size.x)
+			get_node("../ColorRect/AnimationPlayer").play("partial_fadeout")
+			
+			walk_to(Vector2(1630, 995))
+			queue_dialogue_after_walk("Well, think of it this way.", true, 1, 6, "nf1_end_thinkofit", 3)
+		"nf1_end_thinkofit":
+			var narrator_interrupt = get_node("../narrator_interrupt")
+			narrator_interrupt.add_new_text("")
+			narrator_interrupt.target_position = Vector2(960 - narrator_interrupt.target_size.x, 540 - narrator_interrupt.target_size.x)
+			
+			queue_dialogue_after_walk("Do you really think that [color=#aaa]this[color=#fff] genome...", true, 1, 0, "nf1_end_this_genome", 3)
+			
+		"nf1_end_this_genome":
+			get_node("../CanvasLayer/this_genome").showing = true
+			queue_dialogue_after_walk("... and [color=#aaa]that[color=#fff] genome ...", true, 1, 3, "nf1_end_and_this_genome", 3)
+			
+		"nf1_end_and_this_genome":
+			get_node("../CanvasLayer/that_genome").showing = true
+			queue_dialogue_after_walk("... would do the same thing?", true, 1, 0.5, "nf1_end_same_thing", 6)
+		"nf1_end_same_thing":
+			queue_dialogue_after_walk("[wave]Of course not!", true, 1, 0, "nf1_end_ofcnot", 2)
+		"nf1_end_ofcnot":
+			queue_dialogue_after_walk("[wave]They're completely different!", true, 1, 0, "nf1_end_completely_different", 3)
+		"nf1_end_completely_different":
+			queue_dialogue_after_walk("To get to the bottom of this, we're going to need to take a [rainbow sat=0.5][wave]closer look at these genomes...", true, 0.25, 0, "nf1_end_closer_look", 3)
+		"nf1_end_closer_look":
+			get_node("../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
 		_:
 			pass

@@ -25,10 +25,10 @@ func _process(delta: float) -> void:
 	
 	$RichTextLabel.visible_ratio = text_scroll_progress
 	
-	if Input.is_action_just_pressed("dialogue_activate") and dialogue_transition_timer == 0:
-		next_stage()
+	#if Input.is_action_just_pressed("dialogue_activate") and dialogue_transition_timer == 0:
+		#next_stage()
 		
-	if text_stage <= 4:
+	if text_stage == 0:
 		if randi()%2 == 0:
 			var lightning = load("res://Prefabs/Lightning/lightning.tscn").instantiate()
 			lightning.begin_point = target_size/2.0 + Vector2(1, 0).rotated(2*PI*randf())
@@ -53,29 +53,8 @@ func next_stage() -> void:
 	
 	match text_stage:
 		0:
-			add_new_text("[rainbow speed=10][shake level=25]SIKE!!!!![/shake][/rainbow][color=#777] [Press Enter to continue...]")
-			target_position = Vector2(960 - target_size.x/2.0, 520 - target_size.y/2.0)
-		1:
-			add_new_text("[color=#ffb629][shake level=10]Do you really think I'd let Orteil bore you to death?[/shake][color=#777]")
-			target_position = Vector2(960 - target_size.x/2.0, 490 - target_size.y/2.0)
-		2:
-			add_new_text("[color=#ffb629][shake level=10]Think again, Gamer...[/shake][color=#777]")
-			target_position = Vector2(960 - target_size.x/2.0, 380 - target_size.y/2.0)
-		3:
-			add_new_text("[color=#ffb629][shake level=10]It's time to make some money.[/shake][color=#777]")
-			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
-			
-			get_node("../../ColorRect/AnimationPlayer").play("fade_in")
-		4:
-			add_new_text("")
-			target_position = Vector2(960 - target_size.x/2.0, 0)
-			
-			orteil.walk_to(Vector2(235, 1010))
-			
-			orteil.queue_dialogue_after_walk("[rainbow][wave]Hmm.", true, 1, 1, "nf_think", 3)
-		5:
-			add_new_text("")
-			target_position = Vector2(960 - target_size.x/2.0, 0)
+			add_new_text("[color=#ffb629][shake level=25]What is this ... ?[/shake][color=#777] [Press Enter to continue...]")
+			target_position = Vector2(150, 50)
 		_:
 			print("UHH")
 	

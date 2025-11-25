@@ -8,6 +8,7 @@ var mouse_last_pos = Vector2(0, 0)
 var time = 0
 
 var world_id = -1
+var highest_world_unlocked = 0
 
 var worlds = {
 	0: {
@@ -28,6 +29,9 @@ func _ready():
 func _process(delta):
 	time += delta
 	$header/ColorRect.self_modulate.a = lerp($header/ColorRect.self_modulate.a, 1.0 if hovering else 0.0, 0.2)
+	
+	$arena/destination/next.self_modulate.a = lerp($arena/destination/next.self_modulate.a, 1.0 if world_id < highest_world_unlocked else 0.3, 0.2)
+	$arena/destination/prev.self_modulate.a = lerp($arena/destination/prev.self_modulate.a, 1.0 if world_id > 0 else 0.3, 0.2)
 	
 	if dragging:
 		global_position = get_global_mouse_position() - drag_offset
@@ -124,7 +128,7 @@ func _on_button_button_up():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_next_pressed():
-	enter_world_id(clamp(world_id + 1, 0, 1))
+	enter_world_id(clamp(world_id + 1, 0, highest_world_unlocked))
 
 func _on_prev_pressed():
-	enter_world_id(clamp(world_id - 1, 0, 1))
+	enter_world_id(clamp(world_id - 1, 0, highest_world_unlocked))
