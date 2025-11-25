@@ -16,7 +16,7 @@ var worlds = {
 		"finished": false,
 	},
 	1: {
-		"counted_voidlings": 5,
+		"counted_voidlings": 0,
 		"voidlings": 20,
 		"finished": false
 	}
@@ -46,11 +46,14 @@ func update_destination_bar() -> void:
 	for i in 6:
 		work_dir += alphanumeric[randi()%alphanumeric.length()]
 		
-	var max_voidlings = get_tree().get_node_count_in_group("voidlings")
+	var max_voidlings = 0
 	var clicked = 0
 	for v in get_tree().get_nodes_in_group("voidlings"):
-		if v.clicked_once:
-			clicked += 1
+		if weakref(v).get_ref() and !v.is_queued_for_deletion():
+			max_voidlings += 1
+			
+			if v.clicked_once:
+				clicked += 1
 	
 	var pct = int(round(float(100 * clicked) / float(max_voidlings)))
 	
@@ -81,6 +84,7 @@ func enter_world_id(id) -> void:
 			pre_clicked -= 1
 		
 	$arena/destination/sample.text = "[center][color=#777](sample_0" + str(world_id + 1) + ".fasta)"
+	update_destination_bar()
 
 func count_random() -> void:
 	var unclicked = []
