@@ -1,0 +1,316 @@
+[gd_scene load_steps=15 format=3 uid="uid://djvkouurjmk5r"]
+
+[ext_resource type="PackedScene" uid="uid://di0i6wo7jkm73" path="res://Prefabs/UI/coldjellypatch.tscn" id="1_g46kc"]
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_q612g"]
+
+[sub_resource type="Gradient" id="Gradient_2ayy1"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_2ayy1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_an124"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_e7l5x"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+gradient = SubResource("Gradient_e7l5x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7fwqe"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[sub_resource type="Theme" id="Theme_q612g"]
+
+[sub_resource type="FontVariation" id="FontVariation_2ayy1"]
+spacing_glyph = 55
+
+[sub_resource type="LabelSettings" id="LabelSettings_an124"]
+resource_local_to_scene = true
+font_size = 48
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q612g"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ayy1"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7l5x"]
+font_size = 32
+font_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="gv" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+texture = ExtResource("1_q612g")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_an124")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_7fwqe")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="genome" type="VBoxContainer" parent="."]
+offset_left = 103.0
+offset_top = 521.0
+offset_right = 1803.0
+offset_bottom = 997.0
+theme_override_constants/separation = 44
+
+[node name="coldjellypatch" parent="genome" instance=ExtResource("1_g46kc")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.22745098, 0.6745098, 1)
+
+[node name="Label" type="Label" parent="genome/coldjellypatch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q612g")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ayy1")
+text = "ATCGTATAATCCACTGGGCT"
+label_settings = SubResource("LabelSettings_an124")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left_pos" type="Label" parent="genome/coldjellypatch"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = 57.0
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_q612g")
+vertical_alignment = 1
+
+[node name="right_pos" type="Label" parent="genome/coldjellypatch"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1635.0
+offset_right = 1649.0
+grow_vertical = 2
+text = "20"
+label_settings = SubResource("LabelSettings_2ayy1")
+vertical_alignment = 1
+
+[node name="coldjellypatch2" parent="genome" instance=ExtResource("1_g46kc")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.22745098, 0.6745098, 1)
+
+[node name="Label" type="Label" parent="genome/coldjellypatch2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q612g")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ayy1")
+text = "ACAGAATGAAGCGTGCGACT"
+label_settings = SubResource("LabelSettings_an124")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left_pos" type="Label" parent="genome/coldjellypatch2"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = 57.0
+grow_vertical = 2
+text = "21"
+label_settings = SubResource("LabelSettings_q612g")
+vertical_alignment = 1
+
+[node name="right_pos" type="Label" parent="genome/coldjellypatch2"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1635.0
+offset_right = 1649.0
+grow_vertical = 2
+text = "40"
+label_settings = SubResource("LabelSettings_2ayy1")
+vertical_alignment = 1
+
+[node name="coldjellypatch3" parent="genome" instance=ExtResource("1_g46kc")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.22745098, 0.6745098, 1)
+
+[node name="Label" type="Label" parent="genome/coldjellypatch3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q612g")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ayy1")
+text = "ATTGTGGATGCACTTATTTT"
+label_settings = SubResource("LabelSettings_an124")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left_pos" type="Label" parent="genome/coldjellypatch3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = 57.0
+grow_vertical = 2
+text = "41"
+label_settings = SubResource("LabelSettings_q612g")
+vertical_alignment = 1
+
+[node name="right_pos" type="Label" parent="genome/coldjellypatch3"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1635.0
+offset_right = 1649.0
+grow_vertical = 2
+text = "60"
+label_settings = SubResource("LabelSettings_2ayy1")
+vertical_alignment = 1
+
+[node name="coldjellypatch4" parent="genome" instance=ExtResource("1_g46kc")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.22745098, 0.6745098, 1)
+
+[node name="Label" type="Label" parent="genome/coldjellypatch4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_q612g")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ayy1")
+text = "CCGCCGCGGCCAATGGACAT"
+label_settings = SubResource("LabelSettings_an124")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="left_pos" type="Label" parent="genome/coldjellypatch4"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = 57.0
+grow_vertical = 2
+text = "61"
+label_settings = SubResource("LabelSettings_q612g")
+vertical_alignment = 1
+
+[node name="right_pos" type="Label" parent="genome/coldjellypatch4"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1635.0
+offset_right = 1649.0
+grow_vertical = 2
+text = "80"
+label_settings = SubResource("LabelSettings_2ayy1")
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 139.0
+offset_top = 474.0
+offset_right = 545.0
+offset_bottom = 506.0
+text = "Genome of Bilzork, φ Voidling"
+label_settings = SubResource("LabelSettings_e7l5x")
