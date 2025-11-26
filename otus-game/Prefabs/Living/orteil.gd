@@ -140,5 +140,15 @@ in the community.
 			queue_dialogue_after_walk("To get to the bottom of this, we're going to need to take a [rainbow sat=0.5][wave]closer look at these genomes...", true, 0.25, 0, "nf1_end_closer_look", 3)
 		"nf1_end_closer_look":
 			get_node("../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
+		"gv_has_genome":
+			queue_dialogue_after_walk("A [color=#aaa]genome[color=#fff] is made out of a [color=#87e3ff]sequence[color=#fff] of [color=#aaa][wave]DNA bases[/wave][color=#fff].", true, 0.4, 0, "gv_sequence", 8)
+		"gv_sequence":
+			queue_dialogue_after_walk("It is this exact sequence of [color=#aaa][wave]bases[/wave][color=#fff] that defines how a creature grows.", true, 0.4, 0, "gv_determine_creature", 8)
+		"gv_determine_creature":
+			queue_dialogue_after_walk("... On Earth, that is.", true, 1, 0, "gv_onearth", 1)
+		"gv_onearth":
+			queue_dialogue_after_walk("This happens by the way of [color=#87e3ff][wave]genes[/wave][color=#fff].", true, 0.4, 0, "gv_genes", 7)
+		"gv_genes":
+			queue_dialogue_after_walk("A [color=#87e3ff][wave]gene[/wave][color=#fff] is just a small section of the genome, which \"codes for\" some particular thing.", true, 0.4, 0, "gv_codesfor", 5)
 		_:
 			pass

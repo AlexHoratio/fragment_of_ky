@@ -1,7 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://djvkouurjmk5r"]
+[gd_scene load_steps=43 format=3 uid="uid://djvkouurjmk5r"]
 
+[ext_resource type="Script" uid="uid://b0h58h1qsirg1" path="res://Scenes/gv.gd" id="1_an124"]
 [ext_resource type="PackedScene" uid="uid://di0i6wo7jkm73" path="res://Prefabs/UI/coldjellypatch.tscn" id="1_g46kc"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_q612g"]
+[ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="3_2ayy1"]
+[ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="5_46ma7"]
+[ext_resource type="Texture2D" uid="uid://c8lff1k6g2lo5" path="res://Graphics/Kyztlings/Void/White/voidkyztling5.png" id="6_q5b1g"]
+[ext_resource type="Texture2D" uid="uid://ia50k8lm0ow1" path="res://Graphics/Kyztlings/Void/White/voidkyztling4.png" id="7_3xe30"]
+[ext_resource type="Texture2D" uid="uid://cyardwof70ksh" path="res://Graphics/Kyztlings/Void/White/voidkyztling3.png" id="8_csbw2"]
+[ext_resource type="Texture2D" uid="uid://bj0gbs8iffqup" path="res://Graphics/Kyztlings/Void/White/voidkyztling2.png" id="9_7rfjh"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="10_4kope"]
+[ext_resource type="Texture2D" uid="uid://dumms0yhhvm4o" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask1.png" id="11_ktmpt"]
+[ext_resource type="Texture2D" uid="uid://de7rs8mk78ttx" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask5.png" id="12_jogvw"]
+[ext_resource type="Texture2D" uid="uid://dogdfoposw3ns" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask4.png" id="13_os1ga"]
+[ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="14_pdfpn"]
+[ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="15_igy0a"]
 
 [sub_resource type="Gradient" id="Gradient_2ayy1"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
@@ -37,6 +50,54 @@ scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
 color_ramp = SubResource("GradientTexture1D_gg5g1")
 
+[sub_resource type="Animation" id="Animation_46ma7"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q5b1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5b1g"]
+_data = {
+&"RESET": SubResource("Animation_q5b1g"),
+&"fade_in": SubResource("Animation_46ma7")
+}
+
+[sub_resource type="GDScript" id="GDScript_2ayy1"]
+script/source = "extends VBoxContainer
+
+var open = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	position.y = lerp(position.y, 521.0 if open else 1150.0, 0.1)
+"
+
 [sub_resource type="Theme" id="Theme_q612g"]
 
 [sub_resource type="FontVariation" id="FontVariation_2ayy1"]
@@ -61,7 +122,141 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 32
 font_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
 
+[sub_resource type="GDScript" id="GDScript_an124"]
+script/source = "extends Label
+
+@onready var genome = get_node(\"../genome\")
+
+func _ready():
+	pass
+	
+func _process(delta):
+	position.y = genome.position.y - 47.0
+"
+
+[sub_resource type="GDScript" id="GDScript_46ma7"]
+script/source = "extends Area2D
+
+var flipped_once = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	if randi()%480 == 0 and !flipped_once:
+		flipped_once = true
+		$AnimatedSprite2D.flip_h = !$AnimatedSprite2D.flip_h
+
+func damage(val) -> void:
+	get_node(\"../genome\").open = true
+	
+	get_node(\"../orteil\").walk_to(Vector2(960, 451))
+	get_node(\"../orteil\").queue_dialogue_after_walk(\"On Earth, every living thing has its own [color=#aaa][wave]genome[/wave][color=#fff].\", true, 0.5, 2, \"gv_has_genome\", 8)
+	
+	queue_free()
+
+func _on_shoot_timeout():
+	var iron_bullet = load(\"res://Prefabs/Bullets/iron_bullet.tscn\").instantiate()
+	iron_bullet.movement_vector = Vector2(-1, 1)
+	iron_bullet.position = position + Vector2(1000, -1000)
+	get_parent().add_child(iron_bullet)
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1arh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_46ma7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_q5b1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3xe30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_csbw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7rfjh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2yhvl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ktmpt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_jogvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_os1ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pdfpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_igy0a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_jg027"]
+offsets = PackedFloat32Array(0, 0.8742138, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8553459, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hgvod"]
+gradient = SubResource("Gradient_jg027")
+
+[sub_resource type="Curve" id="Curve_e1roq"]
+_data = [Vector2(0, 1), 0.0, -2.2076616, 0, 0, Vector2(1, 0.14716983), -0.05235198, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hgvod"]
+curve = SubResource("Curve_e1roq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7oll3"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 4.0
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_hgvod")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_hgvod")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46ma7"]
+radius = 48.0
+height = 96.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_46ma7"]
+font_size = 32
+font_color = Color(0.46229059, 0.46229059, 0.46229059, 1)
+
 [node name="gv" type="Node2D"]
+script = ExtResource("1_an124")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -80,12 +275,27 @@ process_material = SubResource("ParticleProcessMaterial_7fwqe")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_q5b1g")
+}
+autoplay = "fade_in"
+
 [node name="genome" type="VBoxContainer" parent="."]
 offset_left = 103.0
-offset_top = 521.0
+offset_top = 1208.0
 offset_right = 1803.0
-offset_bottom = 997.0
+offset_bottom = 1684.0
 theme_override_constants/separation = 44
+script = SubResource("GDScript_2ayy1")
 
 [node name="coldjellypatch" parent="genome" instance=ExtResource("1_g46kc")]
 layout_mode = 2
@@ -307,10 +517,66 @@ text = "80"
 label_settings = SubResource("LabelSettings_2ayy1")
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="genome_label" type="Label" parent="."]
 offset_left = 139.0
-offset_top = 474.0
+offset_top = 1161.0
 offset_right = 545.0
-offset_bottom = 506.0
+offset_bottom = 1193.0
 text = "Genome of Bilzork, φ Voidling"
 label_settings = SubResource("LabelSettings_e7l5x")
+script = SubResource("GDScript_an124")
+
+[node name="orteil" parent="." instance=ExtResource("3_2ayy1")]
+position = Vector2(-295, 451)
+
+[node name="voidling" type="Area2D" parent="."]
+position = Vector2(960, 540)
+script = SubResource("GDScript_46ma7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="voidling"]
+self_modulate = Color(0.8495773, 0.59197664, 1.1551381e-06, 1)
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_v1arh")
+animation = &"idle"
+
+[node name="shadow" type="Sprite2D" parent="voidling/AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(2, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("10_4kope")
+
+[node name="mask" type="AnimatedSprite2D" parent="voidling/AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_2yhvl")
+animation = &"idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="voidling"]
+position = Vector2(1, 8)
+emitting = false
+amount = 128
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_7oll3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="voidling"]
+position = Vector2(4, -16)
+shape = SubResource("CapsuleShape2D_46ma7")
+
+[node name="shoot" type="Timer" parent="voidling"]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="Label" type="Label" parent="voidling"]
+offset_left = -69.0
+offset_top = -95.0
+offset_right = 85.0
+offset_bottom = -63.0
+text = "Bilzork (φ)"
+label_settings = SubResource("LabelSettings_46ma7")
+horizontal_alignment = 1
+
+[connection signal="timeout" from="voidling/shoot" to="voidling" method="_on_shoot_timeout"]

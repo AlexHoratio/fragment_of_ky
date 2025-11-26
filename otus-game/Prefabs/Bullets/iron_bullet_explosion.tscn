@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1fhb2k6j5pmi"]
+
+[ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="1_3or8t"]
+[ext_resource type="Texture2D" uid="uid://cvt5rr0gjlsxx" path="res://Graphics/Misc/32x32-circle.png" id="2_tbnf0"]
+
+[sub_resource type="GDScript" id="GDScript_k14wj"]
+script/source = "extends Node2D
+
+func _ready():
+	$AnimatedSprite2D.play(\"default\")
+	$GPUParticles2D.emitting = true
+
+func _on_gpu_particles_2d_finished():
+	queue_free()
+"
+
+[sub_resource type="Gradient" id="Gradient_3or8t"]
+offsets = PackedFloat32Array(0, 0.04587156, 0.21100917, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.42857146, 0.42857146, 0.42857146, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tbnf0"]
+gradient = SubResource("Gradient_3or8t")
+
+[sub_resource type="Curve" id="Curve_3or8t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5327869, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tbnf0"]
+curve = SubResource("Curve_3or8t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bl2ui"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 180.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+damping_max = 100.00001
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_tbnf0")
+color_ramp = SubResource("GradientTexture1D_tbnf0")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4f1kx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tbnf0")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="iron_bullet_explosion" type="Node2D"]
+script = SubResource("GDScript_k14wj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -36.0
+offset_top = -32.0
+offset_right = 46.0
+offset_bottom = 50.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(2, 2)
+emitting = false
+amount = 128
+texture = ExtResource("1_3or8t")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_bl2ui")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_4f1kx")
+autoplay = "default"
+frame = 1
+frame_progress = 1.0
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
