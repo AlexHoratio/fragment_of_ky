@@ -1,0 +1,210 @@
+[gd_scene load_steps=15 format=3 uid="uid://bob3327e8qou4"]
+
+[ext_resource type="Texture2D" uid="uid://djeseni5yc58j" path="res://Graphics/CanvasLayer/ojelly_k9patch.png" id="1_4hwbx"]
+[ext_resource type="Script" uid="uid://dsrpsqkn48s3t" path="res://Prefabs/UI/Narrators/orteil_longver_creaturefeatures.gd" id="2_xfkqt"]
+[ext_resource type="PackedScene" uid="uid://cj3g8j8yqsuic" path="res://Prefabs/UI/ojellypatch.tscn" id="3_xfkqt"]
+[ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="4_pfixr"]
+
+[sub_resource type="GDScript" id="GDScript_pfixr"]
+script/source = "extends NinePatchRect
+
+var hovered = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	$Label.self_modulate = lerp($Label.self_modulate, Color.WHITE if hovered else Color(\"#7f7f7f\"), 0.2)
+
+func _on_button_mouse_entered():
+	hovered = true
+
+func _on_button_mouse_exited():
+	hovered = false
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_xfkqt"]
+
+[sub_resource type="GDScript" id="GDScript_mypji"]
+script/source = "extends NinePatchRect
+
+var hovered = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	$Label.self_modulate = lerp($Label.self_modulate, Color.WHITE if hovered else Color(\"#7f7f7f\"), 0.2)
+
+func _on_button_mouse_entered():
+	hovered = true
+
+func _on_button_mouse_exited():
+	hovered = false
+"
+
+[sub_resource type="Gradient" id="Gradient_mypji"]
+offsets = PackedFloat32Array(0, 0.13302752, 0.92201835, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.5542928, 1, 1, 1, 0.28899086, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_aqrsq"]
+gradient = SubResource("Gradient_mypji")
+
+[sub_resource type="Curve" id="Curve_rjo15"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.66393447, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_632rb"]
+curve = SubResource("Curve_rjo15")
+
+[sub_resource type="Curve" id="Curve_lj2b3"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.12295082, 65.16855), 0.0, 0.0, 0, 0, Vector2(0.21721311, -65.16852), 0.0, 0.0, 0, 0, Vector2(0.34836066, 65.16855), 0.0, 0.0, 0, 0, Vector2(0.44672126, -42.696625), 0.0, 0.0, 0, 0, Vector2(0.5450819, 51.685394), 0.0, 0.0, 0, 0, Vector2(0.6311475, -51.685394), 0.0, 0.0, 0, 0, Vector2(0.7418032, 33.707886), 0.0, 0.0, 0, 0, Vector2(0.8565573, -42.696625), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="CurveTexture" id="CurveTexture_lcvo3"]
+curve = SubResource("Curve_lj2b3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pqfbi"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 16.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 21.009996
+tangential_accel_max = 21.009996
+tangential_accel_curve = SubResource("CurveTexture_lcvo3")
+scale_min = 6.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_632rb")
+color_ramp = SubResource("GradientTexture1D_aqrsq")
+
+[node name="orteil_longver_creaturefeatures" type="NinePatchRect"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = 85.0
+offset_right = 217.0
+offset_bottom = 191.0
+grow_horizontal = 2
+texture = ExtResource("1_4hwbx")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource("2_xfkqt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake]Enough is enough!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="yes" parent="." instance=ExtResource("3_xfkqt")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -125.5
+offset_top = 115.0
+offset_right = -32.5
+offset_bottom = 154.0
+grow_horizontal = 1
+grow_vertical = 1
+script = SubResource("GDScript_pfixr")
+
+[node name="Label" type="Label" parent="yes"]
+self_modulate = Color(0.49803922, 0.49803922, 0.49803922, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "yessss"
+label_settings = SubResource("LabelSettings_xfkqt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="yes"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="no" parent="." instance=ExtResource("3_xfkqt")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 21.5
+offset_top = 115.0
+offset_right = 116.5
+offset_bottom = 154.0
+grow_horizontal = 0
+grow_vertical = 1
+script = SubResource("GDScript_mypji")
+
+[node name="Label" type="Label" parent="no"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "nooooo!"
+label_settings = SubResource("LabelSettings_xfkqt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="no"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Control" type="Control" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
+amount = 64
+texture = ExtResource("4_pfixr")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_pqfbi")
+
+[connection signal="mouse_entered" from="yes/Button" to="yes" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="yes/Button" to="yes" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="no/Button" to="no" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="no/Button" to="no" method="_on_button_mouse_exited"]

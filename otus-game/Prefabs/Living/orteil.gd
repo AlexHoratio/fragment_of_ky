@@ -150,5 +150,10 @@ in the community.
 			queue_dialogue_after_walk("This happens by the way of [color=#87e3ff][wave]genes[/wave][color=#fff].", true, 0.4, 0, "gv_genes", 7)
 		"gv_genes":
 			queue_dialogue_after_walk("A [color=#87e3ff][wave]gene[/wave][color=#fff] is just a small section of the genome, which \"codes for\" some particular thing.", true, 0.4, 0, "gv_codesfor", 5)
+		"gv_codesfor":
+			queue_dialogue_after_walk("[wave]Would you like to know [rainbow sat=0.5]more?", true, 0.4, 0, "gv_creaturefeatures", 0)
+			
+			var orteil_longver_creaturefeatures = load("res://Prefabs/UI/Narrators/orteil_longver_creaturefeatures.tscn").instantiate()
+			get_parent().add_child(orteil_longver_creaturefeatures)
 		_:
 			pass
