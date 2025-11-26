@@ -343,7 +343,7 @@ libraries = {
 autoplay = "fade_in"
 
 [node name="atp_synthase" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
-modulate = Color(1, 1, 1, 0.41400003)
+modulate = Color(1, 1, 1, 0.818)
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -494.0
 offset_right = -2052.0
@@ -383,7 +383,7 @@ text = "ATP Synthase, PDB: 7JG8 (Guo et al., 2020)"
 horizontal_alignment = 1
 
 [node name="dna_binding" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
-modulate = Color(1, 1, 1, 0.41400003)
+modulate = Color(1, 1, 1, 0.81960785)
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 2187.0
 offset_top = -9.0
