@@ -1,9 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://djvkouurjmk5r"]
+[gd_scene load_steps=52 format=3 uid="uid://djvkouurjmk5r"]
 
 [ext_resource type="Script" uid="uid://b0h58h1qsirg1" path="res://Scenes/gv.gd" id="1_an124"]
 [ext_resource type="PackedScene" uid="uid://di0i6wo7jkm73" path="res://Prefabs/UI/coldjellypatch.tscn" id="1_g46kc"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_q612g"]
 [ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="3_2ayy1"]
+[ext_resource type="PackedScene" uid="uid://uxw1vnel28ut" path="res://models/7JG8_lores.glb" id="4_q5b1g"]
+[ext_resource type="PackedScene" uid="uid://dxry2fme4cq4i" path="res://models/4QPQ_lores.glb" id="5_3xe30"]
 [ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="5_46ma7"]
 [ext_resource type="Texture2D" uid="uid://c8lff1k6g2lo5" path="res://Graphics/Kyztlings/Void/White/voidkyztling5.png" id="6_q5b1g"]
 [ext_resource type="Texture2D" uid="uid://ia50k8lm0ow1" path="res://Graphics/Kyztlings/Void/White/voidkyztling4.png" id="7_3xe30"]
@@ -50,21 +52,6 @@ scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
 color_ramp = SubResource("GradientTexture1D_gg5g1")
 
-[sub_resource type="Animation" id="Animation_46ma7"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_q5b1g"]
 length = 0.001
 tracks/0/type = "value"
@@ -80,11 +67,76 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_46ma7"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q5b1g"]
 _data = {
 &"RESET": SubResource("Animation_q5b1g"),
 &"fade_in": SubResource("Animation_46ma7")
 }
+
+[sub_resource type="GDScript" id="GDScript_7rfjh"]
+script/source = "extends NinePatchRect
+
+var open = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	position.x = lerp(position.x, 279.0 if open else -500.0, 0.01)
+"
+
+[sub_resource type="GDScript" id="GDScript_3xe30"]
+script/source = "extends Node3D
+
+func _process(delta):
+	rotation.y += delta
+"
+
+[sub_resource type="Environment" id="Environment_q5b1g"]
+glow_intensity = 8.0
+adjustment_brightness = 3.73
+adjustment_contrast = 3.9
+adjustment_saturation = 3.14
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q5b1g"]
+viewport_path = NodePath("CanvasLayer/atp_synthase/SubViewport")
+
+[sub_resource type="GDScript" id="GDScript_4kope"]
+script/source = "extends NinePatchRect
+
+var open = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	position.x = lerp(position.x, 1275.0 if open else 2500.0, 0.01)
+"
+
+[sub_resource type="GDScript" id="GDScript_csbw2"]
+script/source = "extends Node3D
+
+func _process(delta):
+	rotation.y += delta
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3xe30"]
+viewport_path = NodePath("CanvasLayer/dna_binding/SubViewport")
 
 [sub_resource type="GDScript" id="GDScript_2ayy1"]
 script/source = "extends VBoxContainer
@@ -276,6 +328,7 @@ process_material = SubResource("ParticleProcessMaterial_7fwqe")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -289,6 +342,87 @@ libraries = {
 &"": SubResource("AnimationLibrary_q5b1g")
 }
 autoplay = "fade_in"
+
+[node name="atp_synthase" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
+modulate = Color(1, 1, 1, 0.41400003)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 279.0
+offset_right = -1279.0
+offset_bottom = -532.0
+script = SubResource("GDScript_7rfjh")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/atp_synthase"]
+transparent_bg = true
+
+[node name="7JG8_lores" parent="CanvasLayer/atp_synthase/SubViewport" instance=ExtResource("4_q5b1g")]
+transform = Transform3D(0.20115505, 0.9793465, 0.02042199, -0.10100422, -4.3487848e-08, 0.99488604, 0.9743382, -0.20218904, 0.098918125, 0, 0, 0)
+script = SubResource("GDScript_3xe30")
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/atp_synthase/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 219.93738)
+environment = SubResource("Environment_q5b1g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/atp_synthase/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 142)
+sky_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/atp_synthase"]
+layout_mode = 0
+offset_left = -84.0
+offset_right = 428.0
+offset_bottom = 512.0
+texture = SubResource("ViewportTexture_q5b1g")
+
+[node name="Label" type="Label" parent="CanvasLayer/atp_synthase"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 25.0
+offset_bottom = 41.0
+grow_horizontal = 2
+text = "ATP Synthase, PDB: 7JG8 (Guo et al., 2020)"
+horizontal_alignment = 1
+
+[node name="dna_binding" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
+modulate = Color(1, 1, 1, 0.41400003)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 1275.0
+offset_top = -9.0
+offset_right = -283.0
+offset_bottom = -541.0
+script = SubResource("GDScript_4kope")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/dna_binding"]
+transparent_bg = true
+
+[node name="4QPQ_lores" parent="CanvasLayer/dna_binding/SubViewport" instance=ExtResource("5_3xe30")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 643.38794, 0, 117.39955)
+script = SubResource("GDScript_csbw2")
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/dna_binding/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 643.38794, 0, 219.93738)
+environment = SubResource("Environment_q5b1g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/dna_binding/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 643.38794, 0, 142)
+sky_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/dna_binding"]
+layout_mode = 0
+offset_left = -84.0
+offset_right = 428.0
+offset_bottom = 512.0
+texture = SubResource("ViewportTexture_3xe30")
+
+[node name="Label" type="Label" parent="CanvasLayer/dna_binding"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 34.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "DNA-Binding Protein, PDB: 4QPQ (Peng et al., 2014)"
+horizontal_alignment = 1
 
 [node name="genome" type="VBoxContainer" parent="."]
 offset_left = 103.0

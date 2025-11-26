@@ -172,7 +172,29 @@ in the community.
 		"gv_long_proteins":
 			queue_dialogue_after_walk("[color=#aaa][wave]Proteins[/wave][color=#fff] are the best molecules.", true, 0.7, 0, "gv_long_proteins_best", 4)
 		"gv_long_proteins_best":
-			queue_dialogue_after_walk("", true, 0.7, 0, "gv_long_proteins_best", 4)
+			queue_dialogue_after_walk("They make up the complex [color=#aaa]molecular machinery[color=#fff] of the cell.", true, 0.7, 0, "gv_long_molmach", 7)
+		"gv_long_molmach":
+			queue_dialogue_after_walk("Proteins can do anything from...", true, 1, 0, "gv_long_anythingfrom", 3)
+		"gv_long_anythingfrom":
+			get_node("../CanvasLayer/atp_synthase").open = true
+			queue_dialogue_after_walk("... generating energy ...", true, 1, 0, "gv_long_atpsynthase", 8)
+		"gv_long_atpsynthase":
+			get_node("../CanvasLayer/dna_binding").open = true
+			queue_dialogue_after_walk("... to protecting DNA ...", true, 1, 0, "gv_long_dna_binding", 8)
+		"gv_long_dna_binding":
+			queue_dialogue_after_walk("... to injecting [wave]goop[/wave] into enemy cells.", true, 1, 0, "gv_long_goop", 8)
+		"gv_long_goop":
+			get_node("../CanvasLayer/atp_synthase").open = false
+			get_node("../CanvasLayer/dna_binding").open = false
+			queue_dialogue_after_walk("[color=#ff7e57]Proteins[color=#fff] are what genes [color=#aaa]\"code for\"[color=#fff].", true, 1, 0, "gv_long_genescodefor", 6)
+		"gv_long_genescodefor":
+			queue_dialogue_after_walk("You see, proteins are long strings of [color=#aaa][wave]amino acids[color=#fff].", true, 1, 0, "gv_long_longstring", 6)
+		"gv_long_longstring":
+			queue_dialogue_after_walk("For this reason, you might also hear them being called '[color=#aaa][wave]polypeptide chains[/wave][color=#fff]'.", true, 1, 0, "gv_long_polypeptide", 6)
+		"gv_long_polypeptide":
+			queue_dialogue_after_walk("In fact, the way that a gene codes for a protein is considered so [rainbow sat=0.5][wave]amazing[/wave][/rainbow] by Earthlings, they call it ...", true, 0.4, 0, "gv_long_theycallit", 6)
+		"gv_long_theycallit":
+			queue_dialogue_after_walk("... '[color=#aaa][wave]Central Dogma[/wave][color=#fff]'!", true, 0.4, 0, "gv_long_central_dogma", 9)
 		"gv_longver":
 			pass
 		_:
