@@ -155,5 +155,25 @@ in the community.
 			
 			var orteil_longver_creaturefeatures = load("res://Prefabs/UI/Narrators/orteil_longver_creaturefeatures.tscn").instantiate()
 			get_parent().add_child(orteil_longver_creaturefeatures)
+		"gv_awesome":
+			queue_dialogue_after_walk("Unlike us, [color=#aaa][wave]Earthlings[/wave][color=#fff] aren't made of [shake val=5][color=#B800AC]pure psychic potential.", true, 0.4, 0, "gv_long_psychic_potential", 6)
+		"gv_long_psychic_potential":
+			queue_dialogue_after_walk("Instead, they are made of these weird bubbly things called '[color=#aaa]atoms[color=#fff]' and '[color=#aaa]molecules[color=#fff]'.", true, 0.4, 0, "gv_long_atoms", 6)
+		"gv_long_atoms":
+			queue_dialogue_after_walk("There are loads of molecules: ...", true, 1, 0, "gv_long_loads_of_molecules", 4)
+		"gv_long_loads_of_molecules":
+			queue_dialogue_after_walk("Lipids (like fats and oils), ...", true, 1, 0, "gv_long_lipids", 2)
+		"gv_long_lipids":
+			queue_dialogue_after_walk("... nucleic acids (like in DNA) ...", true, 1, 0, "gv_long_dna", 2)
+		"gv_long_dna":
+			queue_dialogue_after_walk("... sugars (yum) ...", true, 1, 0, "gv_long_sugars", 2)
+		"gv_long_sugars":
+			queue_dialogue_after_walk("... and most importantly, [color=#ff7e57][wave]PROTEINS[/wave][color=#fff]!", true, 1, 0, "gv_long_proteins", 6)
+		"gv_long_proteins":
+			queue_dialogue_after_walk("[color=#aaa][wave]Proteins[/wave][color=#fff] are the best molecules.", true, 0.7, 0, "gv_long_proteins_best", 4)
+		"gv_long_proteins_best":
+			queue_dialogue_after_walk("", true, 0.7, 0, "gv_long_proteins_best", 4)
+		"gv_longver":
+			pass
 		_:
 			pass

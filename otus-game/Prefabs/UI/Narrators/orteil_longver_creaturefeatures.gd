@@ -49,3 +49,11 @@ func next_stage() -> void:
 			print("UHH")
 	
 	text_stage += 1
+
+func _on_no_pressed():
+	target_position = Vector2(960 - target_size.x/2.0, -300)
+	get_tree().get_meta("orteil").queue_dialogue_after_walk("No problem.", true, 1.2, 2, "gv_longver", 3)
+
+func _on_yes_pressed():
+	target_position = Vector2(960 - target_size.x/2.0, -300)
+	get_tree().get_meta("orteil").queue_dialogue_after_walk("[wave]Awesome!", true, 2, 2, "gv_awesome", 3)

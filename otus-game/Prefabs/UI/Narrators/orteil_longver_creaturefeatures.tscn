@@ -141,7 +141,7 @@ label_settings = SubResource("LabelSettings_xfkqt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="yes"]
+[node name="yes" type="Button" parent="yes"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -177,7 +177,7 @@ label_settings = SubResource("LabelSettings_xfkqt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="no"]
+[node name="no" type="Button" parent="no"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -204,7 +204,9 @@ texture = ExtResource("4_pfixr")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_pqfbi")
 
-[connection signal="mouse_entered" from="yes/Button" to="yes" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="yes/Button" to="yes" method="_on_button_mouse_exited"]
-[connection signal="mouse_entered" from="no/Button" to="no" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="no/Button" to="no" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="yes/yes" to="yes" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="yes/yes" to="yes" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="yes/yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="no/no" to="no" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="no/no" to="no" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="no/no" to="." method="_on_no_pressed"]
