@@ -192,9 +192,15 @@ in the community.
 		"gv_long_longstring":
 			queue_dialogue_after_walk("For this reason, you might also hear them being called '[color=#aaa][wave]polypeptide chains[/wave][color=#fff]'.", true, 1, 0, "gv_long_polypeptide", 6)
 		"gv_long_polypeptide":
-			queue_dialogue_after_walk("In fact, the way that a gene codes for a protein is considered so [rainbow sat=0.5][wave]amazing[/wave][/rainbow] by Earthlings, they call it ...", true, 0.4, 0, "gv_long_theycallit", 6)
+			queue_dialogue_after_walk("In fact, the way that a gene codes for a protein is so [rainbow sat=0.5][wave]amazing[/wave][/rainbow] to Earthlings, that they call it ...", true, 0.4, 0, "gv_long_theycallit", 6)
 		"gv_long_theycallit":
-			queue_dialogue_after_walk("... '[color=#aaa][wave]Central Dogma[/wave][color=#fff]'!", true, 0.4, 0, "gv_long_central_dogma", 9)
+			queue_dialogue_after_walk("... '[color=#B800AC][wave]Central Dogma[/wave][color=#fff]'!", true, 0.4, 0, "gv_long_central_dogma", 9)
+		"gv_long_central_dogma":
+			queue_dialogue_after_walk("[color=#B800AC][wave]Central Dogma[/wave][color=#fff] is very simple.", true, 0.4, 0, "gv_long_cd_simple", 6)
+		"gv_long_cd_simple":
+			queue_dialogue_after_walk("First, a gene is [color=#aaa][wave]transcribed[/wave][color=#fff] into [color=#aaa]RNA[color=#fff].", true, 1, 0, "gv_long_transcribed", 6)
+		"gv_long_transcribed":
+			queue_dialogue_after_walk("Next, the RNA '[color=#aaa]transcript[color=#fff]' is [color=#aaa]translated[color=#fff] into a protein sequence.", true, 1, 0, "gv_long_cd_simple", 6)
 		"gv_longver":
 			pass
 		_:
