@@ -328,7 +328,6 @@ process_material = SubResource("ParticleProcessMaterial_7fwqe")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -346,8 +345,8 @@ autoplay = "fade_in"
 [node name="atp_synthase" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
 modulate = Color(1, 1, 1, 0.41400003)
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 279.0
-offset_right = -1279.0
+offset_left = -494.0
+offset_right = -2052.0
 offset_bottom = -532.0
 script = SubResource("GDScript_7rfjh")
 
@@ -386,9 +385,9 @@ horizontal_alignment = 1
 [node name="dna_binding" parent="CanvasLayer" instance=ExtResource("1_g46kc")]
 modulate = Color(1, 1, 1, 0.41400003)
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 1275.0
+offset_left = 2187.0
 offset_top = -9.0
-offset_right = -283.0
+offset_right = 629.0
 offset_bottom = -541.0
 script = SubResource("GDScript_4kope")
 

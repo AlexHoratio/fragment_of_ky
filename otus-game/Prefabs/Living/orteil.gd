@@ -156,17 +156,17 @@ in the community.
 			var orteil_longver_creaturefeatures = load("res://Prefabs/UI/Narrators/orteil_longver_creaturefeatures.tscn").instantiate()
 			get_parent().add_child(orteil_longver_creaturefeatures)
 		"gv_awesome":
-			queue_dialogue_after_walk("Unlike us, [color=#aaa][wave]Earthlings[/wave][color=#fff] aren't made of [shake val=5][color=#B800AC]pure psychic potential.", true, 0.4, 0, "gv_long_psychic_potential", 6)
+			queue_dialogue_after_walk("Unlike us, [color=#aaa][wave]Earthlings[/wave][color=#fff] aren't made of [shake val=5][color=#B800AC]special psychic energy.", true, 0.4, 0, "gv_long_psychic_potential", 6)
 		"gv_long_psychic_potential":
 			queue_dialogue_after_walk("Instead, they are made of these weird bubbly things called '[color=#aaa]atoms[color=#fff]' and '[color=#aaa]molecules[color=#fff]'.", true, 0.4, 0, "gv_long_atoms", 6)
 		"gv_long_atoms":
-			queue_dialogue_after_walk("There are loads of molecules: ...", true, 1, 0, "gv_long_loads_of_molecules", 4)
+			queue_dialogue_after_walk("There are loads of molecules: [wave]...", true, 1, 0, "gv_long_loads_of_molecules", 4)
 		"gv_long_loads_of_molecules":
-			queue_dialogue_after_walk("Lipids (like fats and oils), ...", true, 1, 0, "gv_long_lipids", 2)
+			queue_dialogue_after_walk("Lipids [color=#aaa][wave](like fats and oils)[/wave][color=#fff] ...", true, 1, 0, "gv_long_lipids", 2)
 		"gv_long_lipids":
-			queue_dialogue_after_walk("... nucleic acids (like in DNA) ...", true, 1, 0, "gv_long_dna", 2)
+			queue_dialogue_after_walk("... nucleic acids [color=#aaa][wave](like in DNA)[/wave][color=#fff] ...", true, 1, 0, "gv_long_dna", 2)
 		"gv_long_dna":
-			queue_dialogue_after_walk("... sugars (yum) ...", true, 1, 0, "gv_long_sugars", 2)
+			queue_dialogue_after_walk("... sugars [color=#aaa][wave](yummy)[/wave][color=#fff] ...", true, 1, 0, "gv_long_sugars", 2)
 		"gv_long_sugars":
 			queue_dialogue_after_walk("... and most importantly, [color=#ff7e57][wave]PROTEINS[/wave][color=#fff]!", true, 1, 0, "gv_long_proteins", 6)
 		"gv_long_proteins":
@@ -174,7 +174,7 @@ in the community.
 		"gv_long_proteins_best":
 			queue_dialogue_after_walk("They make up the complex [color=#aaa]molecular machinery[color=#fff] of the cell.", true, 0.7, 0, "gv_long_molmach", 7)
 		"gv_long_molmach":
-			queue_dialogue_after_walk("Proteins can do anything from...", true, 1, 0, "gv_long_anythingfrom", 3)
+			queue_dialogue_after_walk("Proteins can do anything from [wave]...", true, 1, 0, "gv_long_anythingfrom", 3)
 		"gv_long_anythingfrom":
 			get_node("../CanvasLayer/atp_synthase").open = true
 			queue_dialogue_after_walk("... generating energy ...", true, 1, 0, "gv_long_atpsynthase", 8)
@@ -182,7 +182,7 @@ in the community.
 			get_node("../CanvasLayer/dna_binding").open = true
 			queue_dialogue_after_walk("... to protecting DNA ...", true, 1, 0, "gv_long_dna_binding", 8)
 		"gv_long_dna_binding":
-			queue_dialogue_after_walk("... to injecting [wave]goop[/wave] into enemy cells.", true, 1, 0, "gv_long_goop", 8)
+			queue_dialogue_after_walk("... to piercing and injecting [wave]goop[/wave] into enemy cells.", true, 1, 0, "gv_long_goop", 8)
 		"gv_long_goop":
 			get_node("../CanvasLayer/atp_synthase").open = false
 			get_node("../CanvasLayer/dna_binding").open = false
@@ -192,16 +192,20 @@ in the community.
 		"gv_long_longstring":
 			queue_dialogue_after_walk("For this reason, you might also hear them being called '[color=#aaa][wave]polypeptide chains[/wave][color=#fff]'.", true, 1, 0, "gv_long_polypeptide", 6)
 		"gv_long_polypeptide":
-			queue_dialogue_after_walk("In fact, the way that a gene codes for a protein is so [rainbow sat=0.5][wave]amazing[/wave][/rainbow] to Earthlings, that they call it ...", true, 0.4, 0, "gv_long_theycallit", 6)
+			queue_dialogue_after_walk("In fact, the way that a gene codes for a protein is so [rainbow sat=0.5][wave]amazing[/wave][/rainbow] to Earthlings, that they call it [wave]...", true, 0.4, 0, "gv_long_theycallit", 6)
 		"gv_long_theycallit":
-			queue_dialogue_after_walk("... '[color=#B800AC][wave]Central Dogma[/wave][color=#fff]'!", true, 0.4, 0, "gv_long_central_dogma", 9)
+			queue_dialogue_after_walk("... '[color=#B800AC][wave]Central Dogma[/wave][color=#fff]'", true, 0.4, 0, "gv_long_central_dogma", 9)
 		"gv_long_central_dogma":
 			queue_dialogue_after_walk("[color=#B800AC][wave]Central Dogma[/wave][color=#fff] is very simple.", true, 0.4, 0, "gv_long_cd_simple", 6)
 		"gv_long_cd_simple":
-			queue_dialogue_after_walk("First, a gene is [color=#aaa][wave]transcribed[/wave][color=#fff] into [color=#aaa]RNA[color=#fff].", true, 1, 0, "gv_long_transcribed", 6)
+			queue_dialogue_after_walk("First, a gene is copied-- or, '[color=#aaa][wave]transcribed[/wave][color=#fff]' into [color=#aaa]RNA[color=#fff].", true, 0.4, 0, "gv_long_transcribed", 4)
 		"gv_long_transcribed":
-			queue_dialogue_after_walk("Next, the RNA '[color=#aaa]transcript[color=#fff]' is [color=#aaa]translated[color=#fff] into a protein sequence.", true, 1, 0, "gv_long_cd_simple", 6)
+			queue_dialogue_after_walk("Next, the RNA '[color=#aaa]transcript[color=#fff]' is [color=#aaa]translated[color=#fff] into a protein sequence.", true, 0.4, 0, "gv_long_protein_seq", 6)
+		"gv_long_protein_seq":
+			queue_dialogue_after_walk("In short, every [rainbow sat=0.5][wave]3 DNA bases[/wave][/rainbow] codes for [rainbow sat=0.5][wave]1 amino acid[/wave][/rainbow] in the protein.", true, 0.4, 0, "gv_long_base_per_aa", 7)
+		"gv_long_base_per_aa":
+			queue_dialogue_after_walk("Finally, the protein [color=#aaa]floats off[color=#fff], [color=#aaa]folds itself up[color=#fff], and goes on to fulfill its [color=#aaa]cellular purpose[color=#fff].", true, 0.4, 0, "gv_longver", 10)
 		"gv_longver":
-			pass
+			queue_dialogue_after_walk("Anyway lol", true, 1, 0, "gv_longver", 6)
 		_:
 			pass
