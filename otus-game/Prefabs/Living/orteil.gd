@@ -206,6 +206,10 @@ in the community.
 		"gv_long_base_per_aa":
 			queue_dialogue_after_walk("Finally, the protein [color=#aaa]floats off[color=#fff], [color=#aaa]folds itself up[color=#fff], and goes on to fulfill its [color=#aaa]cellular purpose[color=#fff].", true, 0.4, 0, "gv_longver", 10)
 		"gv_longver":
-			queue_dialogue_after_walk("Anyway lol", true, 1, 0, "gv_longver", 6)
+			queue_dialogue_after_walk("Anyway, for now, let's focus on the biology of our [color=#ffb629][wave]Voidlings[/wave][color=#fff].", true, 1, 0, "gv_voidling_bio", 6)
+		"gv_voidling_bio":
+			queue_dialogue_after_walk("These [color=#ffb629]Voidlings[color=#fff] have genes coding for...", true, 1, 0, "gv_voidling_genes_for", 4)
+		"gv_voidling_genes_for":
+			queue_dialogue_after_walk("... [color=#ffb629]colour[color=#fff] ...", true, 1, 0, "gv_voidling_genes_for", 4)
 		_:
 			pass

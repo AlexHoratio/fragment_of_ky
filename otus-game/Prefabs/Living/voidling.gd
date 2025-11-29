@@ -72,11 +72,40 @@ func generate_genome() -> void:
 	var marker_genes = ["ATCGTG", "ATCGTA", "ATCGTT"]
 	genome["marker"] = marker_genes[randi()%marker_genes.size()]
 	
-	for i in range(74):
+	var nucs = ["A", "T", "C", "G"]
+	
+	var spacer = ""
+	for i in range(2):
+		spacer += nucs[randi()%4]
+	genome["junk"] += spacer
+		
+	var colour_gene = convert_colour_to_gene(Color("FFB629")) # 12 chars
+	genome["junk"] += colour_gene
+	
+	for i in range(60):
 		genome["junk"] += ["A", "T", "C", "G"][randi()%4]
 	
 	#print("MY GENOME IS....")
 	#print(genome)
+
+func convert_colour_to_gene(col=Color("FFB629")) -> String:
+	var gene = ""
+	
+	var col_hex = col.to_html(false)
+	var col_dec = col_hex.hex_to_int()
+	
+	var base_4 = ""
+	var quotient = int(col_dec)
+	while int(quotient) != 0:
+		var remainder = quotient - ((int(quotient) / 4) * 4)
+		quotient = (int(quotient) / 4)
+		base_4 = str(int(remainder)) + base_4 
+	
+	var nucs = ["A", "T", "C", "G"]
+	for char in base_4:
+		gene += nucs[int(char)]
+	
+	return gene
 
 func enable_clicking() -> void:
 	click_enabled = true
