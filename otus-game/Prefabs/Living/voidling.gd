@@ -82,20 +82,41 @@ func generate_genome() -> void:
 	var colour_gene = convert_colour_to_gene(Color("FFB629")) # 12 chars
 	genome["junk"] += colour_gene
 	
-	for i in range(60):
+	spacer = ""
+	for i in range(2):
+		spacer += nucs[randi()%4]
+	genome["junk"] += spacer
+	
+	var hp_gene = convert_int_to_gene(1, 5)
+	genome["junk"] += hp_gene
+	
+	spacer = ""
+	for i in range(2):
+		spacer += nucs[randi()%4]
+	genome["junk"] += spacer
+	
+	var speed_gene = convert_int_to_gene(90 + randi()%20, 5)
+	genome["junk"] += speed_gene
+	
+	for i in range(46):
 		genome["junk"] += ["A", "T", "C", "G"][randi()%4]
 	
-	#print("MY GENOME IS....")
-	#print(genome)
+	print("MY GENOME IS....")
+	print(genome)
 
-func convert_colour_to_gene(col=Color("FFB629")) -> String:
+func convert_colour_to_gene(col=Color("FFFFFF")) -> String:
 	var gene = ""
 	
 	var col_hex = col.to_html(false)
 	var col_dec = col_hex.hex_to_int()
 	
+	return convert_int_to_gene(col_dec, 12)
+	
+func convert_int_to_gene(val = 0, min_gene_length = 4) -> String:
+	var gene = ""
+	
 	var base_4 = ""
-	var quotient = int(col_dec)
+	var quotient = int(val)
 	while int(quotient) != 0:
 		var remainder = quotient - ((int(quotient) / 4) * 4)
 		quotient = (int(quotient) / 4)
@@ -104,6 +125,9 @@ func convert_colour_to_gene(col=Color("FFB629")) -> String:
 	var nucs = ["A", "T", "C", "G"]
 	for char in base_4:
 		gene += nucs[int(char)]
+	
+	while gene.length() < min_gene_length:
+		gene = "A" + gene
 	
 	return gene
 
