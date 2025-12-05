@@ -149,6 +149,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="no" parent="." instance=ExtResource("3_xfkqt")]
@@ -185,6 +186,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="Control" type="Control" parent="."]

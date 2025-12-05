@@ -40,6 +40,9 @@ func _process(delta: float) -> void:
 	if text_scroll_progress >= 0.999 and $dialogue/RichTextLabel.visible_ratio != 1:
 		emit_signal("done_talking")
 	
+	if !$after_talk_timer.is_stopped() and Input.is_action_just_pressed("ui_accept") and after_walk_timer == 0 and text_scroll_progress == 1:
+		$after_talk_timer.start(0.01)
+	
 	$dialogue/RichTextLabel.visible_ratio = text_scroll_progress
 	
 	velocity = movement_vector * walk_speed
@@ -210,6 +213,35 @@ in the community.
 		"gv_voidling_bio":
 			queue_dialogue_after_walk("These [color=#ffb629]Voidlings[color=#fff] have genes coding for...", true, 1, 0, "gv_voidling_genes_for", 4)
 		"gv_voidling_genes_for":
-			queue_dialogue_after_walk("... [color=#ffb629]colour[color=#fff] ...", true, 1, 0, "gv_voidling_genes_for", 4)
+			get_node("../genome/coldjellypatch/colour_gene").enabled = true
+			queue_dialogue_after_walk("... [color=#ffb629][wave]colour[/wave][color=#fff] ...", true, 1, 0, "gv_voidling_genes_colour", 4)
+		"gv_voidling_genes_colour":
+			get_node("../genome/coldjellypatch2/hp_gene").enabled = true
+			queue_dialogue_after_walk("... [color=#ff295e][wave]health[/wave][color=#fff] ...", true, 1, 0, "gv_voidling_genes_health", 4)
+		"gv_voidling_genes_health":
+			get_node("../genome/coldjellypatch2/speed_gene").enabled = true
+			queue_dialogue_after_walk("... and [color=#29ff9b][wave]speed[/wave][color=#fff] ...", true, 1, 0, "gv_voidling_genes_speed", 4)
+		"gv_voidling_genes_speed":
+			get_node("../AnimationPlayer").play("pulse")
+			queue_dialogue_after_walk("In fact, there is still much of the Voidling genome that we [color=#aaa][wave]don't understand yet...", true, 0.7, 0, "gv_voidling_genes_dont_understand", 6)
+		"gv_voidling_genes_dont_understand":
+			var narrator_interrupt = load("res://Prefabs/UI/Narrators/gv_narrator_interrupt.tscn").instantiate()
+			get_parent().add_child(narrator_interrupt)
+			
+			narrator_interrupt.add_new_text("[color=#ffb629][wave]... ... ...")
+			narrator_interrupt.target_position = Vector2(960 - narrator_interrupt.target_size.x/2.0, 450 - narrator_interrupt.target_size.x/2.0)
+			
+			queue_dialogue_after_walk("", true, 0.7, 0, "gv_silence", 5)
+			
+		"gv_silence":
+			get_tree().get_meta("gv_narrator_interrupt").next_stage()
+			queue_dialogue_after_walk("Anyway,", true, 0.5, 0, "gv_silence_anyway", 4)
+			
+		"gv_silence_anyway":
+			queue_dialogue_after_walk("[rainbow sat=0.5]Random mutations[/rainbow] in these genes drive evolution.", true, 0.5, 0, "gv_mutations", 6)
+		"gv_mutations":
+			queue_dialogue_after_walk("[wave]Let's take a look at an [color=#aaa]example...", true, 0.5, 0, "gv_example", 3)
+		"gv_example":
+			get_node("../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
 		_:
 			pass

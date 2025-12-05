@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://djvkouurjmk5r"]
+[gd_scene load_steps=62 format=3 uid="uid://djvkouurjmk5r"]
 
 [ext_resource type="Script" uid="uid://b0h58h1qsirg1" path="res://Scenes/gv.gd" id="1_an124"]
 [ext_resource type="PackedScene" uid="uid://di0i6wo7jkm73" path="res://Prefabs/UI/coldjellypatch.tscn" id="1_g46kc"]
@@ -83,10 +83,27 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4kope"]
+resource_name = "fade_out"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q5b1g"]
 _data = {
 &"RESET": SubResource("Animation_q5b1g"),
-&"fade_in": SubResource("Animation_46ma7")
+&"fade_in": SubResource("Animation_46ma7"),
+&"fade_out": SubResource("Animation_4kope")
 }
 
 [sub_resource type="GDScript" id="GDScript_7rfjh"]
@@ -156,6 +173,67 @@ func set_text(text = \"\") -> void:
 	visible = text != \"\"
 "
 
+[sub_resource type="Animation" id="Animation_csbw2"]
+resource_name = "pulse"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.9466667, 2.2666667, 5.5466666),
+"transitions": PackedFloat32Array(0.34151012, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.21176471), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../coldjellypatch4/ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.9466667, 2.48, 2.7799668, 5.9466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.21176471), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7rfjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../coldjellypatch4/ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4kope"]
+_data = {
+&"RESET": SubResource("Animation_7rfjh"),
+&"pulse": SubResource("Animation_csbw2")
+}
+
 [sub_resource type="GDScript" id="GDScript_2ayy1"]
 script/source = "extends VBoxContainer
 
@@ -196,11 +274,15 @@ func _on_button_mouse_exited():
 script/source = "extends ColorRect
 
 var hovering = false
+var enabled = false
 
 func _ready():
 	pass
 	
 func _process(delta):
+	modulate.a = lerp(modulate.a, 1.0 if enabled else 0.0, 0.2)
+	$Button.visible = enabled
+	
 	$ColorRect.self_modulate.a = lerp($ColorRect.self_modulate.a, 1.0 if hovering else 0.0, 0.2)
 
 func _on_button_mouse_entered():
@@ -238,11 +320,15 @@ outline_color = Color(0, 0, 0, 1)
 script/source = "extends ColorRect
 
 var hovering = false
+var enabled = false
 
 func _ready():
 	pass
 	
 func _process(delta):
+	modulate.a = lerp(modulate.a, 1.0 if enabled else 0.0, 0.2)
+	$Button.visible = enabled
+	
 	$ColorRect.self_modulate.a = lerp($ColorRect.self_modulate.a, 1.0 if hovering else 0.0, 0.2)
 
 func _on_button_mouse_entered():
@@ -258,11 +344,15 @@ func _on_button_mouse_exited():
 script/source = "extends ColorRect
 
 var hovering = false
+var enabled = false
 
 func _ready():
 	pass
 	
 func _process(delta):
+	modulate.a = lerp(modulate.a, 1.0 if enabled else 0.0, 0.2)
+	$Button.visible = enabled
+	
 	$ColorRect.self_modulate.a = lerp($ColorRect.self_modulate.a, 1.0 if hovering else 0.0, 0.2)
 
 func _on_button_mouse_entered():
@@ -551,6 +641,12 @@ grow_vertical = 2
 text = "dfg"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../genome/coldjellypatch3/ColorRect")
+libraries = {
+&"": SubResource("AnimationLibrary_4kope")
+}
 
 [node name="genome" type="VBoxContainer" parent="."]
 offset_left = 103.0
@@ -843,18 +939,17 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch3"]
-visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = -7.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.22745098, 0.6745098, 1)
 
 [node name="Label" type="Label" parent="genome/coldjellypatch3"]
 layout_mode = 1
@@ -899,18 +994,17 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="genome/coldjellypatch4"]
-visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = -7.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.22745098, 0.6745098, 1)
 
 [node name="Label" type="Label" parent="genome/coldjellypatch4"]
 layout_mode = 1
@@ -1012,6 +1106,7 @@ text = "Bilzork (φ)"
 label_settings = SubResource("LabelSettings_46ma7")
 horizontal_alignment = 1
 
+[connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="genome/coldjellypatch/marker_gene/Button" to="genome/coldjellypatch/marker_gene" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="genome/coldjellypatch/marker_gene/Button" to="genome/coldjellypatch/marker_gene" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="genome/coldjellypatch/colour_gene/Button" to="genome/coldjellypatch/colour_gene" method="_on_button_mouse_entered"]
