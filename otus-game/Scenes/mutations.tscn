@@ -1,9 +1,250 @@
-[gd_scene load_steps=2 format=3 uid="uid://7ttb10e3sxh4"]
+[gd_scene load_steps=34 format=3 uid="uid://7ttb10e3sxh4"]
 
-[ext_resource type="Texture2D" uid="uid://csqcghpm3pbiv" path="res://icon.svg" id="1_o7w3y"]
+[ext_resource type="PackedScene" uid="uid://d1gd31pqq3g0t" path="res://Prefabs/UI/Narrators/mutations_narrator_intro.tscn" id="1_glexr"]
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_n871v"]
+[ext_resource type="PackedScene" uid="uid://dvi7csjnojv02" path="res://Prefabs/Living/voidling.tscn" id="1_u7uk5"]
+[ext_resource type="Script" uid="uid://bloesjee0yuys" path="res://Prefabs/Living/voidling.gd" id="2_glexr"]
+[ext_resource type="Script" uid="uid://cqkj8vjvcitlt" path="res://Prefabs/Living/FSM.gd" id="3_il714"]
+[ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="4_n871v"]
+[ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="5_xuga4"]
+[ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="6_il7at"]
+[ext_resource type="Texture2D" uid="uid://c8lff1k6g2lo5" path="res://Graphics/Kyztlings/Void/White/voidkyztling5.png" id="7_exihv"]
+[ext_resource type="Texture2D" uid="uid://ia50k8lm0ow1" path="res://Graphics/Kyztlings/Void/White/voidkyztling4.png" id="8_r8iuv"]
+[ext_resource type="Texture2D" uid="uid://cyardwof70ksh" path="res://Graphics/Kyztlings/Void/White/voidkyztling3.png" id="9_rnin3"]
+[ext_resource type="Texture2D" uid="uid://bj0gbs8iffqup" path="res://Graphics/Kyztlings/Void/White/voidkyztling2.png" id="10_65e0q"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="11_p8ymx"]
+[ext_resource type="Texture2D" uid="uid://dumms0yhhvm4o" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask1.png" id="12_afdph"]
+[ext_resource type="Texture2D" uid="uid://de7rs8mk78ttx" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask5.png" id="13_uhkd0"]
+[ext_resource type="Texture2D" uid="uid://dogdfoposw3ns" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask4.png" id="14_soo3p"]
+[ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="15_c6yn8"]
+[ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="16_54t2v"]
+[ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="18_il714"]
+
+[sub_resource type="Gradient" id="Gradient_xuga4"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_xuga4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_il7at"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_exihv"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+gradient = SubResource("Gradient_exihv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r8iuv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym65y"]
+radius = 21.095022
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e45og"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_il7at")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_exihv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r8iuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rnin3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_65e0q")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgqfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_afdph")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_uhkd0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_soo3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_c6yn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_54t2v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ym65y"]
+offsets = PackedFloat32Array(0, 0.8742138, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8553459, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1vgc"]
+gradient = SubResource("Gradient_ym65y")
+
+[sub_resource type="Curve" id="Curve_ym65y"]
+_data = [Vector2(0, 1), 0.0, -2.2076616, 0, 0, Vector2(1, 0.14716983), -0.05235198, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qjum5"]
+curve = SubResource("Curve_ym65y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ym65y"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 4.0
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_qjum5")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_e1vgc")
 
 [node name="mutations" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(366, 365)
-texture = ExtResource("1_o7w3y")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+texture = ExtResource("1_n871v")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_il7at")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_r8iuv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mutations_narrator_intro" parent="CanvasLayer" instance=ExtResource("1_glexr")]
+
+[node name="living" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="voidling" parent="living" instance=ExtResource("1_u7uk5")]
+position = Vector2(1144, 660)
+scale = Vector2(2, 2)
+acting = true
+
+[node name="voidling2" type="CharacterBody2D" parent="living" groups=["voidlings"]]
+position = Vector2(1528, 665)
+scale = Vector2(2, 2)
+motion_mode = 1
+script = ExtResource("2_glexr")
+acting = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="living/voidling2"]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_ym65y")
+
+[node name="FSM" type="Node" parent="living/voidling2"]
+script = ExtResource("3_il714")
+
+[node name="IDLE" type="Node" parent="living/voidling2/FSM"]
+script = ExtResource("4_n871v")
+
+[node name="idle_timer" type="Timer" parent="living/voidling2/FSM/IDLE"]
+wait_time = 5.0
+one_shot = true
+
+[node name="WANDER" type="Node" parent="living/voidling2/FSM"]
+script = ExtResource("5_xuga4")
+
+[node name="wander_timer" type="Timer" parent="living/voidling2/FSM/WANDER"]
+wait_time = 10.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="living/voidling2"]
+self_modulate = Color(0.8495773, 0.59197664, 1.1551381e-06, 1)
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_e45og")
+animation = &"idle"
+frame_progress = 0.03911399
+flip_h = true
+
+[node name="shadow" type="Sprite2D" parent="living/voidling2/AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(-2, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("11_p8ymx")
+
+[node name="mask" type="AnimatedSprite2D" parent="living/voidling2/AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_sgqfr")
+animation = &"idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="living/voidling2"]
+position = Vector2(1, 8)
+emitting = false
+amount = 128
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_ym65y")
+
+[node name="Button" type="Button" parent="living/voidling2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -42.0
+offset_top = -55.0
+offset_right = 42.0
+offset_bottom = 22.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="orteil" parent="living" instance=ExtResource("18_il714")]
+position = Vector2(-140, 711)
+scale = Vector2(2, 2)
+
+[connection signal="timeout" from="living/voidling2/FSM/IDLE/idle_timer" to="living/voidling2/FSM/IDLE" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="living/voidling2/FSM/WANDER/wander_timer" to="living/voidling2/FSM/WANDER" method="_on_wander_timer_timeout"]
+[connection signal="mouse_entered" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="living/voidling2/Button" to="living/voidling2" method="_on_button_pressed"]

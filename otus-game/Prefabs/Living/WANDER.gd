@@ -4,6 +4,10 @@ var fsm = null
 var wander_point = Vector2(0, 0)
 
 func enter() -> void:
+	if fsm.kyztling.acting:
+		fsm.change_to("IDLE")
+		return
+	
 	wander_point = fsm.kyztling.global_position + Vector2(50 + randf()*25, 0).rotated(randf()*2*PI)
 	$wander_timer.start(10)
 	

@@ -7,6 +7,8 @@ var otu_shove_momentum = Vector2(0, 0)
 
 var movement_vector = Vector2(0, 0)
 var walk_speed = 75
+var hp = 1
+var colour = Color("ffb629")
 
 var click_enabled = false
 var hovering = false
@@ -14,6 +16,7 @@ var hovering = false
 var debug = false
 
 var clicked_once = false
+@export var acting = false
 
 var genome = {
 	"marker": "",
@@ -25,14 +28,18 @@ func _ready() -> void:
 	
 	generate_genome()
 	
+	$AnimatedSprite2D.self_modulate = colour
+	
 	if debug:
 		enable_clicking()
 	
-	$GPUParticles2D.emitting = true
-	spawn_momentum = Vector2(256, 0).rotated(2*PI*randf())
+	if !acting:
+		$GPUParticles2D.emitting = true
+		spawn_momentum = Vector2(256, 0).rotated(2*PI*randf())
 	
 	for voidling in get_tree().get_nodes_in_group("voidlings"):
 		add_collision_exception_with(voidling)
+		
 	
 func _process(delta: float) -> void:
 	spawn_momentum *= 0.98
@@ -79,7 +86,7 @@ func generate_genome() -> void:
 		spacer += nucs[randi()%4]
 	genome["junk"] += spacer
 		
-	var colour_gene = convert_colour_to_gene(Color("FFB629")) # 12 chars
+	var colour_gene = convert_colour_to_gene(colour) # 12 chars
 	genome["junk"] += colour_gene
 	
 	spacer = ""
@@ -87,7 +94,7 @@ func generate_genome() -> void:
 		spacer += nucs[randi()%4]
 	genome["junk"] += spacer
 	
-	var hp_gene = convert_int_to_gene(1, 5)
+	var hp_gene = convert_int_to_gene(hp, 5)
 	genome["junk"] += hp_gene
 	
 	spacer = ""
@@ -95,7 +102,7 @@ func generate_genome() -> void:
 		spacer += nucs[randi()%4]
 	genome["junk"] += spacer
 	
-	var speed_gene = convert_int_to_gene(90 + randi()%20, 5)
+	var speed_gene = convert_int_to_gene(walk_speed, 5)
 	genome["junk"] += speed_gene
 	
 	for i in range(46):
@@ -130,6 +137,17 @@ func convert_int_to_gene(val = 0, min_gene_length = 4) -> String:
 		gene = "A" + gene
 	
 	return gene
+
+func convert_gene_to_int(gene: String) -> int:
+	var number = 0
+	
+	var nucs_map = {"A": 0, "T": 1, "C": 2, "G": 3}
+	
+	for i in range(gene.length()):
+		var num = nucs_map[gene[gene.length() - 1 - i]]
+		number += num * pow(4, i)
+	
+	return number
 
 func enable_clicking() -> void:
 	click_enabled = true

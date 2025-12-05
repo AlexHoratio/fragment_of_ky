@@ -243,5 +243,15 @@ in the community.
 			queue_dialogue_after_walk("[wave]Let's take a look at an [color=#aaa]example...", true, 0.5, 0, "gv_example", 3)
 		"gv_example":
 			get_node("../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
+		"mt_intro":
+			var narrator_intro = get_node("../../CanvasLayer/mutations_narrator_intro")
+			narrator_intro.add_new_text("[shake][color=#ffb629]Hi, Orteil.")
+			narrator_intro.target_position = Vector2(800 - narrator_intro.target_size.x/2.0, 350 - narrator_intro.target_size.y)
+			
+			queue_dialogue_after_walk("Wtf are you doing out here.", true, 1, 3, "mt_weird", 1.5)
+		"mt_weird":
+			queue_dialogue_after_walk("Anyway...", true, 1, 0, "mt_anyway", 1)
+		"mt_anyway":
+			queue_dialogue_after_walk("Let's take a look at [color=#ffb629]Gilzork[color=#fff].", true, 1, 0, "mt_gilzork_intro", 4)
 		_:
 			pass
