@@ -15,6 +15,12 @@ func _process(delta: float) -> void:
 func view_voidling_genome(voidling, refresh=false) -> void:
 	$RichTextLabel.text = ""
 	
+	if get_tree().has_meta("orteil"):
+		var orteil = get_tree().get_meta("orteil")
+		if orteil.prev_dialogue in ["mt_click_gilzork", "mt_gilzork_intro"]:
+			orteil.get_node("after_talk_timer").stop()
+			orteil.queue_dialogue_after_walk("[rainbow sat=0.85][wave]Awesome!", true, 1, 0, "mt_click_gilzork_awesome", 2)
+	
 	if !refresh:
 		if current_voidling == voidling:
 			current_voidling = null

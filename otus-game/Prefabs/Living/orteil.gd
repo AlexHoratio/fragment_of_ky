@@ -268,7 +268,7 @@ in the community.
 			var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 			voidling.enable_clicking()
 			voidling.no_click_message = true
-			voidling.position = Vector2(960, 200) + Vector2((960 - 400) * randf(), (1080 - 400) * randf())
+			voidling.position = Vector2(960, 540)# + Vector2((960 - 400) * randf(), (1080 - 400) * randf())
 			voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(voidling))
 			get_parent().add_child(voidling)
 			
@@ -277,6 +277,17 @@ in the community.
 			
 		"mt_gilzork_intro":
 			queue_dialogue_after_walk("Click on [color=#ffb629]Gilzork[color=#fff] to view his [color=#005BDF][wave]genome[/wave][color=#fff].", true, 0.7, 0, "mt_click_gilzork", 6)
+		"mt_click_gilzork_awesome":
+			queue_dialogue_after_walk("Notice that [color=#ffb629]colour[color=#fff], [color=#ff295e]health[color=#fff], and [color=#29ff9b]speed[color=#fff] have now been [color=#aaa][wave]annotated[/wave][color=#fff] in the Genome Viewer.", true, 0.7, 0, "mt_annotation", 7)
+		"mt_annotation":
+			queue_dialogue_after_walk("Normally, when [color=#ffb629]Voidlings[color=#fff] reproduce, it looks like this...", true, 0.7, 0, "mt_voidling_reproduce", 4)
+			get_node("voidling_reproduce").start()
+		"mt_voidling_reproduce":
+			queue_dialogue_after_walk("Each descendent receives a perfect copy of the parent's genome.", true, 0.7, 0, "mt_voidling_perfect_copy", 6)
+		"mt_voidling_perfect_copy":
+			queue_dialogue_after_walk("This is called [color=#B800AC][wave]asexual reproduction[/wave][color=#fff].", true, 0.7, 0, "mt_voidling_asexual", 6)
+		
+		
 		
 		_:
 			pass

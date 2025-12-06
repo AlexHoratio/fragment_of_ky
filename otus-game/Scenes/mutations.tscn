@@ -1,7 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://7ttb10e3sxh4"]
+[gd_scene load_steps=41 format=3 uid="uid://7ttb10e3sxh4"]
 
 [ext_resource type="PackedScene" uid="uid://d1gd31pqq3g0t" path="res://Prefabs/UI/Narrators/mutations_narrator_intro.tscn" id="1_glexr"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_n871v"]
+[ext_resource type="Script" uid="uid://48t45gjwpyi6" path="res://Scenes/mutations.gd" id="1_rnin3"]
 [ext_resource type="PackedScene" uid="uid://dvi7csjnojv02" path="res://Prefabs/Living/voidling.tscn" id="1_u7uk5"]
 [ext_resource type="Script" uid="uid://bloesjee0yuys" path="res://Prefabs/Living/voidling.gd" id="2_glexr"]
 [ext_resource type="Script" uid="uid://bwcxm7c17rnlo" path="res://Prefabs/UI/mutations_genome_viewer.gd" id="3_exihv"]
@@ -153,6 +154,7 @@ color = Color(0, 0, 0, 1)
 color_ramp = SubResource("GradientTexture1D_e1vgc")
 
 [node name="mutations" type="Node2D"]
+script = ExtResource("1_rnin3")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -323,6 +325,10 @@ position = Vector2(-140, 711)
 scale = Vector2(2, 2)
 target_scale = Vector2(2, 2)
 
+[node name="voidling_reproduce" type="Timer" parent="living/orteil"]
+wait_time = 3.0
+one_shot = true
+
 [node name="reticle" parent="." instance=ExtResource("23_r8iuv")]
 
 [connection signal="meta_hover_ended" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_ended"]
@@ -332,3 +338,4 @@ target_scale = Vector2(2, 2)
 [connection signal="mouse_entered" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="living/voidling2/Button" to="living/voidling2" method="_on_button_pressed"]
+[connection signal="timeout" from="living/orteil/voidling_reproduce" to="." method="_on_voidling_reproduce_timeout"]

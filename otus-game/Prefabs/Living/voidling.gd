@@ -171,6 +171,27 @@ func click(suppress_message = false) -> void:
 		kyztling_text.move_speed = 50
 		add_child(kyztling_text)
 
+func reproduce(mutate=false) -> void:
+	
+	var new_voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
+	new_voidling.position = position + Vector2(32, 0)
+	new_voidling.no_click_message = no_click_message
+	new_voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(new_voidling))
+	if click_enabled:
+		new_voidling.enable_clicking()
+	
+	get_parent().add_child(new_voidling)
+	
+	if !mutate:
+		new_voidling.genome = genome
+	
+	position -= Vector2(32, 0)
+	
+	var reproduce_effect = load("res://Prefabs/UI/censor_bar.tscn").instantiate()
+	reproduce_effect.position = position.lerp(new_voidling.position, 0.5)
+	get_parent().add_child(reproduce_effect)
+	
+
 func _on_button_mouse_entered() -> void:
 	hovering = true
 
