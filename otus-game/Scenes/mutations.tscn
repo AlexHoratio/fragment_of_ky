@@ -329,6 +329,10 @@ target_scale = Vector2(2, 2)
 wait_time = 3.0
 one_shot = true
 
+[node name="voidling_reproduce_mutant" type="Timer" parent="living/orteil"]
+wait_time = 3.0
+one_shot = true
+
 [node name="reticle" parent="." instance=ExtResource("23_r8iuv")]
 
 [connection signal="meta_hover_ended" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_ended"]
@@ -339,3 +343,4 @@ one_shot = true
 [connection signal="mouse_exited" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="living/voidling2/Button" to="living/voidling2" method="_on_button_pressed"]
 [connection signal="timeout" from="living/orteil/voidling_reproduce" to="." method="_on_voidling_reproduce_timeout"]
+[connection signal="timeout" from="living/orteil/voidling_reproduce_mutant" to="." method="_on_voidling_reproduce_mutant_timeout"]

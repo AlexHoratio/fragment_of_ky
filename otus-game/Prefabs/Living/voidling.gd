@@ -28,7 +28,10 @@ var genome = {
 func _ready() -> void:
 	randomize()
 	
-	generate_genome()
+	if genome["marker"] == "" and genome["junk"] == "":
+		generate_genome()
+	else:
+		colour = convert_gene_to_colour(genome["junk"].substr(2, 12))
 	
 	$AnimatedSprite2D.self_modulate = colour
 	
@@ -150,6 +153,17 @@ func convert_gene_to_int(gene: String) -> int:
 		number += num * pow(4, i)
 	
 	return number
+	
+func convert_gene_to_colour(gene: String) -> Color:
+	var col = Color("FFF")
+	
+	var gene_int = convert_gene_to_int(gene)
+	
+	var gene_hex = "%X" % gene_int
+	
+	col = Color(gene_hex)
+	
+	return col
 
 func enable_clicking() -> void:
 	click_enabled = true
@@ -171,7 +185,7 @@ func click(suppress_message = false) -> void:
 		kyztling_text.move_speed = 50
 		add_child(kyztling_text)
 
-func reproduce(mutate=false) -> void:
+func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0) -> void:
 	
 	var new_voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 	new_voidling.position = position + Vector2(32, 0)
@@ -180,10 +194,26 @@ func reproduce(mutate=false) -> void:
 	if click_enabled:
 		new_voidling.enable_clicking()
 	
-	get_parent().add_child(new_voidling)
-	
 	if !mutate:
 		new_voidling.genome = genome
+	else:
+		var new_genome = {"marker": genome["marker"]}
+		
+		var new_junk = ""
+		var nucs = ["A", "T", "C", "G"]
+		for i in range(genome["junk"].length()):
+			if i == force_snp_at:
+				new_junk += force_snp_to
+			else:
+				if randf() > mutation_rate:
+					new_junk += genome["junk"][i]
+				else:
+					new_junk += nucs[randi()%nucs.size()]
+					
+		new_genome["junk"] = new_junk
+		new_voidling.genome = new_genome
+	
+	get_parent().add_child(new_voidling)
 	
 	position -= Vector2(32, 0)
 	

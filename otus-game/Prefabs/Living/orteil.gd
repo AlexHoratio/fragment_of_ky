@@ -287,7 +287,10 @@ in the community.
 		"mt_voidling_perfect_copy":
 			queue_dialogue_after_walk("This is called [color=#B800AC][wave]asexual reproduction[/wave][color=#fff].", true, 0.7, 0, "mt_voidling_asexual", 6)
 		
-		
-		
+		"mt_voidling_asexual":
+			queue_dialogue_after_walk("However... sometimes, this process creates [color=#ffb629][wave]mutants[/wave][color=#fff]...", true, 0.7, 0, "mt_voidling_mutants", 5)
+		"mt_voidling_mutants":
+			queue_dialogue_after_walk("This happens when the descendents receive [color=#ffb629][shake]im[/shake]perfect copies[color=#fff] of the parent's genome...", true, 0.7, 0, "mt_voidling_imperfect", 5)
+			$voidling_reproduce_mutant.start()
 		_:
 			pass
