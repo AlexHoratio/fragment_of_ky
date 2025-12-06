@@ -13,6 +13,8 @@ var colour = Color("ffb629")
 var click_enabled = false
 var hovering = false
 
+var no_click_message = false
+
 var debug = false
 
 var clicked_once = false
@@ -108,8 +110,8 @@ func generate_genome() -> void:
 	for i in range(46):
 		genome["junk"] += ["A", "T", "C", "G"][randi()%4]
 	
-	print("MY GENOME IS....")
-	print(genome)
+	#print("MY GENOME IS....")
+	#print(genome)
 
 func convert_colour_to_gene(col=Color("FFFFFF")) -> String:
 	var gene = ""
@@ -153,20 +155,21 @@ func enable_clicking() -> void:
 	click_enabled = true
 	$Button.visible = true
 
-func click() -> void:
+func click(suppress_message = false) -> void:
 	clicked_once = true
 	$AnimatedSprite2D/mask.modulate.a = 1
 	emit_signal("clicked")
 	
-	var kyztling_text = load("res://Prefabs/UI/kyztling_text.tscn").instantiate()
-	#kyztling_text.global_position = global_position
-	kyztling_text.text = "[wave]+1 " + str(genome["marker"]) + "!"
-	kyztling_text.position = Vector2(0, 0)
-	kyztling_text.global_position.x -= kyztling_text.size.x/2.0
-	kyztling_text.global_position.y -= 64
-	kyztling_text.fade_speed = 2.25
-	kyztling_text.move_speed = 50
-	add_child(kyztling_text)
+	if !suppress_message:
+		var kyztling_text = load("res://Prefabs/UI/kyztling_text.tscn").instantiate()
+		#kyztling_text.global_position = global_position
+		kyztling_text.text = "[wave]+1 " + str(genome["marker"]) + "!"
+		kyztling_text.position = Vector2(0, 0)
+		kyztling_text.global_position.x -= kyztling_text.size.x/2.0
+		kyztling_text.global_position.y -= 64
+		kyztling_text.fade_speed = 2.25
+		kyztling_text.move_speed = 50
+		add_child(kyztling_text)
 
 func _on_button_mouse_entered() -> void:
 	hovering = true
@@ -175,4 +178,4 @@ func _on_button_mouse_exited() -> void:
 	hovering = false
 
 func _on_button_pressed() -> void:
-	click()
+	click(no_click_message)

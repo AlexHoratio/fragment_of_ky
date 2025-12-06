@@ -5,6 +5,8 @@ signal done_talking
 var target_position = Vector2(0, 0)
 var walk_speed = 150
 
+@export var target_scale = Vector2(1, 1)
+
 var seeking_destination = false
 var orteil_ready = true
 
@@ -47,6 +49,8 @@ func _process(delta: float) -> void:
 	
 	velocity = movement_vector * walk_speed
 	move_and_slide()
+	
+	scale = lerp(scale, target_scale, 0.2)
 	
 	update_shadow_pos()
 	
@@ -248,10 +252,31 @@ in the community.
 			narrator_intro.add_new_text("[shake][color=#ffb629]Hi, Orteil.")
 			narrator_intro.target_position = Vector2(800 - narrator_intro.target_size.x/2.0, 350 - narrator_intro.target_size.y)
 			
-			queue_dialogue_after_walk("Wtf are you doing out here.", true, 1, 3, "mt_weird", 1.5)
+			queue_dialogue_after_walk("Wtf are you doing.", true, 1, 3, "mt_weird", 1.5)
 		"mt_weird":
-			queue_dialogue_after_walk("Anyway...", true, 1, 0, "mt_anyway", 1)
+			queue_dialogue_after_walk("Anyway,", true, 1, 0, "mt_anyway", 1)
 		"mt_anyway":
-			queue_dialogue_after_walk("Let's take a look at [color=#ffb629]Gilzork[color=#fff].", true, 1, 0, "mt_gilzork_intro", 4)
+			var narrator_intro = get_node("../../CanvasLayer/mutations_narrator_intro")
+			narrator_intro.add_new_text("")
+			narrator_intro.target_position = Vector2(800 - narrator_intro.target_size.x/2.0, 350 - narrator_intro.target_size.y)
+			
+			get_node("../voidling").queue_free()
+			get_node("../voidling2").queue_free()
+			
+			queue_dialogue_after_walk("Let's take a closer look at [color=#ffb629]Gilzork[color=#fff].", true, 0.7, 0, "mt_gilzork_intro", 4)
+			
+			var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
+			voidling.enable_clicking()
+			voidling.no_click_message = true
+			voidling.position = Vector2(960, 200) + Vector2((960 - 400) * randf(), (1080 - 400) * randf())
+			voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(voidling))
+			get_parent().add_child(voidling)
+			
+			target_scale = Vector2(1, 1)
+			walk_to(Vector2(960, 911))
+			
+		"mt_gilzork_intro":
+			queue_dialogue_after_walk("Click on [color=#ffb629]Gilzork[color=#fff] to view his [color=#005BDF][wave]genome[/wave][color=#fff].", true, 0.7, 0, "mt_click_gilzork", 6)
+		
 		_:
 			pass

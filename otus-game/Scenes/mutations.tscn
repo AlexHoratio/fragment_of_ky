@@ -1,11 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://7ttb10e3sxh4"]
+[gd_scene load_steps=40 format=3 uid="uid://7ttb10e3sxh4"]
 
 [ext_resource type="PackedScene" uid="uid://d1gd31pqq3g0t" path="res://Prefabs/UI/Narrators/mutations_narrator_intro.tscn" id="1_glexr"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_n871v"]
 [ext_resource type="PackedScene" uid="uid://dvi7csjnojv02" path="res://Prefabs/Living/voidling.tscn" id="1_u7uk5"]
 [ext_resource type="Script" uid="uid://bloesjee0yuys" path="res://Prefabs/Living/voidling.gd" id="2_glexr"]
+[ext_resource type="Script" uid="uid://bwcxm7c17rnlo" path="res://Prefabs/UI/mutations_genome_viewer.gd" id="3_exihv"]
 [ext_resource type="Script" uid="uid://cqkj8vjvcitlt" path="res://Prefabs/Living/FSM.gd" id="3_il714"]
 [ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="4_n871v"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="4_r8iuv"]
+[ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="5_rnin3"]
 [ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="5_xuga4"]
 [ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="6_il7at"]
 [ext_resource type="Texture2D" uid="uid://c8lff1k6g2lo5" path="res://Graphics/Kyztlings/Void/White/voidkyztling5.png" id="7_exihv"]
@@ -19,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="15_c6yn8"]
 [ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="16_54t2v"]
 [ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="18_il714"]
+[ext_resource type="PackedScene" uid="uid://tyhf6cihnkl5" path="res://Prefabs/UI/reticle.tscn" id="23_r8iuv"]
 
 [sub_resource type="Gradient" id="Gradient_xuga4"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
@@ -53,6 +57,12 @@ scale_min = 16.0
 scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
 color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8iuv"]
+size = Vector2(37, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnin3"]
+size = Vector2(1995, 30.75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ym65y"]
 radius = 21.095022
@@ -163,6 +173,75 @@ process_material = SubResource("ParticleProcessMaterial_r8iuv")
 
 [node name="mutations_narrator_intro" parent="CanvasLayer" instance=ExtResource("1_glexr")]
 
+[node name="mutations_genome_viewer" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1576.0
+offset_top = -565.0
+offset_right = 1891.0
+offset_bottom = -82.0
+mouse_filter = 2
+script = ExtResource("3_exihv")
+
+[node name="jellypatch" parent="CanvasLayer/mutations_genome_viewer" instance=ExtResource("4_r8iuv")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="g9patch" parent="CanvasLayer/mutations_genome_viewer/jellypatch" instance=ExtResource("5_rnin3")]
+visible = false
+self_modulate = Color(0.16445974, 0.16445976, 0.16445974, 1)
+show_behind_parent = true
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/mutations_genome_viewer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0.7200212, 0.47851533, 7.70092e-07, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[color=blue][url=marker]ATCGTA[/url][color=#aaa]GAGG
+TTGACGTCAT
+AACATGGAAT
+AAGTATTCTT
+GGGTGACCTG
+ATGCACTACG
+CAGAATCTAG
+AGTCCGGAGC"
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="left" type="CollisionShape2D" parent="walls"]
+position = Vector2(-18.5, 540)
+shape = SubResource("RectangleShape2D_r8iuv")
+
+[node name="right" type="CollisionShape2D" parent="walls"]
+position = Vector2(1939, 540)
+shape = SubResource("RectangleShape2D_r8iuv")
+
+[node name="top" type="CollisionShape2D" parent="walls"]
+position = Vector2(960.5, -15)
+shape = SubResource("RectangleShape2D_rnin3")
+
+[node name="bottom" type="CollisionShape2D" parent="walls"]
+position = Vector2(960.5, 1095)
+shape = SubResource("RectangleShape2D_rnin3")
+
 [node name="living" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -242,7 +321,12 @@ mouse_default_cursor_shape = 2
 [node name="orteil" parent="living" instance=ExtResource("18_il714")]
 position = Vector2(-140, 711)
 scale = Vector2(2, 2)
+target_scale = Vector2(2, 2)
 
+[node name="reticle" parent="." instance=ExtResource("23_r8iuv")]
+
+[connection signal="meta_hover_ended" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_ended"]
+[connection signal="meta_hover_started" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_started"]
 [connection signal="timeout" from="living/voidling2/FSM/IDLE/idle_timer" to="living/voidling2/FSM/IDLE" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="living/voidling2/FSM/WANDER/wander_timer" to="living/voidling2/FSM/WANDER" method="_on_wander_timer_timeout"]
 [connection signal="mouse_entered" from="living/voidling2/Button" to="living/voidling2" method="_on_button_mouse_entered"]
