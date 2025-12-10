@@ -335,6 +335,9 @@ one_shot = true
 
 [node name="reticle" parent="." instance=ExtResource("23_r8iuv")]
 
+[node name="auto_reproduce" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="meta_hover_ended" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_ended"]
 [connection signal="meta_hover_started" from="CanvasLayer/mutations_genome_viewer/RichTextLabel" to="CanvasLayer/mutations_genome_viewer" method="_on_rich_text_label_meta_hover_started"]
 [connection signal="timeout" from="living/voidling2/FSM/IDLE/idle_timer" to="living/voidling2/FSM/IDLE" method="_on_idle_timer_timeout"]
@@ -344,3 +347,4 @@ one_shot = true
 [connection signal="pressed" from="living/voidling2/Button" to="living/voidling2" method="_on_button_pressed"]
 [connection signal="timeout" from="living/orteil/voidling_reproduce" to="." method="_on_voidling_reproduce_timeout"]
 [connection signal="timeout" from="living/orteil/voidling_reproduce_mutant" to="." method="_on_voidling_reproduce_mutant_timeout"]
+[connection signal="timeout" from="auto_reproduce" to="." method="_on_auto_reproduce_timeout"]

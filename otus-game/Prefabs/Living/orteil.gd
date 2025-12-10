@@ -286,11 +286,19 @@ in the community.
 			queue_dialogue_after_walk("Each descendent receives a perfect copy of the parent's genome.", true, 0.7, 0, "mt_voidling_perfect_copy", 6)
 		"mt_voidling_perfect_copy":
 			queue_dialogue_after_walk("This is called [color=#B800AC][wave]asexual reproduction[/wave][color=#fff].", true, 0.7, 0, "mt_voidling_asexual", 6)
-		
 		"mt_voidling_asexual":
 			queue_dialogue_after_walk("However... sometimes, this process creates [color=#ffb629][wave]mutants[/wave][color=#fff]...", true, 0.7, 0, "mt_voidling_mutants", 5)
 		"mt_voidling_mutants":
 			queue_dialogue_after_walk("This happens when the descendents receive [color=#ffb629][shake]im[/shake]perfect copies[color=#fff] of the parent's genome...", true, 0.7, 0, "mt_voidling_imperfect", 5)
 			$voidling_reproduce_mutant.start()
+		"mt_voidling_imperfect":
+			queue_dialogue_after_walk("Compare the [color=#ffb6a9][wave]Pale Voidling[/wave][color=#fff]'s genome with the others, to see where the mutation occurred.", true, 0.7, 0, "mt_voidling_compare_pale", 6)
+		"mt_voidling_compare_pale":
+			queue_dialogue_after_walk("This mutation at a single position is called a [color=#B800AC][wave]Single Nucleotide Polymorphism[/wave][color=#aaa] (or, [color=#B800AC]SNP[color=#aaa]).", true, 0.7, 0, "mt_voidling_snp", 6)
+		"mt_voidling_snp":
+			queue_dialogue_after_walk("Although it looks small, [color=#B800AC]SNPs[color=#fff] can have [wave]big effects[/wave]!", true, 0.7, 0, "mt_voidling_big_effects", 6)
+			get_node("../../auto_reproduce").start()
+		"mt_voidling_big_effects":
+			queue_dialogue_after_walk("Let's allow the population to grow for a moment.", true, 0.7, 0, "mt_voidling_pop_growth", 10)
 		_:
 			pass
