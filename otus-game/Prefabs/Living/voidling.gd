@@ -27,6 +27,7 @@ var genome = {
 
 var gonna_explode = false
 var center_attracted = false
+var area_center = Vector2(960, 540)
 
 func _ready() -> void:
 	randomize()
@@ -200,7 +201,11 @@ func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0,
 	new_voidling.position = position + Vector2(32, 0)
 	new_voidling.no_click_message = no_click_message
 	new_voidling.center_attracted = center_attracted
-	new_voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(new_voidling))
+	new_voidling.area_center = area_center
+	new_voidling.scale = scale
+	
+	if has_node("../../CanvasLayer/mutations_genome_viewer"):
+		new_voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(new_voidling))
 	if click_enabled:
 		new_voidling.enable_clicking()
 	
@@ -232,6 +237,7 @@ func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0,
 	
 	var reproduce_effect = load("res://Prefabs/UI/censor_bar.tscn").instantiate()
 	reproduce_effect.position = position.lerp(new_voidling.position, 0.5)
+	reproduce_effect.scale = scale
 	get_parent().add_child(reproduce_effect)
 	
 func explode() -> void:

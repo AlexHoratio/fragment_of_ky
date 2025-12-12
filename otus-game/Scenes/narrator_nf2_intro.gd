@@ -73,6 +73,13 @@ func next_stage() -> void:
 		5:
 			add_new_text("[color=#ffb629]I [color=#ffc555]stole[color=#ffb629] one of those beautiful [wave]mutant Voidlings[/wave] from Orteil...")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+			
+			var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
+			voidling.colour = Color("#FFB6A9")
+			voidling.scale = Vector2(0.5, 0.5)
+			voidling.position = get_node("../../sandbox").size/2.0
+			voidling.area_center = get_node("../../sandbox").size/4.0
+			get_node("../../sandbox/arena/living").add_child(voidling)
 		6:
 			add_new_text("[color=#ffb629]First, we're going to [color=#ffc555][wave]CULTURE[/wave][color=#ffb629] it...")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
@@ -85,7 +92,22 @@ func next_stage() -> void:
 		9:
 			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		10:
+			add_new_text("[color=#ffb629]That should be enough. [color=#555][Press Enter to continue...]")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		11:
+			add_new_text("[color=#ffb629]Hit the [color=#ffc555][shake]DESTROY[/shake][color=#ffb629] button!")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		12:
+			add_new_text("")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		13:
+			add_new_text("[color=#ffb629]Brilliant! Grab that DNA! [wave]... ")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		14:
+			add_new_text("")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
 		_:
 			print("UHH")
 	
-	text_stage += 1
+	text_stage = clamp(text_stage + 1, 0, 9 if not(get_node("../../automation").thats_enough) else (12 if not(get_node("../../automation").first_destroy) else 999))
