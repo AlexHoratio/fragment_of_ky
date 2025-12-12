@@ -326,5 +326,6 @@ in the community.
 			queue_dialogue_after_walk("That means, the [color=#005BDF]Marker Gene[color=#fff] tends to be the same across different individuals.", true, 0.7, 0, "mt_marker_is_same", 6)
 		"mt_marker_is_same":
 			queue_dialogue_after_walk("", true, 0.7, 0, "mt_marker_is_same", 6)
+			get_node("../../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
 		_:
 			pass

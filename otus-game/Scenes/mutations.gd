@@ -34,3 +34,8 @@ func _on_marker_mutant_timeout():
 	var voidlings = get_tree().get_nodes_in_group("voidlings")
 	var random_voidling = voidlings[randi()%voidlings.size()]
 	random_voidling.reproduce(true, -1, "", 0.0, true)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "fade_out":
+		pass
