@@ -9,6 +9,9 @@ func enter() -> void:
 		return
 	
 	wander_point = fsm.kyztling.global_position + Vector2(50 + randf()*25, 0).rotated(randf()*2*PI)
+	if fsm.kyztling.center_attracted:
+		wander_point = wander_point.lerp(Vector2(960, 540), 0.1)
+		
 	$wander_timer.start(10)
 	
 func process(delta: float) -> void:

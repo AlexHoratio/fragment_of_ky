@@ -158,6 +158,17 @@ speed_scale = 2.0
 explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_ym65y")
 
+[node name="alert" type="RichTextLabel" parent="."]
+offset_left = -34.0
+offset_top = -71.0
+offset_right = 34.0
+offset_bottom = -41.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+
 [node name="Button" type="Button" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
@@ -168,8 +179,11 @@ offset_bottom = 22.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
+[node name="gonna_explode" type="Timer" parent="."]
+
 [connection signal="timeout" from="FSM/IDLE/idle_timer" to="FSM/IDLE" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="FSM/WANDER/wander_timer" to="FSM/WANDER" method="_on_wander_timer_timeout"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="gonna_explode" to="." method="_on_gonna_explode_timeout"]

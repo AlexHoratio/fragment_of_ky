@@ -268,6 +268,7 @@ in the community.
 			var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 			voidling.enable_clicking()
 			voidling.no_click_message = true
+			voidling.center_attracted = true
 			voidling.position = Vector2(960, 540)# + Vector2((960 - 400) * randf(), (1080 - 400) * randf())
 			voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(voidling))
 			get_parent().add_child(voidling)
@@ -300,5 +301,30 @@ in the community.
 			get_node("../../auto_reproduce").start()
 		"mt_voidling_big_effects":
 			queue_dialogue_after_walk("Let's allow the population to grow for a moment.", true, 0.7, 0, "mt_voidling_pop_growth", 10)
+		"mt_diff_genomes":
+			queue_dialogue_after_walk("[wave]There's so much [rainbow sat=0.2]sequence diversity[/rainbow]!", true, 0.7, 0, "mt_seq_diversity", 5)
+		"mt_seq_diversity":
+			queue_dialogue_after_walk("However, you might notice something...", true, 0.7, 0, "mt_notice_something", 6)
+		"mt_notice_something":
+			queue_dialogue_after_walk("[shake]The [color=#005BDF]Marker Genes[color=#fff] are all identical!", true, 0.7, 0, "mt_identical_markers", 6)
+		"mt_identical_markers":
+			queue_dialogue_after_walk("It's true that some parts of the genome tend to harbour more mutants than others.", true, 0.7, 0, "mt_more_mutants", 6)
+		"mt_more_mutants":
+			queue_dialogue_after_walk("I'll show you why this happens.", true, 0.7, 0, "mt_show_you_why", 6)
+		"mt_show_you_why":
+			queue_dialogue_after_walk("Let's mutate the first base in the [color=#005BDF]Marker Gene[color=#fff] to a [color=#ffb629]G[color=#fff].", true, 0.7, 0, "mt_mutate_marker_gene", 8)
+			$marker_mutant.start()
+		"mt_mutate_marker_gene":
+			queue_dialogue_after_walk("Did you catch that?! He just exploded!!", true, 0.7, 0, "mt_he_exploded", 6)
+		"mt_he_exploded":
+			queue_dialogue_after_walk("This is the reason we hardly ever see mutations in the [color=#005BDF]Marker Gene[color=#fff].", true, 0.7, 0, "mt_why_we_see", 6)
+		"mt_why_we_see":
+			queue_dialogue_after_walk("Whatever it is-- it's important that it works PERFECTLY, or else the [color=#ffb629]Voidling[color=#fff] explodes!", true, 0.7, 0, "mt_else_he_explodes", 6)
+		"mt_else_he_explodes":
+			queue_dialogue_after_walk("Earthlings would say, that this gene is [color=#B800AC][wave]well-conserved[/wave][color=#fff].", true, 0.7, 0, "mt_well_conserved", 6)
+		"mt_well_conserved":
+			queue_dialogue_after_walk("That means, the [color=#005BDF]Marker Gene[color=#fff] tends to be the same across different individuals.", true, 0.7, 0, "mt_marker_is_same", 6)
+		"mt_marker_is_same":
+			queue_dialogue_after_walk("", true, 0.7, 0, "mt_marker_is_same", 6)
 		_:
 			pass

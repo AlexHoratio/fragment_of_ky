@@ -25,6 +25,9 @@ var genome = {
 	"junk": ""
 }
 
+var gonna_explode = false
+var center_attracted = false
+
 func _ready() -> void:
 	randomize()
 	
@@ -44,6 +47,11 @@ func _ready() -> void:
 	
 	for voidling in get_tree().get_nodes_in_group("voidlings"):
 		add_collision_exception_with(voidling)
+		
+	if genome["marker"][0] == "G":
+		gonna_explode = true
+		$alert.text = "[rainbow][wave][center]!"
+		$gonna_explode.start()
 		
 	
 func _process(delta: float) -> void:
@@ -186,11 +194,12 @@ func click(suppress_message = false) -> void:
 		kyztling_text.move_speed = 50
 		add_child(kyztling_text)
 
-func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0) -> void:
+func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0, marker_mutant=false) -> void:
 	
 	var new_voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 	new_voidling.position = position + Vector2(32, 0)
 	new_voidling.no_click_message = no_click_message
+	new_voidling.center_attracted = center_attracted
 	new_voidling.clicked.connect(get_node("../../CanvasLayer/mutations_genome_viewer").view_voidling_genome.bind(new_voidling))
 	if click_enabled:
 		new_voidling.enable_clicking()
@@ -199,6 +208,9 @@ func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0)
 		new_voidling.genome = genome
 	else:
 		var new_genome = {"marker": genome["marker"]}
+		
+		if marker_mutant:
+			new_genome["marker"][0] = "G"
 		
 		var new_junk = ""
 		var nucs = ["A", "T", "C", "G"]
@@ -222,6 +234,12 @@ func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0)
 	reproduce_effect.position = position.lerp(new_voidling.position, 0.5)
 	get_parent().add_child(reproduce_effect)
 	
+func explode() -> void:
+	var explosion = load("res://Prefabs/Bullets/iron_bullet_explosion.tscn").instantiate()
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	
+	queue_free()
 
 func _on_button_mouse_entered() -> void:
 	hovering = true
@@ -231,3 +249,14 @@ func _on_button_mouse_exited() -> void:
 
 func _on_button_pressed() -> void:
 	click(no_click_message)
+
+func _on_gonna_explode_timeout():
+	match $alert.text:
+		"[rainbow][wave][center]!":
+			$alert.text = "[rainbow][wave][center]!!"
+		"[rainbow][wave][center]!!":
+			$alert.text = "[rainbow][wave][center]!!!"
+		"[rainbow][wave][center]!!!":
+			$alert.text = "[rainbow][wave][center]!!!!"
+		"[rainbow][wave][center]!!!!":
+			explode()
