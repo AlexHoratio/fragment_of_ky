@@ -108,6 +108,6 @@ func next_stage() -> void:
 			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
 		_:
-			print("UHH")
+			print("NARRATOR: UHH??")
 	
 	text_stage = clamp(text_stage + 1, 0, 9 if not(get_node("../../automation").thats_enough) else (12 if not(get_node("../../automation").first_destroy) else 999))

@@ -195,7 +195,7 @@ func click(suppress_message = false) -> void:
 		kyztling_text.move_speed = 50
 		add_child(kyztling_text)
 
-func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0, marker_mutant=false) -> void:
+func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0, marker_mutant=false, suppress_censor=false) -> void:
 	
 	var new_voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 	new_voidling.position = position + Vector2(32, 0)
@@ -235,10 +235,11 @@ func reproduce(mutate=false, force_snp_at=-1, force_snp_to="A", mutation_rate=0,
 	
 	position -= Vector2(32, 0)
 	
-	var reproduce_effect = load("res://Prefabs/UI/censor_bar.tscn").instantiate()
-	reproduce_effect.position = position.lerp(new_voidling.position, 0.5)
-	reproduce_effect.scale = scale
-	get_parent().add_child(reproduce_effect)
+	if !suppress_censor:
+		var reproduce_effect = load("res://Prefabs/UI/censor_bar.tscn").instantiate()
+		reproduce_effect.position = position.lerp(new_voidling.position, 0.5)
+		reproduce_effect.scale = scale
+		get_parent().add_child(reproduce_effect)
 	
 func explode() -> void:
 	var explosion = load("res://Prefabs/Bullets/iron_bullet_explosion.tscn").instantiate()

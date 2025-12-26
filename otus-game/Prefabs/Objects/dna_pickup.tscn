@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0053r1mbwn0m"]
+
+[ext_resource type="Script" uid="uid://cbfkooraeqhfu" path="res://Prefabs/Objects/dna_pickup.gd" id="1_6184f"]
+[ext_resource type="Texture2D" uid="uid://dibhosumtupx4" path="res://Graphics/Objects/gene.png" id="2_gk4ab"]
+
+[sub_resource type="Animation" id="Animation_84aij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gene:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gene:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.06, 0.06)]
+}
+
+[sub_resource type="Animation" id="Animation_qf5bj"]
+resource_name = "collect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gene:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2871746, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gene:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2332583, 1),
+"update": 0,
+"values": [Vector2(0.06, 0.06), Vector2(0.05, 0.05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npc1g"]
+_data = {
+&"RESET": SubResource("Animation_84aij"),
+&"collect": SubResource("Animation_qf5bj")
+}
+
+[node name="dna_pickup" type="Node2D"]
+script = ExtResource("1_6184f")
+
+[node name="Gene" type="Sprite2D" parent="."]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("2_gk4ab")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_npc1g")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

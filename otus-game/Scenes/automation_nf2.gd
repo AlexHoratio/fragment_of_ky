@@ -94,6 +94,11 @@ func _on_destroy_timeout():
 	
 	if voidlings.size() > 1:
 		var random_voidling = voidlings[randi()%voidlings.size()]
+		
+		var dna_pickup = load("res://Prefabs/Objects/dna_pickup.tscn").instantiate()
+		get_node("../sandbox/arena/living").add_child(dna_pickup)
+		dna_pickup.position = random_voidling.position
+		
 		random_voidling.explode()
 		
 	get_node("../sandbox").scores["destroyed"] += 1

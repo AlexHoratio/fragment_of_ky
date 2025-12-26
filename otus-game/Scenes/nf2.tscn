@@ -19,7 +19,7 @@
 offsets = PackedFloat32Array(0, 0.51282054, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jviro"]
 gradient = SubResource("Gradient_a70ce")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7qn4k"]
@@ -30,13 +30,13 @@ gravity = Vector3(0, 98, 0)
 scale_min = 16.0
 scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.047058824)
-color_ramp = SubResource("GradientTexture1D_prais")
+color_ramp = SubResource("GradientTexture1D_jviro")
 
 [sub_resource type="Gradient" id="Gradient_t7ks3"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cl2em"]
 gradient = SubResource("Gradient_t7ks3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_15ig2"]
@@ -47,7 +47,7 @@ gravity = Vector3(-50, 500, 0)
 scale_min = 16.0
 scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
-color_ramp = SubResource("GradientTexture1D_gg5g1")
+color_ramp = SubResource("GradientTexture1D_cl2em")
 
 [sub_resource type="GDScript" id="GDScript_j4qnu"]
 script/source = "extends Control

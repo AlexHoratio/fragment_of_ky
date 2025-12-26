@@ -323,7 +323,7 @@ in the community.
 		"mt_else_he_explodes":
 			queue_dialogue_after_walk("Earthlings would say, that this gene is [color=#B800AC][wave]well-conserved[/wave][color=#fff].", true, 0.7, 0, "mt_well_conserved", 6)
 		"mt_well_conserved":
-			queue_dialogue_after_walk("That means, the [color=#005BDF]Marker Gene[color=#fff] tends to be the same across different individuals.", true, 0.7, 0, "mt_marker_is_same", 6)
+			queue_dialogue_after_walk("That means, the [color=#005BDF]Marker Gene[color=#fff] tends to be the same across similar individuals.", true, 0.7, 0, "mt_marker_is_same", 6)
 		"mt_marker_is_same":
 			queue_dialogue_after_walk("", true, 0.7, 0, "mt_marker_is_same", 6)
 			get_node("../../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
