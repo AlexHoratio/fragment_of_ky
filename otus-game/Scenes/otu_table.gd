@@ -53,10 +53,11 @@ func view_new_voidling(voidling) -> void:
 		viewed_voidlings.append(voidling)
 		if !$body/rows.has_node(voidling.genome["marker"]):
 			var otu_discovered = load("res://Prefabs/UI/kyztling_text.tscn").instantiate()
-			otu_discovered.text = "[rainbow][wave]OTU Discovered!"
+			otu_discovered.text = "[center][rainbow][wave]OTU Discovered![/wave][/rainbow]\n[wave]+1 " + str(voidling.genome["marker"]) + "!"
 			otu_discovered.global_position = get_global_mouse_position()
 			otu_discovered.global_position.x -= otu_discovered.size.x/2.0
 			otu_discovered.global_position.y -= 32
+			otu_discovered.border_size = 2
 			get_parent().get_parent().add_child(otu_discovered)
 			
 			create_row(voidling.genome["marker"], [voidling.genome["marker"], "1"])
@@ -66,6 +67,7 @@ func view_new_voidling(voidling) -> void:
 			plus_one.global_position = get_global_mouse_position()
 			plus_one.global_position.x -= plus_one.size.x/2.0
 			plus_one.global_position.y -= 32
+			plus_one.border_size = 2
 			get_parent().get_parent().add_child(plus_one)
 			
 			var freq_cell = get_node("body/rows/" + voidling.genome["marker"]).get_child(1)

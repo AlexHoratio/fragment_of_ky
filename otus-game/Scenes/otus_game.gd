@@ -20,4 +20,5 @@ func spawn_voidling() -> void:
 	var voidling = load("res://Prefabs/Living/voidling.tscn").instantiate()
 	voidling.position = Vector2(200, 200) + Vector2((1920 - 400) * randf(), (1080 - 400) * randf())
 	voidling.clicked.connect($CanvasLayer/genome_viewer.view_voidling_genome.bind(voidling))
+	voidling.no_click_message = true
 	$living.add_child(voidling)

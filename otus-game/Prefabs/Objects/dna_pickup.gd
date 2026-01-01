@@ -16,4 +16,5 @@ func _process(delta):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "collect":
 		emit_signal("collected")
+		get_parent().get_parent().get_parent().get_parent().dna_collected += 1
 		queue_free()

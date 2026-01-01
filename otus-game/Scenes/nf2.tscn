@@ -1,10 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://dfu3ucxp045ni"]
+[gd_scene load_steps=43 format=3 uid="uid://dfu3ucxp045ni"]
 
 [ext_resource type="Script" uid="uid://d4akr7wbvvvsd" path="res://Scenes/nf2.gd" id="1_1pu44"]
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="2_jviro"]
 [ext_resource type="Texture2D" uid="uid://b0kahnjfw2y1v" path="res://Graphics/CanvasLayer/goldjelly_k9patch_x2.png" id="3_cl2em"]
 [ext_resource type="Script" uid="uid://3muypya1t2vg" path="res://Scenes/narrator_nf2_intro.gd" id="4_1pu44"]
 [ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="5_84aij"]
+[ext_resource type="Texture2D" uid="uid://dibhosumtupx4" path="res://Graphics/Objects/gene.png" id="5_cl2em"]
 [ext_resource type="Script" uid="uid://dikqlnlfpuie4" path="res://Scenes/automation_nf2.gd" id="6_1pu44"]
 [ext_resource type="PackedScene" uid="uid://buas3t6alkbt3" path="res://Prefabs/UI/g9patch.tscn" id="6_npc1g"]
 [ext_resource type="PackedScene" uid="uid://c7q87tmixkuid" path="res://Prefabs/UI/d9patch.tscn" id="7_8gpoe"]
@@ -137,6 +138,21 @@ _data = {
 &"fade_out": SubResource("Animation_2wapo"),
 &"partial_fadeout": SubResource("Animation_15ig2")
 }
+
+[sub_resource type="GDScript" id="GDScript_qf5bj"]
+script/source = "extends Control
+
+func _ready() -> void:
+	pass
+	
+func _process(delta: float) -> void:
+	$value.text = str(get_parent().get_parent().dna_collected)
+	
+	modulate.a = lerp(modulate.a, 0.0 if get_parent().get_parent().dna_collected == 0 else 1.0, 0.1)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_qf5bj"]
+font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_jv23o"]
 font_size = 32
@@ -425,6 +441,36 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
+
+[node name="dna" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 185.0
+grow_horizontal = 2
+script = SubResource("GDScript_qf5bj")
+
+[node name="value" type="Label" parent="CanvasLayer/dna"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = 5.0
+offset_right = -149.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_qf5bj")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/dna"]
+position = Vector2(1808.9999, 91.999985)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_cl2em")
 
 [node name="automation" parent="." instance=ExtResource("7_8gpoe")]
 offset_left = 1316.0
