@@ -11,6 +11,9 @@ var can_download = false
 var thats_enough = false
 var first_destroy = false
 
+var waited_for_all_destroyed = false
+var downloaded_once = false
+
 func _ready():
 	pass
 	
@@ -23,8 +26,14 @@ func _process(delta):
 	#update_stats()
 	
 	$download/download.visible = can_download
-	$download.position.y = lerp($download.position.y, 304.0 if can_download else 250.0, 0.2)
+	$download.position.y = lerp($download.position.y, 333.0 if can_download else 250.0, 0.2)
 	$download/ColorRect.self_modulate.a = lerp($download/ColorRect.self_modulate.a, 0.0, 0.2)
+	
+	if get_node("../CanvasLayer/narrator").waiting_for_all_destroyed:
+		waited_for_all_destroyed = true
+	
+	can_download = !downloaded_once and waited_for_all_destroyed and get_tree().get_node_count_in_group("voidlings") == 1
+	$download/download.text = "> Download Results (" + str(get_parent().dna_collected) + "x DNA)"
 
 func update_stats() -> void:
 	$body/RichTextLabel.text = """[color=#777]withName: [color=#fff]COUNT_OTUS {
@@ -63,10 +72,10 @@ func _on_count_timeout():
 	get_node("../sandbox").count_random()
 
 func _on_download_pressed():
-	get_node("../sandbox").worlds[get_node("../sandbox").world_id]["finished"] = true
-	get_node("../results").download_result({"otu_tables": 1})
+#	get_node("../sandbox").worlds[get_node("../sandbox").world_id]["finished"] = true
+#	get_node("../results").download_result({"dna": get_parent().get_parent().dna_collected})
 	can_download = false
-	#stop_automation()
+	downloaded_once = true
 	
 	$download/ColorRect.self_modulate.a = 1.0
 

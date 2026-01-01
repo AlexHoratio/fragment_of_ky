@@ -9,6 +9,8 @@ var target_size = Vector2(0, 0)
 
 var text_scroll_progress = 0
 
+var waiting_for_all_destroyed = false
+
 func _ready() -> void:
 	target_size = Vector2(433, 106)
 	position = Vector2(744, -240)
@@ -24,6 +26,11 @@ func _process(delta: float) -> void:
 	
 	position = lerp(position, target_position, 0.1)
 	size = lerp(size, target_size, 0.1)
+	
+	if waiting_for_all_destroyed:
+		if get_tree().get_node_count_in_group("voidlings") == 1:
+			waiting_for_all_destroyed = false
+			next_stage()
 	
 	$RichTextLabel.visible_ratio = text_scroll_progress
 	
@@ -107,7 +114,15 @@ func next_stage() -> void:
 		14:
 			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+			
+			waiting_for_all_destroyed = true
+		15:
+			add_new_text("[color=#ffb629]Great work, Gamer [wave]... ")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		16:
+			add_new_text("[color=#ffb629]")
+			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
 		_:
 			print("NARRATOR: UHH??")
 	
-	text_stage = clamp(text_stage + 1, 0, 9 if not(get_node("../../automation").thats_enough) else (12 if not(get_node("../../automation").first_destroy) else 999))
+	text_stage = clamp(text_stage + 1, 0, 9 if not(get_node("../../automation").thats_enough) else (12 if not(get_node("../../automation").first_destroy) else (15 if waiting_for_all_destroyed else 999)))
