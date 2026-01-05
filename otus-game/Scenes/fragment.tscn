@@ -1,0 +1,177 @@
+[gd_scene load_steps=13 format=3 uid="uid://cq4kjxdxm04dx"]
+
+[ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="1_3b7pg"]
+[ext_resource type="Texture2D" uid="uid://2laiuvju0hvt" path="res://Graphics/Kyztlings/Faction/kyztling1.png" id="1_fnwbw"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="2_brxyv"]
+[ext_resource type="Texture2D" uid="uid://q1w02w7aqbt4" path="res://Graphics/CanvasLayer/FragmentHUD/fragmenthud.png" id="2_uubfi"]
+[ext_resource type="Texture2D" uid="uid://qxwudgytucyk" path="res://Graphics/Kyztlings/Wild/PLT/orteil1.png" id="3_glghq"]
+
+[sub_resource type="Gradient" id="Gradient_uubfi"]
+offsets = PackedFloat32Array(0, 0.31578946, 0.7368421, 1)
+colors = PackedColorArray(0, 0.68235296, 0.29803923, 0, 0, 0.63223565, 0.27267087, 0.9005848, 0, 0.50742286, 0.21479392, 0.83359915, 0, 0.68235296, 0.29803923, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4u4il"]
+gradient = SubResource("Gradient_uubfi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3n25b"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 15.0
+angular_velocity_min = -100.000015
+angular_velocity_max = 99.999985
+gravity = Vector3(0, 0, 0)
+scale_max = 8.0
+color_ramp = SubResource("GradientTexture1D_4u4il")
+
+[sub_resource type="Curve" id="Curve_4u4il"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5025381, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3n25b"]
+curve = SubResource("Curve_4u4il")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3b7pg"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 10.0
+angular_velocity_min = -150.00002
+angular_velocity_max = 149.99998
+gravity = Vector3(0, 0, 0)
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_3n25b")
+color = Color(0.89, 0, 0.26700017, 0.39215687)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uubfi"]
+
+[node name="fragment" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="bg" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21839999, 0.56, 0.39489332, 1)
+
+[node name="grass" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+amount = 512
+texture = ExtResource("1_3b7pg")
+lifetime = 2.0
+preprocess = 2.0
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_3n25b")
+
+[node name="flower" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+amount = 4
+texture = ExtResource("1_3b7pg")
+lifetime = 8.0
+preprocess = 8.0
+process_material = SubResource("ParticleProcessMaterial_3b7pg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="taskbar" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 203.0
+grow_horizontal = 2
+
+[node name="shadow" type="TextureRect" parent="CanvasLayer/taskbar"]
+self_modulate = Color(0.68307686, 0.6830775, 0.68307734, 1)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 1923.0
+offset_bottom = 260.0
+texture = ExtResource("2_uubfi")
+
+[node name="panel" type="TextureRect" parent="CanvasLayer/taskbar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uubfi")
+
+[node name="illuminations" type="Control" parent="CanvasLayer/taskbar"]
+anchors_preset = 0
+offset_left = 65.0
+offset_top = 51.0
+offset_right = 1057.0
+offset_bottom = 187.0
+
+[node name="title" type="Label" parent="CanvasLayer/taskbar/illuminations"]
+visible = false
+layout_mode = 0
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 106.0
+offset_bottom = 28.0
+text = "Illuminations"
+label_settings = SubResource("LabelSettings_uubfi")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/taskbar/illuminations"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[u]Illuminations[/u]
+
+-> You are gay!
+-> and you are stupid!
+
+- [Unlock at Stage 1-3]
+- [Unlock at Stage 1-4]"
+scroll_active = false
+
+[node name="team" type="Control" parent="CanvasLayer/taskbar"]
+anchors_preset = 0
+offset_left = 1082.0
+offset_top = 53.0
+offset_right = 1467.0
+offset_bottom = 180.0
+
+[node name="mystery" type="Control" parent="CanvasLayer/taskbar"]
+anchors_preset = 0
+offset_left = 1550.0
+offset_top = 53.0
+offset_right = 1837.0
+offset_bottom = 180.0
+
+[node name="living" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="living"]
+position = Vector2(460, 417)
+texture = ExtResource("1_fnwbw")
+
+[node name="Sprite2D" type="Sprite2D" parent="living/Sprite2D"]
+show_behind_parent = true
+position = Vector2(2, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("2_brxyv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="living"]
+position = Vector2(1188, 622)
+texture = ExtResource("3_glghq")
