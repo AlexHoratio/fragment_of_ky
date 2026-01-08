@@ -13,6 +13,7 @@ config_version=5
 config/name="Fragment of Ky"
 run/main_scene="uid://dyfud3bbl61dt"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/image="uid://baxbvwihi4gij"
 config/icon="res://icon.svg"
 
 [autoload]
