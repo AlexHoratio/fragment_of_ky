@@ -7,3 +7,6 @@ func _ready():
 	
 func _process(delta):
 	pass
+
+func _on_next_scene_timeout() -> void:
+	get_tree().change_scene("res://Scenes/end.tscn")

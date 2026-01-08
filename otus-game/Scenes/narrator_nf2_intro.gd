@@ -119,9 +119,15 @@ func next_stage() -> void:
 		15:
 			add_new_text("[color=#ffb629]Great work, Gamer [wave]... ")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+			
+			get_node("../ColorRect/AnimationPlayer").play("fade_out")
+			
 		16:
-			add_new_text("[color=#ffb629]")
+			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, 180 - target_size.y/2.0)
+		
+			$next_scene.start()
+			
 		_:
 			print("NARRATOR: UHH??")
 	

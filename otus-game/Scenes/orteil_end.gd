@@ -327,20 +327,5 @@ in the community.
 		"mt_marker_is_same":
 			queue_dialogue_after_walk("", true, 0.7, 0, "mt_marker_is_same", 6)
 			get_node("../../CanvasLayer/ColorRect/AnimationPlayer").play("fade_out")
-		"end_concludes":
-			queue_dialogue_after_walk("The [color=#ffb629][shake rate=10.0 level=10]DEV[/shake][color=#fff] says he'll take\ncare of the finances.", true, 0.7, 0, "end_dev_says", 6)
-		"end_dev_says":
-			queue_dialogue_after_walk("Do you believe him?", true, 0.7, 0, "end_do_you_believe", 4)
-		"end_do_you_believe":
-			queue_dialogue_after_walk("[shake rate=25.0 level=10]I sure don't!", true, 0.7, 0, "end_i_dont", 4)
-		"end_i_dont":
-			queue_dialogue_after_walk("I suspect we're going\nto be seeing each-other\nagain quite soon.", true, 0.7, 0, "end_see_again", 6)
-		"end_see_again":
-			queue_dialogue_after_walk("[rainbow sat=0.2]... :)", true, 0.7, 0, "end_smiley", 4)
-		"end_smiley":
-			queue_dialogue_after_walk("Anyway, if you'd like\nto learn more, here are\nsome great links:", true, 0.7, 0, "end_great_links", 8)
-			
-			get_node("../AnimationPlayer").play("reveal_links")
-			
 		_:
 			pass

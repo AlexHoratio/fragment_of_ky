@@ -69,6 +69,21 @@ font_color = Color(1, 0.7137255, 0.16078432, 1)
 shadow_color = Color(0.3404046, 0.2278035, 0, 1)
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="GDScript" id="GDScript_qf5bj"]
+script/source = "extends Control
+
+func _ready() -> void:
+	pass
+	
+func _process(delta: float) -> void:
+	$value.text = str(get_parent().get_parent().dna_collected)
+	
+	modulate.a = lerp(modulate.a, 0.0 if get_parent().get_parent().dna_collected == 0 else 1.0, 0.1)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_qf5bj"]
+font_size = 64
+
 [sub_resource type="Animation" id="Animation_4gexm"]
 length = 0.001
 tracks/0/type = "value"
@@ -113,7 +128,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.54200006), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_15ig2"]
@@ -138,21 +153,6 @@ _data = {
 &"fade_out": SubResource("Animation_2wapo"),
 &"partial_fadeout": SubResource("Animation_15ig2")
 }
-
-[sub_resource type="GDScript" id="GDScript_qf5bj"]
-script/source = "extends Control
-
-func _ready() -> void:
-	pass
-	
-func _process(delta: float) -> void:
-	$value.text = str(get_parent().get_parent().dna_collected)
-	
-	modulate.a = lerp(modulate.a, 0.0 if get_parent().get_parent().dna_collected == 0 else 1.0, 0.1)
-"
-
-[sub_resource type="LabelSettings" id="LabelSettings_qf5bj"]
-font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_jv23o"]
 font_size = 32
@@ -393,8 +393,37 @@ text = "0g"
 label_settings = SubResource("LabelSettings_j4qnu")
 vertical_alignment = 1
 
+[node name="dna" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 185.0
+grow_horizontal = 2
+script = SubResource("GDScript_qf5bj")
+
+[node name="value" type="Label" parent="CanvasLayer/dna"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = 5.0
+offset_right = -149.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_qf5bj")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="icon" type="Sprite2D" parent="CanvasLayer/dna"]
+position = Vector2(1808.9999, 91.999985)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_cl2em")
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -442,35 +471,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="dna" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 185.0
-grow_horizontal = 2
-script = SubResource("GDScript_qf5bj")
-
-[node name="value" type="Label" parent="CanvasLayer/dna"]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -315.0
-offset_top = 5.0
-offset_right = -149.0
-offset_bottom = 5.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "0"
-label_settings = SubResource("LabelSettings_qf5bj")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="icon" type="Sprite2D" parent="CanvasLayer/dna"]
-position = Vector2(1808.9999, 91.999985)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_cl2em")
+[node name="next_scene" type="Timer" parent="CanvasLayer/narrator"]
+wait_time = 2.0
+one_shot = true
 
 [node name="automation" parent="." instance=ExtResource("7_8gpoe")]
 offset_left = 1316.0
@@ -1096,6 +1099,7 @@ label_settings = SubResource("LabelSettings_15ig2")
 position = Vector2(-216, 995)
 
 [connection signal="animation_finished" from="CanvasLayer/ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="CanvasLayer/narrator/next_scene" to="." method="_on_next_scene_timeout"]
 [connection signal="button_down" from="automation/header/Button" to="automation" method="_on_button_button_down"]
 [connection signal="button_up" from="automation/header/Button" to="automation" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="automation/header/Button" to="automation" method="_on_button_mouse_entered"]
