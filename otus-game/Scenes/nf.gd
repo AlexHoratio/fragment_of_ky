@@ -13,3 +13,8 @@ func _on_animation_player_animation_finished(anim_name):
 			$CanvasLayer/narrator.next_stage()
 	elif anim_name == "fade_out":
 		get_tree().change_scene_to_file("res://Scenes/gv.tscn")
+
+
+func _on_auto_start_timeout() -> void:
+	if $CanvasLayer/narrator.text_stage == 0:
+		$CanvasLayer/narrator.next_stage()

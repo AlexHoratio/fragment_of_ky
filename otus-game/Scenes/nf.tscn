@@ -1009,6 +1009,10 @@ libraries = {
 [node name="orteil" parent="." instance=ExtResource("10_a70ce")]
 position = Vector2(-216, 995)
 
+[node name="auto_start" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [connection signal="meta_hover_ended" from="CanvasLayer/this_genome/RichTextLabel" to="CanvasLayer/this_genome" method="_on_rich_text_label_meta_hover_ended"]
 [connection signal="meta_hover_started" from="CanvasLayer/this_genome/RichTextLabel" to="CanvasLayer/this_genome" method="_on_rich_text_label_meta_hover_started"]
 [connection signal="meta_hover_ended" from="CanvasLayer/that_genome/RichTextLabel" to="CanvasLayer/that_genome" method="_on_rich_text_label_meta_hover_ended"]
@@ -1038,3 +1042,4 @@ position = Vector2(-216, 995)
 [connection signal="mouse_exited" from="results/sell/Button" to="results/sell" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="results/sell/Button" to="results/sell" method="_on_button_pressed"]
 [connection signal="animation_finished" from="ColorRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="auto_start" to="." method="_on_auto_start_timeout"]

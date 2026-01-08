@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://i0rbmlncvov2"]
+[gd_scene load_steps=8 format=3 uid="uid://i0rbmlncvov2"]
 
 [ext_resource type="PackedScene" uid="uid://f6kkmi10wb4g" path="res://Prefabs/Living/orteil.tscn" id="1_5j2cu"]
 [ext_resource type="Script" uid="uid://nnkke5o3688t" path="res://Scenes/end.gd" id="1_xmt8n"]
+[ext_resource type="PackedScene" uid="uid://c2k0vm17eugnr" path="res://Prefabs/UI/Narrators/narrator_interrupt.tscn" id="2_ql4ve"]
+[ext_resource type="Script" uid="uid://cxn4j8u86ghjb" path="res://Scenes/narrator_end.gd" id="3_q5l5q"]
 
 [sub_resource type="Animation" id="Animation_xmt8n"]
 resource_name = "reveal_links"
@@ -50,6 +52,14 @@ grow_vertical = 2
 script = ExtResource("1_xmt8n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="narrator_interrupt" parent="CanvasLayer" instance=ExtResource("2_ql4ve")]
+offset_left = -767.0
+offset_top = 162.0
+offset_right = -334.0
+offset_bottom = 268.0
+scale = Vector2(2, 2)
+script = ExtResource("3_q5l5q")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1

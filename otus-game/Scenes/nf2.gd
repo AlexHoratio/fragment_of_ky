@@ -9,4 +9,4 @@ func _process(delta):
 	pass
 
 func _on_next_scene_timeout() -> void:
-	get_tree().change_scene("res://Scenes/end.tscn")
+	get_tree().change_scene_to_file("res://Scenes/end.tscn")

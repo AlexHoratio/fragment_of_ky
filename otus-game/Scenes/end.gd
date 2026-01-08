@@ -24,3 +24,4 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_orteil_leave_timeout() -> void:
 	$orteil.walk_to(Vector2(-309, 990))
+	$CanvasLayer/narrator_interrupt.next_stage()
