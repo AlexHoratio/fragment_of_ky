@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://di0i6wo7jkm73"]
+
+[ext_resource type="Texture2D" uid="uid://5s7xieidmcmc" path="res://Graphics/CanvasLayer/coldjelly_k9patch_x2.png" id="1_how4l"]
+
+[node name="coldjellypatch" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1888.0
+offset_bottom = -1048.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_how4l")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
