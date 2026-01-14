@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxtr76deimplr"]
+
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_r0gxc"]
+
+[sub_resource type="Gradient" id="Gradient_hg1gj"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_hg1gj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0shp8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_iktv0"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+gradient = SubResource("Gradient_iktv0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s0qn4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[node name="market_intro" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+texture = ExtResource("1_r0gxc")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_0shp8")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_s0qn4")
