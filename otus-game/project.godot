@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Fragment of Ky: II"
+config/name="Fragment of Ky: Chapter II"
 config/description="Save the world!"
 run/main_scene="uid://cxtr76deimplr"
 config/features=PackedStringArray("4.5", "Forward Plus")
