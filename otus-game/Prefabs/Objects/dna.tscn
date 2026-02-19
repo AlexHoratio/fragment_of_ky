@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5hssii8x7arm"]
+
+[ext_resource type="Script" uid="uid://c6eqc5ivuc6yt" path="res://Prefabs/Objects/dna.gd" id="1_3s6xj"]
+
+[node name="dna" type="Node2D" unique_id=1004648313]
+position = Vector2(79, 62)
+script = ExtResource("1_3s6xj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=809236093]
+offset_left = -32.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 20.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center][wave]+DNA"
+fit_content = true
+scroll_active = false

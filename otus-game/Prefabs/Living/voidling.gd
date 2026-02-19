@@ -16,6 +16,7 @@ var hovering = false
 var no_click_message = false
 
 var debug = false
+var drop_dna = false
 
 var clicked_once = false
 @export var acting = false
@@ -245,6 +246,11 @@ func explode() -> void:
 	var explosion = load("res://Prefabs/Bullets/iron_bullet_explosion.tscn").instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
+	
+	if drop_dna:
+		var dna = load("res://Prefabs/Objects/dna.tscn").instantiate()
+		dna.position = position
+		get_parent().add_child(dna)
 	
 	queue_free()
 	
