@@ -108,6 +108,12 @@ animations = [{
 radius = 20.0
 height = 44.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru06l"]
+size = Vector2(69, 1272)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6hcf"]
+size = Vector2(2071, 270)
+
 [node name="shmup" type="Node2D" unique_id=622154615]
 script = ExtResource("1_381ea")
 
@@ -187,3 +193,21 @@ frame_progress = 0.19389535
 [node name="CollisionShape2D" type="CollisionShape2D" parent="living/ironman" unique_id=1975148016]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_ru06l")
+
+[node name="walls" type="StaticBody2D" parent="." unique_id=46996765]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=443412240]
+position = Vector2(-34.5, 592)
+shape = SubResource("RectangleShape2D_ru06l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=154074289]
+position = Vector2(1954, 592)
+shape = SubResource("RectangleShape2D_ru06l")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls" unique_id=36105748]
+position = Vector2(966.5, -135)
+shape = SubResource("RectangleShape2D_x6hcf")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls" unique_id=166251935]
+position = Vector2(966.5, 1216)
+shape = SubResource("RectangleShape2D_x6hcf")

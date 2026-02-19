@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dvi7csjnojv02"]
+[gd_scene format=3 uid="uid://dvi7csjnojv02"]
 
 [ext_resource type="Script" uid="uid://bloesjee0yuys" path="res://Prefabs/Living/voidling.gd" id="1_ceeps"]
 [ext_resource type="Texture2D" uid="uid://kxhk4k5ixt2s" path="res://Graphics/Kyztlings/Void/White/voidkyztling1.png" id="1_fkm02"]
@@ -104,32 +104,32 @@ scale_curve = SubResource("CurveTexture_qjum5")
 color = Color(0, 0, 0, 1)
 color_ramp = SubResource("GradientTexture1D_e1vgc")
 
-[node name="voidling" type="CharacterBody2D" groups=["voidlings"]]
+[node name="voidling" type="CharacterBody2D" unique_id=176355989 groups=["voidlings"]]
 motion_mode = 1
 script = ExtResource("1_ceeps")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1287077136]
 position = Vector2(0, -17)
 shape = SubResource("CircleShape2D_ym65y")
 
-[node name="FSM" type="Node" parent="."]
+[node name="FSM" type="Node" parent="." unique_id=2100080765]
 script = ExtResource("2_hgvod")
 
-[node name="IDLE" type="Node" parent="FSM"]
+[node name="IDLE" type="Node" parent="FSM" unique_id=238990328]
 script = ExtResource("3_yi0aw")
 
-[node name="idle_timer" type="Timer" parent="FSM/IDLE"]
+[node name="idle_timer" type="Timer" parent="FSM/IDLE" unique_id=796000429]
 wait_time = 5.0
 one_shot = true
 
-[node name="WANDER" type="Node" parent="FSM"]
+[node name="WANDER" type="Node" parent="FSM" unique_id=1138305552]
 script = ExtResource("4_e45og")
 
-[node name="wander_timer" type="Timer" parent="FSM/WANDER"]
+[node name="wander_timer" type="Timer" parent="FSM/WANDER" unique_id=1234713319]
 wait_time = 10.0
 one_shot = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1697889945]
 self_modulate = Color(0.8495773, 0.59197664, 1.1551381e-06, 1)
 position = Vector2(0, -20)
 scale = Vector2(2, 2)
@@ -137,18 +137,18 @@ sprite_frames = SubResource("SpriteFrames_e45og")
 animation = &"idle"
 frame_progress = 0.03911399
 
-[node name="shadow" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="shadow" type="Sprite2D" parent="AnimatedSprite2D" unique_id=1539537259]
 show_behind_parent = true
 position = Vector2(2, 10.5)
 scale = Vector2(2, 2)
 texture = ExtResource("7_ym65y")
 
-[node name="mask" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+[node name="mask" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1238124963]
 modulate = Color(1, 1, 1, 0)
 sprite_frames = SubResource("SpriteFrames_sgqfr")
 animation = &"idle"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=868327958]
 position = Vector2(1, 8)
 emitting = false
 amount = 128
@@ -158,7 +158,7 @@ speed_scale = 2.0
 explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_ym65y")
 
-[node name="alert" type="RichTextLabel" parent="."]
+[node name="alert" type="RichTextLabel" parent="." unique_id=520163543]
 offset_left = -34.0
 offset_top = -71.0
 offset_right = 34.0
@@ -169,7 +169,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 scroll_active = false
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=296403163]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -42.0
@@ -179,7 +179,7 @@ offset_bottom = 22.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="gonna_explode" type="Timer" parent="."]
+[node name="gonna_explode" type="Timer" parent="." unique_id=1174232804]
 
 [connection signal="timeout" from="FSM/IDLE/idle_timer" to="FSM/IDLE" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="FSM/WANDER/wander_timer" to="FSM/WANDER" method="_on_wander_timer_timeout"]

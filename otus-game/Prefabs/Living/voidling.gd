@@ -247,6 +247,11 @@ func explode() -> void:
 	explosion.global_position = global_position
 	
 	queue_free()
+	
+func damage(amnt=1) -> void:
+	hp -= 1
+	if hp <= 0:
+		explode()
 
 func _on_button_mouse_entered() -> void:
 	hovering = true

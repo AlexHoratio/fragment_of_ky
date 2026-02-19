@@ -32,7 +32,7 @@ color = Color(1, 0.77254903, 0.33333334, 1)
 color_ramp = SubResource("GradientTexture1D_8wrqa")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8wrqa"]
-radius = 8.0
+radius = 75.00667
 
 [node name="iron_bullet" type="Area2D" unique_id=1731986690]
 position = Vector2(-759, 528)
@@ -57,4 +57,5 @@ wait_time = 4.0
 autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="auto_delete" to="." method="_on_auto_delete_timeout"]

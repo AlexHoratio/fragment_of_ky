@@ -21,3 +21,13 @@ func _on_area_entered(area):
 
 func _on_auto_delete_timeout():
 	queue_free()
+
+func _on_body_entered(body):
+	if body in get_tree().get_nodes_in_group("voidlings"):
+		body.damage(1)
+		var explosion = load("res://Prefabs/Bullets/iron_bullet_explosion.tscn").instantiate()
+		get_parent().add_child(explosion)
+		explosion.global_position = body.global_position
+		
+		queue_free()
+		

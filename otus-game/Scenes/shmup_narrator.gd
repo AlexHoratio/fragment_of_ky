@@ -62,6 +62,7 @@ func next_stage() -> void:
 			target_position = Vector2(960 - target_size.x/2.0, -0)
 			
 			get_node("../../living/ironman").enable()
+			get_parent().get_parent().spawning = true
 		_:
 			print("UHH")
 	
