@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dyfud3bbl61dt"]
+[gd_scene format=3 uid="uid://dyfud3bbl61dt"]
 
 [ext_resource type="Script" uid="uid://ov4r4fyq6b4m" path="res://Scenes/otus_game.gd" id="1_82jwl"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="1_hxn3n"]
@@ -17,7 +17,7 @@
 offsets = PackedFloat32Array(0, 0.51282054, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wtrc5"]
 gradient = SubResource("Gradient_wtrc5")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_prais"]
@@ -28,13 +28,13 @@ gravity = Vector3(0, 98, 0)
 scale_min = 16.0
 scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.047058824)
-color_ramp = SubResource("GradientTexture1D_prais")
+color_ramp = SubResource("GradientTexture1D_wtrc5")
 
 [sub_resource type="Gradient" id="Gradient_prais"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
 gradient = SubResource("Gradient_prais")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ut1hc"]
@@ -45,7 +45,7 @@ gravity = Vector3(-50, 500, 0)
 scale_min = 16.0
 scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
-color_ramp = SubResource("GradientTexture1D_gg5g1")
+color_ramp = SubResource("GradientTexture1D_prais")
 
 [sub_resource type="GDScript" id="GDScript_7gmj1"]
 script/source = "extends ColorRect
@@ -104,27 +104,27 @@ size = Vector2(37, 1080)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ucos"]
 size = Vector2(1995, 30.75)
 
-[node name="otus_game" type="Node2D"]
+[node name="otus_game" type="Node2D" unique_id=454183652]
 script = ExtResource("1_82jwl")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=282531362]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1251518113]
 
-[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1943864897]
 position = Vector2(960, 540)
 texture = ExtResource("2_wtrc5")
 speed_scale = 0.2
 process_material = SubResource("ParticleProcessMaterial_prais")
 
-[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=17527700]
 position = Vector2(960, 540)
 speed_scale = 0.2
 process_material = SubResource("ParticleProcessMaterial_ut1hc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517459920]
 
-[node name="narrator" parent="CanvasLayer" instance=ExtResource("1_hxn3n")]
+[node name="narrator" parent="CanvasLayer" unique_id=924951583 instance=ExtResource("1_hxn3n")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -136,7 +136,7 @@ offset_bottom = 281.0
 grow_vertical = 1
 script = ExtResource("2_3tj8s")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator" unique_id=1826025456]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,7 +151,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
-[node name="genome_viewer" type="Control" parent="CanvasLayer"]
+[node name="genome_viewer" type="Control" parent="CanvasLayer" unique_id=651737537]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1576.0
@@ -161,20 +161,20 @@ offset_bottom = -82.0
 mouse_filter = 2
 script = ExtResource("4_cam1e")
 
-[node name="jellypatch" parent="CanvasLayer/genome_viewer" instance=ExtResource("4_4tgwp")]
+[node name="jellypatch" parent="CanvasLayer/genome_viewer" unique_id=1565502184 instance=ExtResource("4_4tgwp")]
 modulate = Color(1, 1, 1, 0.5803922)
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="g9patch" parent="CanvasLayer/genome_viewer/jellypatch" instance=ExtResource("6_8g0im")]
+[node name="g9patch" parent="CanvasLayer/genome_viewer/jellypatch" unique_id=1449109372 instance=ExtResource("6_8g0im")]
 self_modulate = Color(0.16445974, 0.16445976, 0.16445974, 1)
 show_behind_parent = true
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/genome_viewer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/genome_viewer" unique_id=1243118405]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,7 +202,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 meta_underlined = false
 
-[node name="otu_table" type="Control" parent="CanvasLayer"]
+[node name="otu_table" type="Control" parent="CanvasLayer" unique_id=1331723244]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 118.0
@@ -210,16 +210,16 @@ offset_right = 40.0
 offset_bottom = 158.0
 script = ExtResource("7_7gmj1")
 
-[node name="tab" type="Sprite2D" parent="CanvasLayer/otu_table"]
+[node name="tab" type="Sprite2D" parent="CanvasLayer/otu_table" unique_id=696101161]
 position = Vector2(129, 951)
 scale = Vector2(2, 2)
 texture = ExtResource("7_fyaec")
 
-[node name="mask" type="Sprite2D" parent="CanvasLayer/otu_table/tab"]
+[node name="mask" type="Sprite2D" parent="CanvasLayer/otu_table/tab" unique_id=498997374]
 self_modulate = Color(1, 1, 1, 0)
 texture = ExtResource("8_6l3gq")
 
-[node name="Label" type="Label" parent="CanvasLayer/otu_table"]
+[node name="Label" type="Label" parent="CanvasLayer/otu_table" unique_id=1464537942]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 1039.0
@@ -233,7 +233,7 @@ theme_override_font_sizes/font_size = 32
 text = "OTU Table"
 horizontal_alignment = 1
 
-[node name="tab_button" type="Button" parent="CanvasLayer/otu_table"]
+[node name="tab_button" type="Button" parent="CanvasLayer/otu_table" unique_id=1372832268]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 18.0
@@ -244,7 +244,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 action_mode = 0
 
-[node name="body" parent="CanvasLayer/otu_table" instance=ExtResource("4_4tgwp")]
+[node name="body" parent="CanvasLayer/otu_table" unique_id=268915900 instance=ExtResource("4_4tgwp")]
 show_behind_parent = true
 layout_mode = 1
 offset_left = -1.0
@@ -252,7 +252,7 @@ offset_top = 1075.0
 offset_right = 1881.0
 offset_bottom = 1333.0
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/otu_table/body"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/otu_table/body" unique_id=605085716]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,7 +263,7 @@ offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="rows" type="Control" parent="CanvasLayer/otu_table/body"]
+[node name="rows" type="Control" parent="CanvasLayer/otu_table/body" unique_id=1947188529]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -274,7 +274,7 @@ offset_right = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="fader" type="ColorRect" parent="CanvasLayer"]
+[node name="fader" type="ColorRect" parent="CanvasLayer" unique_id=1542989208]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -284,12 +284,10 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 script = SubResource("GDScript_7gmj1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fader"]
-libraries = {
-&"": SubResource("AnimationLibrary_prais")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fader" unique_id=562683402]
+libraries/ = SubResource("AnimationLibrary_prais")
 
-[node name="press_to_begin" type="RichTextLabel" parent="CanvasLayer"]
+[node name="press_to_begin" type="RichTextLabel" parent="CanvasLayer" unique_id=13358113]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -301,30 +299,30 @@ text = "[wave][color=#aaa]Press [Enter] or [Spacebar] to begin..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="walls" type="StaticBody2D" parent="."]
+[node name="walls" type="StaticBody2D" parent="." unique_id=746429755]
 
-[node name="left" type="CollisionShape2D" parent="walls"]
+[node name="left" type="CollisionShape2D" parent="walls" unique_id=1409631330]
 position = Vector2(-18.5, 540)
 shape = SubResource("RectangleShape2D_82jwl")
 
-[node name="right" type="CollisionShape2D" parent="walls"]
+[node name="right" type="CollisionShape2D" parent="walls" unique_id=870895191]
 position = Vector2(1939, 540)
 shape = SubResource("RectangleShape2D_82jwl")
 
-[node name="top" type="CollisionShape2D" parent="walls"]
+[node name="top" type="CollisionShape2D" parent="walls" unique_id=1501289254]
 position = Vector2(960.5, -15)
 shape = SubResource("RectangleShape2D_5ucos")
 
-[node name="bottom" type="CollisionShape2D" parent="walls"]
+[node name="bottom" type="CollisionShape2D" parent="walls" unique_id=287092087]
 position = Vector2(960.5, 1095)
 shape = SubResource("RectangleShape2D_5ucos")
 
-[node name="reticle" parent="." instance=ExtResource("8_segjo")]
+[node name="reticle" parent="." unique_id=24089094 instance=ExtResource("8_segjo")]
 
-[node name="living" type="Node2D" parent="."]
+[node name="living" type="Node2D" parent="." unique_id=1195213937]
 y_sort_enabled = true
 
-[node name="orteil" parent="living" instance=ExtResource("4_5ucos")]
+[node name="orteil" parent="living" unique_id=525457707 instance=ExtResource("4_5ucos")]
 position = Vector2(-291, 745)
 
 [connection signal="meta_hover_ended" from="CanvasLayer/genome_viewer/RichTextLabel" to="CanvasLayer/genome_viewer" method="_on_rich_text_label_meta_hover_ended"]

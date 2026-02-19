@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxtr76deimplr"]
+[gd_scene format=3 uid="uid://cxtr76deimplr"]
 
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_r0gxc"]
 [ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="2_0shp8"]
@@ -45,24 +45,24 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_iktv0"]
 font_size = 32
 
-[node name="market_intro" type="Node2D"]
+[node name="market_intro" type="Node2D" unique_id=555516591]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=76068299]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=822513844]
 
-[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1731864243]
 position = Vector2(960, 540)
 texture = ExtResource("1_r0gxc")
 speed_scale = 0.2
 process_material = SubResource("ParticleProcessMaterial_0shp8")
 
-[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=715879320]
 position = Vector2(960, 540)
 speed_scale = 0.2
 process_material = SubResource("ParticleProcessMaterial_s0qn4")
 
-[node name="market" type="Control" parent="."]
+[node name="market" type="Control" parent="." unique_id=235004980]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 546.0
@@ -71,21 +71,21 @@ offset_right = 1373.0
 offset_bottom = 811.0
 script = ExtResource("2_iktv0")
 
-[node name="bg" parent="market" instance=ExtResource("2_hg1gj")]
+[node name="bg" parent="market" unique_id=1901002321 instance=ExtResource("2_hg1gj")]
 visible = false
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="body" parent="market" instance=ExtResource("2_0shp8")]
+[node name="body" parent="market" unique_id=1207820264 instance=ExtResource("2_0shp8")]
 layout_mode = 1
 offset_left = 3.0
-offset_top = 97.0
+offset_top = 101.0
 offset_right = -2.0
-offset_bottom = -2.0
+offset_bottom = 2.0
 
-[node name="escrow" parent="market/body" instance=ExtResource("2_hg1gj")]
+[node name="escrow" parent="market/body" unique_id=851314100 instance=ExtResource("2_hg1gj")]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 1
 offset_left = 12.0
@@ -93,14 +93,14 @@ offset_top = 12.0
 offset_right = -415.0
 offset_bottom = -12.0
 
-[node name="body" parent="market/body/escrow" instance=ExtResource("2_0shp8")]
+[node name="body" parent="market/body/escrow" unique_id=1034389711 instance=ExtResource("2_0shp8")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 62.0
 offset_right = -1.0
 offset_bottom = -1.0
 
-[node name="header" type="Label" parent="market/body/escrow"]
+[node name="header" type="Label" parent="market/body/escrow" unique_id=1608524583]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 0
 offset_left = 1.0
@@ -112,7 +112,7 @@ label_settings = SubResource("LabelSettings_0shp8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="public" parent="market/body" instance=ExtResource("2_hg1gj")]
+[node name="public" parent="market/body" unique_id=1763949351 instance=ExtResource("2_hg1gj")]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 1
 offset_left = 414.0
@@ -120,14 +120,14 @@ offset_top = 12.0
 offset_right = -13.0
 offset_bottom = -12.0
 
-[node name="body" parent="market/body/public" instance=ExtResource("2_0shp8")]
+[node name="body" parent="market/body/public" unique_id=438748620 instance=ExtResource("2_0shp8")]
 layout_mode = 1
 offset_left = 2.0
 offset_top = 62.0
 offset_right = -1.0
 offset_bottom = -1.0
 
-[node name="header" type="Label" parent="market/body/public"]
+[node name="header" type="Label" parent="market/body/public" unique_id=973418824]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 0
 offset_left = 1.0
@@ -139,14 +139,14 @@ label_settings = SubResource("LabelSettings_0shp8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="header" parent="market" instance=ExtResource("2_0shp8")]
+[node name="header" parent="market" unique_id=750742789 instance=ExtResource("2_0shp8")]
 layout_mode = 1
 offset_left = -8.0
 offset_top = -1.0
 offset_right = 11.0
 offset_bottom = -444.0
 
-[node name="header" type="Label" parent="market/header"]
+[node name="header" type="Label" parent="market/header" unique_id=541966001]
 self_modulate = Color(1, 0.7137255, 0.16078432, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -159,7 +159,7 @@ label_settings = SubResource("LabelSettings_iktv0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="market/header"]
+[node name="ColorRect" type="ColorRect" parent="market/header" unique_id=1259450834]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -172,7 +172,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.19607843)
 
-[node name="Button" type="Button" parent="market/header"]
+[node name="Button" type="Button" parent="market/header" unique_id=38808575]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

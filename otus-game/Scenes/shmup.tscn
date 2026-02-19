@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://cr66c1gnnoxfh"]
+
+[ext_resource type="Script" uid="uid://c5mcksg8ea6d7" path="res://Scenes/shmup.gd" id="1_381ea"]
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_gnfft"]
+[ext_resource type="PackedScene" uid="uid://b415eloc8pgu2" path="res://Prefabs/UI/d9patch_x2.tscn" id="3_j70ir"]
+[ext_resource type="Script" uid="uid://dvqda2u5pmd7h" path="res://Scenes/shmup_narrator.gd" id="4_fyl2u"]
+[ext_resource type="Script" uid="uid://ct257j6i065ct" path="res://Scenes/ironman.gd" id="5_fyl2u"]
+[ext_resource type="Texture2D" uid="uid://d2gq8ibpgxoqk" path="res://Graphics/IronSpaceman/ironman1.png" id="6_ru06l"]
+[ext_resource type="Texture2D" uid="uid://ctyiqw0dop3ed" path="res://Graphics/IronSpaceman/ironman9.png" id="7_x6hcf"]
+[ext_resource type="Texture2D" uid="uid://ba21r6v6n5yfk" path="res://Graphics/IronSpaceman/ironman8.png" id="8_ty26y"]
+[ext_resource type="Texture2D" uid="uid://18dlmkqlesoq" path="res://Graphics/IronSpaceman/ironman7.png" id="9_le3wn"]
+[ext_resource type="Texture2D" uid="uid://dllkecso82m6r" path="res://Graphics/IronSpaceman/ironman6.png" id="10_23e1r"]
+[ext_resource type="Texture2D" uid="uid://gma5xrhaferf" path="res://Graphics/IronSpaceman/ironman5.png" id="11_7hgdg"]
+[ext_resource type="Texture2D" uid="uid://iacsm7gj84p2" path="res://Graphics/IronSpaceman/ironman4.png" id="12_y5djt"]
+[ext_resource type="Texture2D" uid="uid://dgt168qfn3xi8" path="res://Graphics/IronSpaceman/ironman3.png" id="13_ejpwi"]
+[ext_resource type="Texture2D" uid="uid://djsrtcpv6hwt2" path="res://Graphics/IronSpaceman/ironman2.png" id="14_mb0l4"]
+
+[sub_resource type="Gradient" id="Gradient_381ea"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_381ea")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iwdsl"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_j70ir"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gg5g1"]
+gradient = SubResource("Gradient_j70ir")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fyl2u"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_gg5g1")
+
+[sub_resource type="GDScript" id="GDScript_j70ir"]
+script/source = "extends RichTextLabel
+
+var showing = true
+
+func _ready():
+	pass
+	
+func _process(delta):
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		showing = false
+		
+	modulate.a = lerp(modulate.a, 1.0 if showing else 0.0, 0.1)
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k1q0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ru06l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_x6hcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ty26y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_le3wn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_23e1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7hgdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_y5djt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ejpwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mb0l4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[node name="shmup" type="Node2D" unique_id=622154615]
+script = ExtResource("1_381ea")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1745032123]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1488726132]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1135901806]
+position = Vector2(960, 540)
+texture = ExtResource("1_gnfft")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_iwdsl")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1511202737]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_fyl2u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1069606776]
+
+[node name="press_to_begin" type="RichTextLabel" parent="CanvasLayer" unique_id=1414004797]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[font_size=100]CHAPTER II: THIS GAME SUX[/font_size]
+
+[wave][color=#aaa]Press [Enter] or [Spacebar] to begin..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_j70ir")
+
+[node name="narrator" parent="CanvasLayer" unique_id=1339077823 instance=ExtResource("3_j70ir")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -216.0
+offset_top = -150.0
+offset_right = 217.0
+offset_bottom = -44.0
+grow_vertical = 1
+script = ExtResource("4_fyl2u")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/narrator" unique_id=1375186583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake]Enough is enough!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="living" type="Node2D" parent="." unique_id=872069665]
+
+[node name="ironman" type="CharacterBody2D" parent="living" unique_id=1058463319]
+position = Vector2(959, 659)
+script = ExtResource("5_fyl2u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="living/ironman" unique_id=711272864]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_k1q0y")
+animation = &"walk"
+frame_progress = 0.19389535
