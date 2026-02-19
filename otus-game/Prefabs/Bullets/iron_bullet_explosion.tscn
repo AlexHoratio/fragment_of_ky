@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1fhb2k6j5pmi"]
+[gd_scene format=3 uid="uid://c1fhb2k6j5pmi"]
 
 [ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="1_3or8t"]
 [ext_resource type="Texture2D" uid="uid://cvt5rr0gjlsxx" path="res://Graphics/Misc/32x32-circle.png" id="2_tbnf0"]
@@ -56,17 +56,17 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="iron_bullet_explosion" type="Node2D"]
+[node name="iron_bullet_explosion" type="Node2D" unique_id=1499731092]
 script = SubResource("GDScript_k14wj")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=107039853]
 visible = false
 offset_left = -36.0
 offset_top = -32.0
 offset_right = 46.0
 offset_bottom = 50.0
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1665180712]
 scale = Vector2(2, 2)
 emitting = false
 amount = 128
@@ -76,7 +76,7 @@ speed_scale = 2.0
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_bl2ui")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1567125370]
 visible = false
 sprite_frames = SubResource("SpriteFrames_4f1kx")
 autoplay = "default"

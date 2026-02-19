@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Fragment of Ky: Chapter II"
+config/name="Fragment of Ky"
 config/description="Save the world!"
 run/main_scene="uid://cxtr76deimplr"
 config/features=PackedStringArray("4.6", "Forward Plus")

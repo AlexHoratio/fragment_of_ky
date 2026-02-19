@@ -60,6 +60,8 @@ func next_stage() -> void:
 		5:
 			add_new_text("")
 			target_position = Vector2(960 - target_size.x/2.0, -0)
+			
+			get_node("../../living/ironman").enable()
 		_:
 			print("UHH")
 	

@@ -104,6 +104,10 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ru06l"]
+radius = 20.0
+height = 44.0
+
 [node name="shmup" type="Node2D" unique_id=622154615]
 script = ExtResource("1_381ea")
 
@@ -167,9 +171,11 @@ vertical_alignment = 1
 visible_characters_behavior = 1
 
 [node name="living" type="Node2D" parent="." unique_id=872069665]
+y_sort_enabled = true
 
 [node name="ironman" type="CharacterBody2D" parent="living" unique_id=1058463319]
-position = Vector2(959, 659)
+visible = false
+position = Vector2(959, 544)
 script = ExtResource("5_fyl2u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="living/ironman" unique_id=711272864]
@@ -177,3 +183,7 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_k1q0y")
 animation = &"walk"
 frame_progress = 0.19389535
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="living/ironman" unique_id=1975148016]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_ru06l")

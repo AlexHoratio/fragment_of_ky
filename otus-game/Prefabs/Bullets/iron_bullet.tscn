@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1lcslbm1r8cg"]
+[gd_scene format=3 uid="uid://c1lcslbm1r8cg"]
 
 [ext_resource type="Script" uid="uid://b41quub082348" path="res://Prefabs/Bullets/iron_bullet.gd" id="1_8wrqa"]
 [ext_resource type="Texture2D" uid="uid://80p8rxjfryq1" path="res://Graphics/Objects/Powerup/powerup1.png" id="2_8wrqa"]
@@ -34,22 +34,27 @@ color_ramp = SubResource("GradientTexture1D_8wrqa")
 [sub_resource type="CircleShape2D" id="CircleShape2D_8wrqa"]
 radius = 8.0
 
-[node name="iron_bullet" type="Area2D"]
+[node name="iron_bullet" type="Area2D" unique_id=1731986690]
 position = Vector2(-759, 528)
 script = ExtResource("1_8wrqa")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1952284441]
 scale = Vector2(4, 4)
 amount = 128
 texture = ExtResource("2_hu2ol")
 speed_scale = 4.0
 process_material = SubResource("ParticleProcessMaterial_8wrqa")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1366774145]
 scale = Vector2(4, 4)
 texture = ExtResource("2_8wrqa")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1081686267]
 shape = SubResource("CircleShape2D_8wrqa")
 
+[node name="auto_delete" type="Timer" parent="." unique_id=187059266]
+wait_time = 4.0
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="auto_delete" to="." method="_on_auto_delete_timeout"]

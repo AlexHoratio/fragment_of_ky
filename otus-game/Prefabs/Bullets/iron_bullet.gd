@@ -17,3 +17,7 @@ func _on_area_entered(area):
 		explosion.global_position = area.global_position
 		
 		queue_free()
+
+
+func _on_auto_delete_timeout():
+	queue_free()
