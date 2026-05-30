@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://bowky0rxbw2dj"]
+
+[ext_resource type="Script" uid="uid://bnhabatmjswja" path="res://Scenes/kyztling.gd" id="1_1h246"]
+[ext_resource type="Script" uid="uid://cqkj8vjvcitlt" path="res://Prefabs/Living/FSM.gd" id="2_6s2o3"]
+[ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="3_2ph6c"]
+[ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="4_xukro"]
+[ext_resource type="Texture2D" uid="uid://2laiuvju0hvt" path="res://Graphics/Kyztlings/Faction/kyztling1.png" id="5_1chqt"]
+[ext_resource type="Texture2D" uid="uid://cfl1yyo0624go" path="res://Graphics/Kyztlings/Faction/kyztling2.png" id="6_ygj5l"]
+[ext_resource type="Texture2D" uid="uid://bpdinur07yf4i" path="res://Graphics/Kyztlings/Faction/kyztling3.png" id="7_rrowd"]
+[ext_resource type="Texture2D" uid="uid://de5gs1e7g7s8l" path="res://Graphics/Kyztlings/Faction/kyztling4.png" id="8_jyd3b"]
+[ext_resource type="Texture2D" uid="uid://ctvk57a04bqda" path="res://Graphics/Kyztlings/Faction/kyztling5.png" id="9_en3kw"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="10_ujni4"]
+[ext_resource type="Texture2D" uid="uid://dumms0yhhvm4o" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask1.png" id="11_qu0qd"]
+[ext_resource type="Texture2D" uid="uid://de7rs8mk78ttx" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask5.png" id="12_4myfv"]
+[ext_resource type="Texture2D" uid="uid://dogdfoposw3ns" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask4.png" id="13_k16iu"]
+[ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="14_08tnd"]
+[ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="15_oq467"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym65y"]
+radius = 21.095022
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgkw4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1chqt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ygj5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rrowd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jyd3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_en3kw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgqfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_qu0qd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_4myfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_k16iu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_08tnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_oq467")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ym65y"]
+offsets = PackedFloat32Array(0, 0.8742138, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8553459, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1vgc"]
+gradient = SubResource("Gradient_ym65y")
+
+[sub_resource type="Curve" id="Curve_ym65y"]
+_data = [Vector2(0, 1), 0.0, -2.2076616, 0, 0, Vector2(1, 0.14716983), -0.05235198, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qjum5"]
+curve = SubResource("Curve_ym65y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ym65y"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 4.0
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_qjum5")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_e1vgc")
+
+[node name="anonymi" type="CharacterBody2D" unique_id=1671918605 groups=["voidlings"]]
+motion_mode = 1
+script = ExtResource("1_1h246")
+acting = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1933806982]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_ym65y")
+
+[node name="FSM" type="Node" parent="." unique_id=379965139]
+script = ExtResource("2_6s2o3")
+
+[node name="IDLE" type="Node" parent="FSM" unique_id=510213700]
+script = ExtResource("3_2ph6c")
+
+[node name="idle_timer" type="Timer" parent="FSM/IDLE" unique_id=257540659]
+wait_time = 5.0
+one_shot = true
+
+[node name="WANDER" type="Node" parent="FSM" unique_id=1896230419]
+script = ExtResource("4_xukro")
+
+[node name="wander_timer" type="Timer" parent="FSM/WANDER" unique_id=455823923]
+wait_time = 10.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=868933057]
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rgkw4")
+animation = &"idle"
+
+[node name="shadow" type="Sprite2D" parent="AnimatedSprite2D" unique_id=1766258651]
+show_behind_parent = true
+position = Vector2(2, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("10_ujni4")
+
+[node name="mask" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1024944718]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_sgqfr")
+animation = &"idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=675367222]
+position = Vector2(1, 8)
+emitting = false
+amount = 128
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_ym65y")
+
+[node name="alert" type="RichTextLabel" parent="." unique_id=597199392]
+offset_left = -34.0
+offset_top = -71.0
+offset_right = 34.0
+offset_bottom = -41.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="." unique_id=834795339]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -42.0
+offset_top = -55.0
+offset_right = 42.0
+offset_bottom = 22.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="gonna_explode" type="Timer" parent="." unique_id=1946510402]
+
+[connection signal="timeout" from="FSM/IDLE/idle_timer" to="FSM/IDLE" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="FSM/WANDER/wander_timer" to="FSM/WANDER" method="_on_wander_timer_timeout"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="gonna_explode" to="." method="_on_gonna_explode_timeout"]
