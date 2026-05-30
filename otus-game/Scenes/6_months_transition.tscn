@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dss0sckjc0amg"]
+
+[ext_resource type="Script" uid="uid://d2cj3r53kss0s" path="res://Scenes/6_months_transition.gd" id="1_32lod"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3yk5i"]
+font_size = 128
+
+[sub_resource type="Animation" id="Animation_ol58s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lqla5"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b2434"]
+_data = {
+&"RESET": SubResource("Animation_ol58s"),
+&"default": SubResource("Animation_lqla5")
+}
+
+[node name="6months_transition" type="Control" unique_id=1162559191]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32lod")
+
+[node name="bg" type="ColorRect" parent="." unique_id=7453150]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=2101262667]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "6 months later..."
+label_settings = SubResource("LabelSettings_3yk5i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=710246078]
+libraries/ = SubResource("AnimationLibrary_b2434")
+autoplay = &"default"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
