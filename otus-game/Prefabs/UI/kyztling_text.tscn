@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq0chxi4dy1xk"]
+[gd_scene format=3 uid="uid://cq0chxi4dy1xk"]
 
 [ext_resource type="Script" uid="uid://2ewkij2cpwh1" path="res://Prefabs/UI/kyztling_text.gd" id="1_dudwi"]
 
-[node name="kyztling_text" type="RichTextLabel"]
+[node name="kyztling_text" type="RichTextLabel" unique_id=1809136784]
 offset_left = 178.0
 offset_top = 123.0
 offset_right = 740.0

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="3_2ph6c"]
 [ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="4_xukro"]
 [ext_resource type="Texture2D" uid="uid://2laiuvju0hvt" path="res://Graphics/Kyztlings/Faction/kyztling1.png" id="5_1chqt"]
+[ext_resource type="Script" uid="uid://7mfs8ab26mny" path="res://Prefabs/Living/WALK_TO.gd" id="5_6s2o3"]
 [ext_resource type="Texture2D" uid="uid://cfl1yyo0624go" path="res://Graphics/Kyztlings/Faction/kyztling2.png" id="6_ygj5l"]
 [ext_resource type="Texture2D" uid="uid://bpdinur07yf4i" path="res://Graphics/Kyztlings/Faction/kyztling3.png" id="7_rrowd"]
 [ext_resource type="Texture2D" uid="uid://de5gs1e7g7s8l" path="res://Graphics/Kyztlings/Faction/kyztling4.png" id="8_jyd3b"]
@@ -129,6 +130,9 @@ script = ExtResource("4_xukro")
 [node name="wander_timer" type="Timer" parent="FSM/WANDER" unique_id=455823923]
 wait_time = 10.0
 one_shot = true
+
+[node name="WALK_TO" type="Node" parent="FSM" unique_id=1244967715]
+script = ExtResource("5_6s2o3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=868933057]
 position = Vector2(0, -20)

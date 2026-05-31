@@ -258,6 +258,16 @@ func damage(amnt=1) -> void:
 	hp -= 1
 	if hp <= 0:
 		explode()
+		
+func walk_to_spot(destination = Vector2(0, 0)) -> void:
+	$FSM/WALK_TO.destination = destination
+	$FSM.change_to("WALK_TO")
+
+func say(text) -> void:
+	var kyztling_text = load("res://Prefabs/UI/kyztling_text.tscn").instantiate()
+	kyztling_text.text = text
+	get_parent().add_child(kyztling_text)
+	kyztling_text.position = position - Vector2(kyztling_text.size.x/2.0, 16)
 
 func _on_button_mouse_entered() -> void:
 	hovering = true

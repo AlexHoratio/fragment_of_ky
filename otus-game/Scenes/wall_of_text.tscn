@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bvtkus7jrsvlh"]
 
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_81wqg"]
+[ext_resource type="PackedScene" uid="uid://bowky0rxbw2dj" path="res://Prefabs/Living/kyztling.tscn" id="2_bf0s8"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="3_bp3bm"]
 
 [sub_resource type="Gradient" id="Gradient_bf0s8"]
 offsets = PackedFloat32Array(0, 0.51282054, 1)
@@ -36,6 +38,113 @@ scale_max = 16.0
 color = Color(1, 0.74509805, 0.47843137, 0.45882353)
 color_ramp = SubResource("GradientTexture1D_prais")
 
+[sub_resource type="Animation" id="Animation_bf0s8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_81wqg"]
+resource_name = "fade_in"
+length = 45.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("living/qubert")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4, 6, 18.033333, 34.5, 34.766666, 37, 38),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [Vector2(1907, 876)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(2641, 876)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(1464, 876)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(1500, 876)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(1490, 876)],
+"method": &"walk_to_spot"
+}, {
+"args": ["read it"],
+"method": &"say"
+}, {
+"args": [Vector2(1950, 876)],
+"method": &"walk_to_spot"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("living/read_prop")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(17.866667, 34.466667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_following"
+}, {
+"args": [],
+"method": &"stop_following"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bf0s8"]
+_data = {
+&"RESET": SubResource("Animation_bf0s8"),
+&"fade_in": SubResource("Animation_81wqg")
+}
+
+[sub_resource type="GDScript" id="GDScript_bp3bm"]
+script/source = "extends Control
+
+var following_qubert = false
+var follow_offset = Vector2(0, 0)
+
+func _ready():
+	pass
+	
+func _process(delta):
+	if following_qubert:
+		position = get_node(\"../qubert\").position + follow_offset
+		
+func start_following() -> void:
+	following_qubert = true
+	follow_offset = position - get_node(\"../qubert\").position
+	
+func stop_following() -> void:
+	following_qubert = false
+"
+
 [node name="wall_of_text" type="Control" unique_id=1098243382]
 layout_mode = 3
 anchors_preset = 15
@@ -58,3 +167,52 @@ process_material = SubResource("ParticleProcessMaterial_bp3bm")
 position = Vector2(960, 540)
 speed_scale = 0.2
 process_material = SubResource("ParticleProcessMaterial_fwlyn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=214608961]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1016247713]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1643781920]
+libraries/ = SubResource("AnimationLibrary_bf0s8")
+autoplay = &"fade_in"
+
+[node name="living" type="Node2D" parent="." unique_id=210618519]
+
+[node name="qubert" parent="living" unique_id=1671918605 instance=ExtResource("2_bf0s8")]
+position = Vector2(1950, 876)
+
+[node name="read_prop" type="Control" parent="living" unique_id=2129197315]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1966.0
+offset_top = 172.0
+offset_right = 2637.0
+offset_bottom = 881.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_bp3bm")
+
+[node name="header" parent="living/read_prop" unique_id=1040292973 instance=ExtResource("3_bp3bm")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 106.0
+grow_vertical = 1
+
+[node name="body" parent="living/read_prop" unique_id=1278235756 instance=ExtResource("3_bp3bm")]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 117.0
+offset_right = -13.0
+offset_bottom = 0.0
