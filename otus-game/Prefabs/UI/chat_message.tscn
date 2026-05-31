@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ci1wvfl8yyf4"]
+
+[ext_resource type="Script" uid="uid://bcbdvtenubqdy" path="res://Prefabs/UI/chat_message.gd" id="1_xfba6"]
+
+[node name="chat_message" type="Control" unique_id=748130667 groups=["chat_messages"]]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_xfba6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=2043989509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Test: test"
+scroll_active = false

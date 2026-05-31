@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Gold="*res://Scripts/Gold.gd"
+Chat="*uid://dhmpl1oqel3mb"
 
 [display]
 
@@ -35,6 +36,7 @@ window/stretch/mode="viewport"
 [global_group]
 
 voidlings=""
+chat_messages=""
 
 [gui]
 

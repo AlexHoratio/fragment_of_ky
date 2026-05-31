@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bvtkus7jrsvlh"]
+
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_81wqg"]
+
+[sub_resource type="Gradient" id="Gradient_bf0s8"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wtrc5"]
+gradient = SubResource("Gradient_bf0s8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bp3bm"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_wtrc5")
+
+[sub_resource type="Gradient" id="Gradient_mbhum"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_mbhum")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fwlyn"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[node name="wall_of_text" type="Control" unique_id=1098243382]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1234679097]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=298611488]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=964965812]
+position = Vector2(960, 540)
+texture = ExtResource("1_81wqg")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_bp3bm")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=497604888]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_fwlyn")

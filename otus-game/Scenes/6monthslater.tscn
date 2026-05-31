@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dmlfpebhnk6wp"]
 
 [ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="1_1h7d4"]
+[ext_resource type="Script" uid="uid://8clwaf5j4vmx" path="res://Scenes/6_monthslater.gd" id="1_8vn3g"]
 [ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="2_78efp"]
 [ext_resource type="PackedScene" uid="uid://bowky0rxbw2dj" path="res://Prefabs/Living/kyztling.tscn" id="2_a6qvq"]
 [ext_resource type="Script" uid="uid://bnhabatmjswja" path="res://Scenes/kyztling.gd" id="3_4b383"]
@@ -359,10 +360,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("intro/Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_b8x0j"]
 resource_name = "fade_in"
-length = 4.0
+length = 106.0
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -370,10 +384,90 @@ tracks/0/path = NodePath("intro:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 4, 96.1, 106),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6, 8, 17, 22, 25, 26.5, 32, 34, 39, 45, 51, 53.4, 53.5, 61, 66, 78, 83, 84.5, 93),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["[color=#563B78]Qubert[color=#fff]: bro..."],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: where the *** is the developer"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: idk"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: wtf do you mean bro"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: we have a delivery due on MONDAY"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: BRO"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: lol"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: wuts a monday"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: .........."],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: idk i heard it from Earth"],
+"method": &"say"
+}, {
+"args": ["[color=#f00]Olaf: [color=#900]stfu wannabe Earthling"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: lol"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: omg"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: and where tf is Orteil"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: wut do we do"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: make it ourselves?"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: ughhhh "],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Qubert[color=#fff]: i hate game developmetn"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: ik bro. ik. me too"],
+"method": &"say"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("intro/Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(92.503075, 93),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ja5ad"]
@@ -382,6 +476,30 @@ _data = {
 &"fade_in": SubResource("Animation_b8x0j")
 }
 
+[sub_resource type="GDScript" id="GDScript_vwgu0"]
+script/source = "extends Camera2D
+
+var speed = 25
+
+func _ready():
+	pass
+	
+func _process(delta):
+	var movement_vector = Vector2(0, 0)
+	
+	if Input.is_action_pressed(\"left\"):
+		movement_vector.x -= 1
+	if Input.is_action_pressed(\"right\"):
+		movement_vector.x += 1
+	if Input.is_action_pressed(\"up\"):
+		movement_vector.y -= 1
+	if Input.is_action_pressed(\"down\"):
+		movement_vector.y += 1
+		
+	
+	position += movement_vector * speed * delta
+"
+
 [node name="6monthslater" type="Control" unique_id=1665252741]
 layout_mode = 3
 anchors_preset = 15
@@ -389,6 +507,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8vn3g")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=391287405]
 
@@ -486,9 +605,11 @@ texture = ExtResource("6_vwgu0")
 y_sort_enabled = true
 
 [node name="anonymi" parent="living" unique_id=1671918605 instance=ExtResource("2_a6qvq")]
+visible = false
 position = Vector2(848, 614)
 
 [node name="kai" type="CharacterBody2D" parent="living" unique_id=2007057555 groups=["voidlings"]]
+visible = false
 position = Vector2(988, 614)
 motion_mode = 1
 script = ExtResource("3_4b383")
@@ -569,7 +690,6 @@ mouse_default_cursor_shape = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1643718143]
 
 [node name="intro" type="Control" parent="CanvasLayer" unique_id=192125324]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -602,9 +722,14 @@ vertical_alignment = 1
 libraries/ = SubResource("AnimationLibrary_ja5ad")
 autoplay = &"fade_in"
 
+[node name="movable_camera" type="Camera2D" parent="." unique_id=1113041592]
+anchor_mode = 0
+script = SubResource("GDScript_vwgu0")
+
 [connection signal="timeout" from="living/kai/FSM/IDLE/idle_timer" to="living/kai/FSM/IDLE" method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="living/kai/FSM/WANDER/wander_timer" to="living/kai/FSM/WANDER" method="_on_wander_timer_timeout"]
 [connection signal="mouse_entered" from="living/kai/Button" to="living/kai" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="living/kai/Button" to="living/kai" method="_on_button_mouse_exited"]
 [connection signal="pressed" from="living/kai/Button" to="living/kai" method="_on_button_pressed"]
 [connection signal="timeout" from="living/kai/gonna_explode" to="living/kai" method="_on_gonna_explode_timeout"]
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
