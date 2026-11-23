@@ -12,4 +12,4 @@ func say(text) -> void:
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_in":
-		pass
+		get_tree().change_scene_to_file("res://Scenes/read_classification.tscn")

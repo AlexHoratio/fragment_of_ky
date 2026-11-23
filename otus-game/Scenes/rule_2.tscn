@@ -1,5 +1,46 @@
 [gd_scene format=3 uid="uid://blgwclujq1r7c"]
 
+[ext_resource type="Script" uid="uid://emovcg4sy4qd" path="res://Scenes/rule_2.gd" id="1_r2script"]
+[ext_resource type="PackedScene" uid="uid://bowky0rxbw2dj" path="res://Prefabs/Living/kyztling.tscn" id="2_r2kyz"]
+[ext_resource type="Texture2D" uid="uid://bvvnk3xwxarov" path="res://Graphics/Memes/you_are_stupid.png" id="3_r2meme"]
+
+[sub_resource type="Animation" id="Animation_r2_reset"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_r2_main"]
+resource_name = "rule_2"
+length = 20.0
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("living/kai")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 8.6, 9.4, 11.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [Vector2(1138, 700)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(1218, 700)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(1206, 700)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(2300, 700)],
+"method": &"walk_to_spot"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r2"]
+_data = {
+&"RESET": SubResource("Animation_r2_reset"),
+&"rule_2": SubResource("Animation_r2_main")
+}
+
 [node name="rule_2" type="Control" unique_id=272746823]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_r2script")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1044767802]
 layout_mode = 1
@@ -16,3 +58,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="living" type="Node2D" parent="." unique_id=272746901]
+y_sort_enabled = true
+
+[node name="meme" type="Sprite2D" parent="living" unique_id=272746902]
+position = Vector2(2122, 700)
+scale = Vector2(2, 2)
+texture = ExtResource("3_r2meme")
+offset = Vector2(0, -120)
+
+[node name="kai" parent="living" unique_id=272746903 instance=ExtResource("2_r2kyz")]
+position = Vector2(2300, 700)
+walk_speed = 150
+hover_name = "Kai"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=272746904]
+libraries/ = SubResource("AnimationLibrary_r2")
+autoplay = &"rule_2"
