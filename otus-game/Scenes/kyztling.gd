@@ -6,7 +6,7 @@ var spawn_momentum = Vector2(0, 0)
 var otu_shove_momentum = Vector2(0, 0)
 
 var movement_vector = Vector2(0, 0)
-var walk_speed = 75
+@export var walk_speed = 75
 var hp = 1
 var colour = Color("ffffff")
 
@@ -20,6 +20,12 @@ var drop_dna = false
 
 var clicked_once = false
 @export var acting = false
+# If set, hovering this kyztling shows this name faintly above its head.
+@export var hover_name = ""
+
+const HOVER_NAME_ALPHA = 0.5
+var name_label: Label = null
+var name_hovering = false
 
 var genome = {
 	"marker": "",
@@ -32,6 +38,9 @@ var area_center = Vector2(960, 540)
 
 func _ready() -> void:
 	randomize()
+	
+	if hover_name != "":
+		setup_hover_name()
 	
 	if genome["marker"] == "" and genome["junk"] == "":
 		generate_genome()
@@ -57,6 +66,9 @@ func _ready() -> void:
 		
 	
 func _process(delta: float) -> void:
+	if name_label:
+		name_label.modulate.a = lerp(name_label.modulate.a, HOVER_NAME_ALPHA if name_hovering else 0.0, 0.2)
+	
 	spawn_momentum *= 0.98
 	otu_shove_momentum *= 0.95
 	
@@ -269,13 +281,36 @@ func say(text) -> void:
 	get_parent().add_child(kyztling_text)
 	kyztling_text.position = position - Vector2(kyztling_text.size.x/2.0, 16)
 
+func setup_hover_name() -> void:
+	name_label = Label.new()
+	name_label.text = hover_name
+	name_label.add_theme_font_override("font", load("res://Graphics/Fonts/basis33.regular.ttf"))
+	name_label.add_theme_font_size_override("font_size", 32)
+	name_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	name_label.position = Vector2(-60, -76)
+	name_label.size = Vector2(120, 20)
+	name_label.modulate.a = 0.0
+	add_child(name_label)
+	
+	# The (invisible) Button provides the hover area and the pointing-hand cursor.
+	$Button.visible = true
+
 func _on_button_mouse_entered() -> void:
+	name_hovering = true
+	if !click_enabled:
+		return
 	hovering = true
 
 func _on_button_mouse_exited() -> void:
+	name_hovering = false
 	hovering = false
 
 func _on_button_pressed() -> void:
+	if !click_enabled:
+		return
 	click(no_click_message)
 
 func _on_gonna_explode_timeout():

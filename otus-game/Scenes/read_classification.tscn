@@ -1,0 +1,821 @@
+[gd_scene format=3 uid="uid://bkow35qmtrucu"]
+
+[ext_resource type="Script" uid="uid://codpfqqaanwm2" path="res://Scenes/read_classification_scene.tscn.gd" id="1_8iqkm"]
+[ext_resource type="Texture2D" uid="uid://vexdpquy7u2i" path="res://Graphics/Misc/big_glow.png" id="2_ix1wt"]
+[ext_resource type="Texture2D" uid="uid://3e40b140vpi4" path="res://Graphics/Misc/tiny3px.png" id="3_x0as3"]
+[ext_resource type="Texture2D" uid="uid://d22iiu0qm3phb" path="res://Prefabs/Environment/grasslite_emission_mask_filled.res" id="4_mgdi8"]
+[ext_resource type="Texture2D" uid="uid://c426swtvr46b7" path="res://Graphics/Misc/x1.png" id="5_ns28c"]
+[ext_resource type="Texture2D" uid="uid://c5qhqxlphmw3b" path="res://Prefabs/Environment/bushlite_emission_mask.res" id="6_rqntc"]
+[ext_resource type="Texture2D" uid="uid://dw4l0qbsxb1ig" path="res://Graphics/Environment/Trees/Pink/pink.png" id="7_s8ssf"]
+[ext_resource type="Texture2D" uid="uid://dx3at8rxfbtu7" path="res://Graphics/Environment/Trees/Red/red-shadow.png" id="8_gw0hp"]
+[ext_resource type="PackedScene" uid="uid://bowky0rxbw2dj" path="res://Prefabs/Living/kyztling.tscn" id="9_yityo"]
+[ext_resource type="Script" uid="uid://bnhabatmjswja" path="res://Scenes/kyztling.gd" id="10_yhisk"]
+[ext_resource type="Script" uid="uid://cqkj8vjvcitlt" path="res://Prefabs/Living/FSM.gd" id="11_3myu7"]
+[ext_resource type="Script" uid="uid://bvta8oxwr7y3v" path="res://Prefabs/Living/IDLE.gd" id="12_7w7nm"]
+[ext_resource type="Script" uid="uid://b2wnxg8x2nabm" path="res://Prefabs/Living/WANDER.gd" id="13_dw1lq"]
+[ext_resource type="Texture2D" uid="uid://2laiuvju0hvt" path="res://Graphics/Kyztlings/Faction/kyztling1.png" id="14_8chb8"]
+[ext_resource type="Texture2D" uid="uid://cfl1yyo0624go" path="res://Graphics/Kyztlings/Faction/kyztling2.png" id="15_4b7ux"]
+[ext_resource type="Texture2D" uid="uid://bpdinur07yf4i" path="res://Graphics/Kyztlings/Faction/kyztling3.png" id="16_qnicm"]
+[ext_resource type="Texture2D" uid="uid://de5gs1e7g7s8l" path="res://Graphics/Kyztlings/Faction/kyztling4.png" id="17_g3qk8"]
+[ext_resource type="Texture2D" uid="uid://ctvk57a04bqda" path="res://Graphics/Kyztlings/Faction/kyztling5.png" id="18_gf2fo"]
+[ext_resource type="Texture2D" uid="uid://iyvn58wr45g5" path="res://Graphics/Kyztlings/shadow.png" id="19_obyur"]
+[ext_resource type="Texture2D" uid="uid://dumms0yhhvm4o" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask1.png" id="20_3a4ra"]
+[ext_resource type="Texture2D" uid="uid://de7rs8mk78ttx" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask5.png" id="21_jtro0"]
+[ext_resource type="Texture2D" uid="uid://dogdfoposw3ns" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask4.png" id="22_4ydes"]
+[ext_resource type="Texture2D" uid="uid://bln2piiwh41r" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask3.png" id="23_n21ew"]
+[ext_resource type="Texture2D" uid="uid://d17wge6l3fsfv" path="res://Graphics/Kyztlings/Faction/mask/kyztling_mask2.png" id="24_45hd6"]
+[ext_resource type="PackedScene" uid="uid://ckfnl6k0kjf03" path="res://Prefabs/UI/jellypatch.tscn" id="25_jelly"]
+
+[sub_resource type="Gradient" id="Gradient_1mkmv"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wtrc5"]
+gradient = SubResource("Gradient_1mkmv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrcrc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.047058824)
+color_ramp = SubResource("GradientTexture1D_wtrc5")
+
+[sub_resource type="Gradient" id="Gradient_lqitj"]
+offsets = PackedFloat32Array(0, 0.51282054, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_prais"]
+gradient = SubResource("Gradient_lqitj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13ktp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(-50, 500, 0)
+scale_min = 16.0
+scale_max = 16.0
+color = Color(1, 0.74509805, 0.47843137, 0.45882353)
+color_ramp = SubResource("GradientTexture1D_prais")
+
+[sub_resource type="Gradient" id="Gradient_v7lti"]
+offsets = PackedFloat32Array(0, 0.33333334, 0.6384181, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m15mb"]
+gradient = SubResource("Gradient_v7lti")
+
+[sub_resource type="Curve" id="Curve_ngbjj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09852217, 1), 0.0, 0.0, 0, 0, Vector2(0.81280786, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vwgu0"]
+curve = SubResource("Curve_ngbjj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a6qvq"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("4_mgdi8")
+emission_point_count = 63361
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vwgu0")
+color = Color(0.23429999, 0.71, 0.6624299, 1)
+color_ramp = SubResource("GradientTexture1D_m15mb")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.029999977
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+
+[sub_resource type="Gradient" id="Gradient_ngbjj"]
+offsets = PackedFloat32Array(0, 0.10169491, 0.46327683, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.7, 0.7, 0.7, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vwgu0"]
+gradient = SubResource("Gradient_ngbjj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8vn3g"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("4_mgdi8")
+emission_point_count = 63361
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vwgu0")
+color = Color(0.3225, 0.75, 0.70724994, 1)
+color_ramp = SubResource("GradientTexture1D_vwgu0")
+hue_variation_min = -0.010000022
+hue_variation_max = 0.009999977
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+
+[sub_resource type="Gradient" id="Gradient_m15mb"]
+offsets = PackedFloat32Array(0, 0.22033899, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.74138474, 0.7413847, 0.74138457, 0.8587571, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ngbjj"]
+gradient = SubResource("Gradient_m15mb")
+
+[sub_resource type="Curve" id="Curve_vwgu0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5320197, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8vn3g"]
+curve = SubResource("Curve_vwgu0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vwgu0"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("4_mgdi8")
+emission_point_count = 63361
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_8vn3g")
+color = Color(0.83, 0.2075, 0.6224999, 1)
+color_ramp = SubResource("GradientTexture1D_ngbjj")
+hue_variation_min = -0.010000022
+hue_variation_max = 0.009999977
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 8
+sub_emitter_keep_velocity = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b8x0j"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("4_mgdi8")
+emission_point_count = 63361
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.39999998
+scale_max = 0.75
+scale_curve = SubResource("CurveTexture_8vn3g")
+color = Color(0.85, 0.28899997, 0.59754986, 1)
+color_ramp = SubResource("GradientTexture1D_ngbjj")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.009999977
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+
+[sub_resource type="Gradient" id="Gradient_vwgu0"]
+offsets = PackedFloat32Array(0, 0.4519774, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.40677965, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8vn3g"]
+gradient = SubResource("Gradient_vwgu0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ngbjj"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("6_rqntc")
+emission_point_count = 36372
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vwgu0")
+color = Color(0.02688642, 0.10286007, 0.104330055, 1)
+color_ramp = SubResource("GradientTexture1D_8vn3g")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m15mb"]
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("6_rqntc")
+emission_point_count = 36372
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vwgu0")
+color = Color(0.312, 0.38386667, 0.4, 1)
+color_ramp = SubResource("GradientTexture1D_ngbjj")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.0
+turbulence_initial_displacement_min = -10.999999
+turbulence_initial_displacement_max = 5.5000014
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym65y"]
+radius = 21.095022
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgkw4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_8chb8")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_4b7ux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_qnicm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_g3qk8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_gf2fo")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgqfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_3a4ra")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_jtro0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4ydes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_n21ew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_45hd6")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_ym65y"]
+offsets = PackedFloat32Array(0, 0.8742138, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8553459, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1vgc"]
+gradient = SubResource("Gradient_ym65y")
+
+[sub_resource type="Curve" id="Curve_ym65y"]
+_data = [Vector2(0, 1), 0.0, -2.2076616, 0, 0, Vector2(1, 0.14716983), -0.05235198, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qjum5"]
+curve = SubResource("Curve_ym65y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ym65y"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 4.0
+scale_max = 32.0
+scale_curve = SubResource("CurveTexture_qjum5")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_e1vgc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vwgu0"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_rule_title"]
+font_size = 128
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="Animation" id="Animation_rc_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("intro/bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rc_fade_in"]
+resource_name = "fade_in"
+length = 45.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("intro/bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5, 6.6, 8.9, 13.1, 16.2, 17.7, 22.5, 26, 27.1, 31.6, 33.4, 35.2, 37.8, 40.5, 42),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": ["[color=#563B78]Kai[color=#fff]: Whats up bro"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Kai[color=#fff]: Ya we gonna tota teach yous"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Kai[color=#fff]: about game developments"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: wait wut"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Kai[color=#fff]: bro"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Kai[color=#fff]: it's all I know"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: and like what do U know about game development"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Kai[color=#fff]: shhh"],
+"method": &"say"
+}, {
+"args": [],
+"method": &"show_rule_panel"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: kai bro"],
+"method": &"say"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: bro no plz"],
+"method": &"say"
+}, {
+"args": [],
+"method": &"reveal_rule_also"
+}, {
+"args": [],
+"method": &"reveal_rule_hashtags"
+}, {
+"args": ["[color=#563B78]Anonymi[color=#fff]: k w/e"],
+"method": &"say"
+}, {
+"args": [],
+"method": &"blackout_rule_panel"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../living/anonymi")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(11.6, 11.9, 21.6, 21.8, 40.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [Vector2(838, 614)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(848, 614)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(838, 614)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(848, 614)],
+"method": &"walk_to_spot"
+}, {
+"args": [Vector2(-400, 614)],
+"method": &"walk_to_spot"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rc"]
+_data = {
+&"RESET": SubResource("Animation_rc_reset"),
+&"fade_in": SubResource("Animation_rc_fade_in")
+}
+
+[sub_resource type="GDScript" id="GDScript_vwgu0"]
+script/source = "extends Camera2D
+
+var speed = 25
+
+func _ready():
+	pass
+	
+func _process(delta):
+	var movement_vector = Vector2(0, 0)
+	
+	if Input.is_action_pressed(\"left\"):
+		movement_vector.x -= 1
+	if Input.is_action_pressed(\"right\"):
+		movement_vector.x += 1
+	if Input.is_action_pressed(\"up\"):
+		movement_vector.y -= 1
+	if Input.is_action_pressed(\"down\"):
+		movement_vector.y += 1
+		
+	
+	position += movement_vector * speed * delta
+"
+
+[node name="read_classification" type="Control" unique_id=1665252741]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8iqkm")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=391287405]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=869351361]
+
+[node name="glow" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=519802724]
+position = Vector2(960, 540)
+texture = ExtResource("2_ix1wt")
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_hrcrc")
+
+[node name="particles" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer" unique_id=2051356537]
+position = Vector2(960, 540)
+speed_scale = 0.2
+process_material = SubResource("ParticleProcessMaterial_13ktp")
+
+[node name="fragment" type="Node2D" parent="." unique_id=235415462]
+position = Vector2(957, 586)
+
+[node name="grass2" type="GPUParticles2D" parent="fragment" unique_id=1914834261]
+position = Vector2(-11, 0)
+scale = Vector2(4, 4)
+amount = 131072
+texture = ExtResource("3_x0as3")
+lifetime = 2.0
+preprocess = 16.0
+explosiveness = 0.07
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_a6qvq")
+
+[node name="grass" type="GPUParticles2D" parent="fragment" unique_id=903909772]
+position = Vector2(-11, 0)
+scale = Vector2(4, 4)
+amount = 24576
+texture = ExtResource("3_x0as3")
+lifetime = 16.0
+preprocess = 16.0
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_8vn3g")
+
+[node name="flowers" type="GPUParticles2D" parent="fragment" unique_id=175396992]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(14, 0)
+scale = Vector2(4, 4)
+amount = 48
+sub_emitter = NodePath("flowers2")
+texture = ExtResource("5_ns28c")
+lifetime = 16.0
+preprocess = 16.0
+fixed_fps = 60
+trail_lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_vwgu0")
+
+[node name="flowers2" type="GPUParticles2D" parent="fragment/flowers" unique_id=838930992]
+amount = 256
+sub_emitter = NodePath(".")
+texture = ExtResource("5_ns28c")
+lifetime = 16.0
+preprocess = 16.0
+fixed_fps = 60
+trail_lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_b8x0j")
+
+[node name="bush2" type="GPUParticles2D" parent="fragment" unique_id=327439944]
+position = Vector2(14, 0)
+scale = Vector2(4, 4)
+amount = 98304
+texture = ExtResource("3_x0as3")
+lifetime = 8.0
+preprocess = 16.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ngbjj")
+
+[node name="bush" type="GPUParticles2D" parent="fragment" unique_id=338247415]
+position = Vector2(14, 0)
+scale = Vector2(4, 4)
+amount = 110592
+texture = ExtResource("3_x0as3")
+lifetime = 8.0
+preprocess = 16.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_m15mb")
+
+[node name="tree" type="Sprite2D" parent="fragment" unique_id=197938705]
+position = Vector2(-39, -34)
+scale = Vector2(4, 4)
+texture = ExtResource("7_s8ssf")
+
+[node name="shadow" type="Sprite2D" parent="fragment/tree" unique_id=716799455]
+show_behind_parent = true
+position = Vector2(0, 6.5)
+texture = ExtResource("8_gw0hp")
+
+[node name="living" type="Node2D" parent="." unique_id=180114492]
+y_sort_enabled = true
+
+[node name="anonymi" parent="living" unique_id=1671918605 instance=ExtResource("9_yityo")]
+position = Vector2(848, 614)
+hover_name = "Anonymi"
+
+[node name="kai" type="CharacterBody2D" parent="living" unique_id=2007057555 groups=["voidlings"]]
+position = Vector2(988, 614)
+motion_mode = 1
+script = ExtResource("10_yhisk")
+acting = true
+hover_name = "Kai"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="living/kai" unique_id=1933806982]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_ym65y")
+
+[node name="FSM" type="Node" parent="living/kai" unique_id=379965139]
+script = ExtResource("11_3myu7")
+
+[node name="IDLE" type="Node" parent="living/kai/FSM" unique_id=510213700]
+script = ExtResource("12_7w7nm")
+
+[node name="idle_timer" type="Timer" parent="living/kai/FSM/IDLE" unique_id=257540659]
+wait_time = 5.0
+one_shot = true
+
+[node name="WANDER" type="Node" parent="living/kai/FSM" unique_id=1896230419]
+script = ExtResource("13_dw1lq")
+
+[node name="wander_timer" type="Timer" parent="living/kai/FSM/WANDER" unique_id=455823923]
+wait_time = 10.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="living/kai" unique_id=868933057]
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rgkw4")
+animation = &"idle"
+flip_h = true
+
+[node name="shadow" type="Sprite2D" parent="living/kai/AnimatedSprite2D" unique_id=1766258651]
+show_behind_parent = true
+position = Vector2(2, 10.5)
+scale = Vector2(2, 2)
+texture = ExtResource("19_obyur")
+
+[node name="mask" type="AnimatedSprite2D" parent="living/kai/AnimatedSprite2D" unique_id=1024944718]
+modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_sgqfr")
+animation = &"idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="living/kai" unique_id=675367222]
+position = Vector2(1, 8)
+emitting = false
+amount = 128
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_ym65y")
+
+[node name="alert" type="RichTextLabel" parent="living/kai" unique_id=597199392]
+offset_left = -34.0
+offset_top = -71.0
+offset_right = 34.0
+offset_bottom = -41.0
+focus_mode = 0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="living/kai" unique_id=834795339]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -42.0
+offset_top = -55.0
+offset_right = 42.0
+offset_bottom = 22.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="gonna_explode" type="Timer" parent="living/kai" unique_id=1946510402]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1643718143]
+layer = 0
+
+[node name="intro" type="Control" parent="CanvasLayer" unique_id=192125324]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="bg" type="ColorRect" parent="CanvasLayer/intro" unique_id=105318758]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/intro" unique_id=248660785]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "6 months later..."
+label_settings = SubResource("LabelSettings_vwgu0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="rule_panel" type="Control" parent="CanvasLayer" unique_id=1987021101]
+visible = false
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 980.0
+offset_top = 60.0
+offset_right = 1860.0
+offset_bottom = 1020.0
+mouse_filter = 2
+
+[node name="board" parent="CanvasLayer/rule_panel" unique_id=1987021102 instance=ExtResource("25_jelly")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="clip" parent="CanvasLayer/rule_panel" unique_id=1987021103 instance=ExtResource("25_jelly")]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -130.0
+offset_top = -26.0
+offset_right = 130.0
+offset_bottom = 34.0
+grow_vertical = 1
+
+[node name="title" type="Label" parent="CanvasLayer/rule_panel" unique_id=1987021104]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 40.0
+offset_top = 70.0
+offset_right = -40.0
+offset_bottom = 230.0
+grow_horizontal = 2
+text = "RULE 1"
+label_settings = SubResource("LabelSettings_rule_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="underline" type="ColorRect" parent="CanvasLayer/rule_panel" unique_id=1987021105]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 236.0
+offset_right = 260.0
+offset_bottom = 244.0
+grow_horizontal = 2
+scale = Vector2(1e-05, 1)
+pivot_offset = Vector2(260, 4)
+mouse_filter = 2
+
+[node name="rule_text" type="RichTextLabel" parent="CanvasLayer/rule_panel" unique_id=1987021106]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 300.0
+offset_right = -50.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center][rainbow freq=0.5 sat=0.8 val=1.0][shake rate=20.0 level=50]VIBE CODE EVERYTHING!!!!![/shake][/rainbow]
+
+ALSO: [rainbow freq=0.5 sat=0.8 val=1.0][shake rate=20.0 level=50]**** YOU[/shake][/rainbow]
+[color=#333]#Gamers #Gaming
+#GodotEngine
+"
+scroll_active = false
+autowrap_mode = 2
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1870215634]
+libraries/ = SubResource("AnimationLibrary_rc")
+autoplay = &"fade_in"
+
+[node name="movable_camera" type="Camera2D" parent="." unique_id=1113041592]
+anchor_mode = 0
+script = SubResource("GDScript_vwgu0")
+
+[connection signal="timeout" from="living/kai/FSM/IDLE/idle_timer" to="living/kai/FSM/IDLE" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="living/kai/FSM/WANDER/wander_timer" to="living/kai/FSM/WANDER" method="_on_wander_timer_timeout"]
+[connection signal="mouse_entered" from="living/kai/Button" to="living/kai" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="living/kai/Button" to="living/kai" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="living/kai/Button" to="living/kai" method="_on_button_pressed"]
+[connection signal="timeout" from="living/kai/gonna_explode" to="living/kai" method="_on_gonna_explode_timeout"]
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
